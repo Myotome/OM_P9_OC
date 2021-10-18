@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+
+    <color name="englishGreen">#00561b</color>
+    <color name="englishGreenLight">#416345</color>
+    <color name="englishGreenDark">#001500</color>
+
+    <color name="ocher">#fff196</color>
+    <color name="ocherLight">#ffffc8</color>
+    <color name="ocherDark">#cabf67</color>
+</resources>

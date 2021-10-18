@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:padding="10dp"
+    tools:context=".activity.addoredit.fragment.partone.AOEPartOneFragment">
+
+    <TextView
+        android:id="@+id/tv_add_bedrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bedrooms"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/bedrooms"
+        app:layout_constraintBottom_toBottomOf="@id/et_add_bedrooms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_add_bedrooms" />
+
+    <EditText
+        android:id="@+id/et_add_bedrooms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/et_add_bathrooms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_add_bedrooms"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_add_bathrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bathrooms"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/bathrooms"
+        app:layout_constraintBottom_toBottomOf="@id/et_add_bathrooms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_add_bathrooms" />
+
+    <EditText
+        android:id="@+id/et_add_bathrooms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_add_bathrooms"
+        app:layout_constraintTop_toBottomOf="@id/et_add_bedrooms" />
+
+    <TextView
+        android:id="@+id/tv_add_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/description"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/text"
+        app:layout_constraintBottom_toTopOf="@id/sv_add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_add_bathrooms" />
+
+    <ScrollView
+        android:id="@+id/sv_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/et_add_realtor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_description">
+
+        <EditText
+            android:id="@+id/et_add_description"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:inputType="textMultiLine" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_add_realtor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/realtor"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/realtor"
+        app:layout_constraintBottom_toBottomOf="@id/et_add_realtor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_add_realtor" />
+
+    <EditText
+        android:id="@+id/et_add_realtor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/bt_two_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_add_realtor"
+        app:layout_constraintTop_toBottomOf="@id/sv_add" />
+
+    <Button
+        android:id="@+id/bt_two_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+        android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bt_two_back" />
+
+    <Button
+        android:id="@+id/bt_two_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+        android:text="@string/previous"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_two_next"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
