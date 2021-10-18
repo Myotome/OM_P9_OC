@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.addoredit.fragment.photos.AOEPhotoFragment"
+    android:layout_margin="20dp">
+
+    <Button
+        android:id="@+id/bt_add_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/photo_of_estate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_add_take_photo"
+        app:layout_constraintBottom_toTopOf="@id/bt_photo_finish"/>
+
+    <Button
+        android:id="@+id/bt_add_take_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take a picture"
+        app:layout_constraintBottom_toTopOf="@id/bt_photo_finish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bt_add_gallery" />
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/rv_add_photo"
+       android:layout_width="wrap_content"
+       android:layout_height="0dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintBottom_toTopOf="@id/bt_add_gallery"
+       tools:listitem="@layout/image_list_content"
+       app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+       app:spanCount="3"
+       android:paddingEnd="12dp"
+       android:paddingStart="12dp"
+       android:paddingTop="24dp"/>
+
+    <Button
+        android:id="@+id/bt_photo_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bt_photo_back"/>
+
+    <Button
+        android:id="@+id/bt_photo_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+        android:text="@string/previous"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_photo_finish"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
