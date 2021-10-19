@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.databinding.ImageListContentBinding
 import com.openclassrooms.realestatemanager.model.Photo
@@ -25,13 +26,12 @@ class DetailAdapter(private val listener: (Photo) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(photo: Photo, listener: (Photo) -> Unit) {
 
-            Log.d("DEBUGKEY", "bind path ${photo.location.path}")
+//            Glide.with(binding.ivContentList)
+//                .load(photo.location.path)
+//                .fitCenter()
+//                .into(binding.ivContentList)
 
-            Glide.with(binding.ivContentList)
-                .load(photo.location.path)
-                .fitCenter()
-                .into(binding.ivContentList)
-
+            binding.ivContentList.load(photo.image)
             binding.tvContentList.text = photo.name
 
         }

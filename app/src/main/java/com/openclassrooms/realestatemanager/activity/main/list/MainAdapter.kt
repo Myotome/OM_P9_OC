@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.openclassrooms.realestatemanager.databinding.EstateListContentBinding
 import java.text.DecimalFormat
 
@@ -39,6 +40,8 @@ class MainAdapter(private val listener: (MainViewState) -> Unit) :
                     .format(estateViewState.price)
                     .toString()
             binding.tvContentType.text = estateViewState.type
+
+            binding.ivEstateContent.load(estateViewState.photo?.image)
 
             itemView.setOnClickListener { listener(estateViewState) }
         }

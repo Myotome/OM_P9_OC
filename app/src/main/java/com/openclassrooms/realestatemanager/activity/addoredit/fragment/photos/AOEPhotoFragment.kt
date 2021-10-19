@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -16,11 +17,15 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPhotoBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
 @AndroidEntryPoint
@@ -36,7 +41,8 @@ class AOEPhotoFragment : Fragment() {
     ): View {
         binding = FragmentAddPhotoBinding.inflate(inflater, container, false)
 
-        val adapter = AOEPhotoAdapter {}
+        val adapter = AOEPhotoAdapter{}
+        //TODO : add listener click to edit picture?
         binding.rvAddPhoto.adapter = adapter
 
         viewModel.listPhotoLive().observe(viewLifecycleOwner) {
@@ -77,12 +83,15 @@ class AOEPhotoFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.d(TAG, "onActivityResult: is call")
+       lateinit var uri: Uri
+
         if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
+
             if (data?.data != null) {
-                Log.d(TAG, "onActivityResult: ${data.data!!}")
-                popupName(data.data!!)
+                uri = data.data!!
+//                popupName(data.data!!)
             }
+
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Log.d(TAG, "onActivityResult from take picture is call")
             val takenImage = data?.extras?.get("data") as Bitmap
@@ -95,13 +104,28 @@ class AOEPhotoFragment : Fragment() {
                 "Title",
                 null
             )
-            val image = Uri.parse(path.toString())
+            uri = Uri.parse(path.toString())
 
-            popupName(image)
+//            popupName(image)
+        }
+
+        lifecycleScope.launch{
+            getBitmap(uri)
         }
     }
 
-    private fun popupName(imageUri: Uri) {
+    private suspend fun getBitmap(uri: Uri) {
+        val loading = ImageLoader(requireContext())
+        val request = ImageRequest.Builder(requireContext())
+            .data(uri)
+            .build()
+
+        val result =  (loading.execute(request) as SuccessResult).drawable
+        popupName ((result as BitmapDrawable).bitmap)
+
+    }
+
+    private fun popupName(imageBitmap: Bitmap) {
         val builder = AlertDialog.Builder(context)
         builder.setMessage("What is that ?")
 
@@ -111,7 +135,7 @@ class AOEPhotoFragment : Fragment() {
         builder.setView(input)
 
         builder.setPositiveButton("Ok") { _, _ ->
-            viewModel.addPhoto(input.text.toString(), imageUri)
+            viewModel.addPhoto(input.text.toString(), imageBitmap)
         }
         builder.setNegativeButton("Cancel") { _, _ -> }
 

@@ -31,10 +31,10 @@ class MainViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
     private fun map(estate: Estate): MainViewState =
 
             MainViewState(estate.id,
-                estate.estateType?:"",
-                estate.address?.district?:"",
-                estate.price?:0,
-                estate.listPhoto?.first()?.location
+                estate.estateType,
+                estate.address.district,
+                estate.price,
+                if(!estate.listPhoto.isNullOrEmpty()) estate.listPhoto[0] else null
             )
 
 
