@@ -16,8 +16,8 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.parttwo.AOEPartTwoViewModel
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPhotoBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -43,14 +43,17 @@ class AOEPhotoFragment : Fragment() {
             adapter.submitList(it)
         }
 
-        binding.btAddTakePhoto.setOnClickListener { dispatchTakePictureIntent() }
-        binding.btAddGallery.setOnClickListener { dispatchGalleryPhoto() }
-
-        binding.btPhotoFinish.setOnClickListener{viewModel.getAllData()}
-
+        binding.apply {
+            btAddTakePhoto.setOnClickListener { dispatchTakePictureIntent() }
+            btAddGallery.setOnClickListener { dispatchGalleryPhoto() }
+            btPhotoFinish.setOnClickListener { viewModel.getAllData() }
+            btPhotoBack.setOnClickListener {
+                (activity as AOEActivity).clickToRightOrLeft(ADD_EDIT_PREVIOUS_RESULT)
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.addEditTwoEvent.collect { event->
-                when (event){
+            viewModel.addEditTwoEvent.collect { event ->
+                when (event) {
                     is AOEPhotoViewModel.AddEditPhotoEvent.NavigateResult -> {
                         (activity as AOEActivity).clickToRightOrLeft(event.result)
                     }

@@ -41,7 +41,7 @@ class AOEAddressFragment : Fragment() {
 
         binding.apply {
             etAddDistrict.addTextChangedListener { viewModel.district = (it.toString()) }
-            etAddNumber.addTextChangedListener { viewModel.number = (it.toString().toInt()) }
+            etAddNumber.addTextChangedListener { viewModel.number = (it.toString().toIntOrNull()) }
             etAddComplement.addTextChangedListener { viewModel.complement = (it.toString()) }
             etAddStreet.addTextChangedListener { viewModel.street = (it.toString()) }
             etAddPostcode.addTextChangedListener {
