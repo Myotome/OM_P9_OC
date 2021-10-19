@@ -6,6 +6,7 @@ import com.openclassrooms.realestatemanager.database.EstateDAO
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Interest
+import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.utils.Utils
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -27,6 +28,7 @@ class AddRepository @Inject constructor(
     private val realtor = MutableLiveData<String?>()
     private val addressLiveData = MutableLiveData<Address>()
     private val interestLiveData = MutableLiveData<Interest>()
+//    private var listPhoto = ArrayList<Photo>()
 
     fun setPartOne(type: String, price: Int, surface: Double, rooms: Int?, landsize: Double?) {
         this.type.value = type
@@ -58,7 +60,11 @@ class AddRepository @Inject constructor(
         interestLiveData.value = interest
     }
 
-    suspend fun createEstateInDatabase() {
+//    fun setPhoto(photoList : List<Photo>){
+//        listPhoto = photoList as ArrayList<Photo>
+//    }
+
+    suspend fun createEstateInDatabase(listPhoto : List<Photo>) {
         val estate = Estate(
             estateType = type.value!!,
             price = price.value!!,
@@ -71,7 +77,7 @@ class AddRepository @Inject constructor(
             realtor = realtor.value,
             address = addressLiveData.value,
             interest = interestLiveData.value!!,
-            listPhoto = null,
+            listPhoto = listPhoto,
             entryDate = Utils.getTodayDate(),
             soldDate = null
         )

@@ -1,8 +1,10 @@
 package com.openclassrooms.realestatemanager.activity.main
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -46,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
 //        requestedOrientation = when (resources.getBoolean(R.bool.portrait_only)) {
 //            true -> ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 //            else -> ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -54,12 +57,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun displayCurrentFragment(fragment: Fragment) =
+    private fun displayCurrentFragment(fragment: Fragment) {
+        val mId = when (resources.getBoolean(R.bool.portrait_only)) {
+            true -> R.id.cl_estate_list
+            false -> R.id.fl_estate_detail_container
+        }
+
         supportFragmentManager.commit {
+            supportFragmentManager.findFragmentById(mId)?.let { remove(it) }
             replace(R.id.frameLayout, fragment)
             setReorderingAllowed(true)
-            addToBackStack("main")
+//            addToBackStack("main")
         }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -80,5 +91,21 @@ class MainActivity : AppCompatActivity() {
             R.id.main_menu_search -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onBackPressed() {
+        val count = supportFragmentManager.backStackEntryCount
+        if (count == 0) {
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Do you really quit ?")
+            builder.setPositiveButton("Yes") { _, _ ->
+                super.onBackPressed()
+            }
+            builder.setNegativeButton("Cancel") { _, _ -> }
+            builder.show()
+        } else {
+            super.onBackPressed()
+        }
+
     }
 }

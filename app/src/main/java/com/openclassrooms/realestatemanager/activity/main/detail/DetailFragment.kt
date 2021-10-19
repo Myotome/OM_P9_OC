@@ -24,6 +24,9 @@ class DetailFragment : Fragment() {
 
         binding = EstateDetailBinding.inflate(inflater, container, false)
 
+        val adapter = DetailAdapter{}
+        binding.rvDetailPhoto.adapter = adapter
+
         viewModel.detailLiveData.observe(viewLifecycleOwner) {
 
             binding.apply {
@@ -45,6 +48,7 @@ class DetailFragment : Fragment() {
                 tvDetailTheatre.visibility = if(it.theatre)View.VISIBLE else View.GONE
                 tvDetailSubway.visibility = if (it.subway) View.VISIBLE else View.GONE
                 tvDetailNightlife.visibility = if(it.nightlife)View.VISIBLE else View.GONE
+                adapter.submitList(it.photoList)
 
             }
 

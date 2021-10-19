@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.activity.main.detail
 
-import com.openclassrooms.realestatemanager.model.Interest
+
+import com.openclassrooms.realestatemanager.model.Photo
 
 data class DetailViewState (
     val type: String,
@@ -18,5 +19,6 @@ data class DetailViewState (
     val movie: Boolean,
     val theatre: Boolean,
     val subway: Boolean,
-    val nightlife: Boolean
+    val nightlife: Boolean,
+    val photoList: List<Photo>?
 )

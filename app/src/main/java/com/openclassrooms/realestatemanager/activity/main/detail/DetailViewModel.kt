@@ -39,6 +39,7 @@ class DetailViewModel @Inject constructor(
             movie = estate.interest.movie,
             theatre = estate.interest.theatre,
             subway = estate.interest.subway,
-            nightlife = estate.interest.nightlife
+            nightlife = estate.interest.nightlife,
+            photoList = estate.listPhoto
         )
 }
