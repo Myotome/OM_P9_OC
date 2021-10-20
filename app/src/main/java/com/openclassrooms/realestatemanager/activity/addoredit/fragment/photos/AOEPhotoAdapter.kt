@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -30,7 +31,7 @@ class AOEPhotoAdapter(private val listener: (Photo) -> Unit) :
 //                .fitCenter()
 //                .into(binding.ivContentList)
 
-            binding.ivContentList.load(photo.image)
+            binding.ivContentList.load(Uri.parse(photo.image))
 
             binding.tvContentList.text = photo.name
         }

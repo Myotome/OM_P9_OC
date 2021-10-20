@@ -44,8 +44,9 @@ class AOEPhotoViewModel @Inject constructor(
 //
 //    }
 
-    fun addPhoto(name: String, image: Bitmap) {
-        listPhoto.add(Photo(name, image))
+    fun addPhoto(name: String, path: String) {
+//        val pathString = image.toString()
+        listPhoto.add(Photo(name, path))
         listPhotoLiveData.value = listPhoto
     }
 

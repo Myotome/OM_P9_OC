@@ -17,6 +17,23 @@
         android:contentDescription="@string/photo_of_estate" />
 
     <TextView
+        android:id="@+id/tv_content_sold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sold"
+        android:textColor="@color/ocherDark"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:background="@color/englishGreenDark"
+        app:layout_constraintStart_toStartOf="@id/iv_estate_content"
+        app:layout_constraintEnd_toEndOf="@id/iv_estate_content"
+        app:layout_constraintBottom_toBottomOf="@id/iv_estate_content"/>
+
+
+    <TextView
         android:id="@+id/tv_content_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

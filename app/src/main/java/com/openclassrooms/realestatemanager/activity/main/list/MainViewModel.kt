@@ -34,6 +34,7 @@ class MainViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
                 estate.estateType,
                 estate.address.district,
                 estate.price,
+                estate.onSale,
                 if(!estate.listPhoto.isNullOrEmpty()) estate.listPhoto[0] else null
             )
 

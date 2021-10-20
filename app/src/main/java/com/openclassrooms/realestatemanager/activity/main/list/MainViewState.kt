@@ -8,5 +8,6 @@ data class MainViewState(
     val type: String,
     val district: String,
     val price: Int,
+    val onSale: Boolean,
     val photo: Photo?
 )

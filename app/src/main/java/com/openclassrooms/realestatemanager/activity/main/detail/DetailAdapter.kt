@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.activity.main.detail
 
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,7 +32,7 @@ class DetailAdapter(private val listener: (Photo) -> Unit) :
 //                .fitCenter()
 //                .into(binding.ivContentList)
 
-            binding.ivContentList.load(photo.image)
+            binding.ivContentList.load(Uri.parse(photo.image))
             binding.tvContentList.text = photo.name
 
         }

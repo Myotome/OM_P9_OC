@@ -1,6 +1,8 @@
 package com.openclassrooms.realestatemanager.activity.main.list
 
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -41,7 +43,9 @@ class MainAdapter(private val listener: (MainViewState) -> Unit) :
                     .toString()
             binding.tvContentType.text = estateViewState.type
 
-            binding.ivEstateContent.load(estateViewState.photo?.image)
+            binding.ivEstateContent.load(Uri.parse(estateViewState.photo?.image))
+
+            if(!estateViewState.onSale) binding.tvContentSold.visibility = View.VISIBLE
 
             itemView.setOnClickListener { listener(estateViewState) }
         }
