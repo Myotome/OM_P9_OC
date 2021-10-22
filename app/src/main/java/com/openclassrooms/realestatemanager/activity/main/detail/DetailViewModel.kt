@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.activity.main.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.openclassrooms.realestatemanager.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,6 +41,21 @@ class DetailViewModel @Inject constructor(
             theatre = estate.interest.theatre,
             subway = estate.interest.subway,
             nightlife = estate.interest.nightlife,
-            photoList = estate.listPhoto
+            photoList = estate.listPhoto,
+            address = getAddressString(estate.address),
+            realtor = estate.realtor?: "",
+            entryDate =estate.entryDate,
+            modificationDate = estate.modificationDate?:"",
+            soldDate = estate.soldDate?:"",
+            onSale = estate.onSale
+
         )
+
+    private fun getAddressString(address: Address): String {
+
+        return ("${address.number}   ${address.complement}" +
+                address.street +
+                address.district +
+                "${address.postCode}  ${address.city}")
+    }
 }

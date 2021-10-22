@@ -32,9 +32,10 @@ abstract class EstateRoomDatabase : RoomDatabase() {
             val dao = database.get().EstateDAO()
 
             val listPhoto = ArrayList<Photo>()
-            listPhoto.add(Photo(image="content://com.android.providers.media.documents/document/image%3A109",name = "Living"))
-            listPhoto.add(Photo(image="content://com.android.providers.media.documents/document/image%3A108",name="Kitchen"))
-            listPhoto.add(Photo(image="content://com.android.providers.media.documents/document/image%3A104",name="Bathroom"))
+            listPhoto.add(Photo(image="content://media/external/images/media/162",name ="view"))
+            listPhoto.add(Photo(image="content://media/external/images/media/158",name="view"))
+            listPhoto.add(Photo(image="content://media/external/images/media/159",name="swimming pool"))
+
 
             applicationScope.launch {
                 dao.insertEstate(
@@ -58,6 +59,7 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                         listPhoto = listPhoto,
                         interest = Interest(),
                         landSize = null,
+                        modificationDate = null,
                         soldDate = null
                     )
                 )
@@ -92,6 +94,7 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                         interest = Interest(),
                         landSize = null,
                         soldDate = null,
+                        modificationDate = null,
                         onSale = false
                     )
                 )

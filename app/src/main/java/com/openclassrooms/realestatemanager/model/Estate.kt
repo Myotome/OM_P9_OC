@@ -15,6 +15,7 @@ data class Estate(
     val landSize: Double?,
     val onSale: Boolean = true,
     val entryDate: String,
+    val modificationDate: String?,
     val soldDate: String?,
     val realtor: String?,
     @Embedded val address: Address,

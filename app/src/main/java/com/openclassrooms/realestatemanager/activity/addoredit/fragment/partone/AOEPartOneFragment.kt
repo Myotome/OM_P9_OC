@@ -29,16 +29,20 @@ class AOEPartOneFragment : Fragment() {
         viewModel.currentEstate.observe(viewLifecycleOwner) { vs ->
             if (vs != null) {
                 binding.apply {
+                    swOneSale.isChecked = vs.onSale
+                    swOneSale.jumpDrawablesToCurrentState()
                     etAddType.setText(vs.type)
                     etAddPrice.setText(vs.price.toString())
                     etAddSurface.setText(vs.surface.toString())
                     etAddRooms.setText(vs.room?.toString()?:"")
-                    etAddLandsize.setText(vs.landsize?.toString()?:"")
+                    etAddLandsize.setText(vs.landSize?.toString()?:"")
                 }
             }
         }
 
         binding.apply {
+            swOneSale.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.onSale = isChecked  }
             etAddType.addTextChangedListener { viewModel.type = (it.toString()) }
             etAddPrice.addTextChangedListener { viewModel.price = (it.toString().toInt()) }
             etAddSurface.addTextChangedListener { viewModel.surface = (it.toString().toDouble()) }

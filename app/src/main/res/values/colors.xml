@@ -10,6 +10,8 @@
     <color name="englishGreenLight">#416345</color>
     <color name="englishGreenDark">#001500</color>
 
+    <color name="englishGreen50">#8000561b</color>
+
     <color name="ocher">#fff196</color>
     <color name="ocherLight">#ffffc8</color>
     <color name="ocherDark">#cabf67</color>

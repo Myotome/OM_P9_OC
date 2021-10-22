@@ -16,27 +16,42 @@ class AddRepository @Inject constructor(
     private val estateDAO: EstateDAO
 ) {
 
+    private var onSale = true
     private var estateId: Int? = null
     private val type = MutableLiveData<String?>()
     private val price = MutableLiveData<Int?>()
     private val surface = MutableLiveData<Double?>()
     private val rooms = MutableLiveData<Int?>()
-    private val landsize = MutableLiveData<Double?>()
+    private val landSize = MutableLiveData<Double?>()
+    private var soldDate: String? = null
     private val bedrooms = MutableLiveData<Int?>()
     private val bathrooms = MutableLiveData<Int?>()
     private val description = MutableLiveData<String?>()
     private val realtor = MutableLiveData<String?>()
-//    private val addressLiveData = MutableLiveData<Address>()
+    private var dateEntry: String? = null
+    private var modifDate: String? = null
+
+    //    private val addressLiveData = MutableLiveData<Address>()
     private lateinit var address: Address
     private val interestLiveData = MutableLiveData<Interest>()
 //    private var listPhoto = ArrayList<Photo>()
 
-    fun setPartOne(type: String, price: Int, surface: Double, rooms: Int?, landsize: Double?) {
+    fun setPartOne(
+        onSale: Boolean,
+        type: String,
+        price: Int,
+        surface: Double,
+        rooms: Int?,
+        landSize: Double?,
+        soldDate: String?
+    ) {
+        this.onSale = onSale
         this.type.value = type
         this.price.value = price
         this.surface.value = surface
         this.rooms.value = rooms
-        this.landsize.value = landsize
+        this.landSize.value = landSize
+        this.soldDate = soldDate
     }
 
     fun setPartTwo(
@@ -44,35 +59,34 @@ class AddRepository @Inject constructor(
         bedroom: Int?,
         bathroom: Int?,
         description: String?,
-        realtor: String?
+        realtor: String?,
+        entryDate: String?,
+        modificationDate: String?
     ) {
         estateId = id
         bedrooms.value = bedroom
         bathrooms.value = bathroom
         this.description.value = description
         this.realtor.value = realtor
+        dateEntry = entryDate
+        modifDate = modificationDate
     }
 
     fun setAddress(address: Address) {
         this.address = address
-//        addressLiveData.value = address
     }
 
     fun setInterest(interest: Interest) {
         interestLiveData.value = interest
     }
 
-//    fun setPhoto(photoList : List<Photo>){
-//        listPhoto = photoList as ArrayList<Photo>
-//    }
-
-    suspend fun createEstateInDatabase(listPhoto : List<Photo>) {
+    suspend fun createEstateInDatabase(listPhoto: List<Photo>) {
         val estate = Estate(
             estateType = type.value!!,
             price = price.value!!,
             surface = surface.value!!,
             room = rooms.value,
-            landSize = landsize.value,
+            landSize = landSize.value,
             bedrooms = bedrooms.value,
             bathrooms = bathrooms.value,
             description = description.value,
@@ -80,8 +94,10 @@ class AddRepository @Inject constructor(
             address = address,
             interest = interestLiveData.value!!,
             listPhoto = listPhoto,
-            entryDate = Utils.getTodayDate(),
-            soldDate = null
+            entryDate = dateEntry!!,
+            soldDate = soldDate,
+            modificationDate = modifDate,
+            onSale = onSale
         )
         if (estateId != null) {
             val updateEstate = estate.copy(id = estateId!!)

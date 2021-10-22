@@ -7,6 +7,7 @@ import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.AddRepository
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
@@ -30,6 +31,8 @@ class AOEPartTwoViewModel @Inject constructor(
     var bathrooms: Int? = null
     var description: String? = null
     var realtor: String? = null
+    var entryDate: String? = null
+    var modificationDate: String? = null
 
     @FlowPreview
     val currentEstate : LiveData<AOEPartTwoViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
@@ -40,14 +43,16 @@ class AOEPartTwoViewModel @Inject constructor(
             bedroom = estate.bedrooms,
             bathroom = estate.bathrooms,
             description = estate.description,
-            realtor= estate.realtor
+            realtor= estate.realtor,
+            dateEntry = estate.entryDate
         )
     }else{
         null
     }
 
     fun onSaveClick() = viewModelScope.launch {
-        addRepo.setPartTwo(estateId, bedrooms, bathrooms, description, realtor)
+        if(entryDate == null) entryDate = Utils.getTodayDate() else modificationDate = Utils.getTodayDate()
+        addRepo.setPartTwo(estateId, bedrooms, bathrooms, description, realtor, entryDate, modificationDate)
         addEditTwoChannel.send(AddEditTwoEvent.NavigateResult(ADD_EDIT_NEXT_RESULT))
     }
 

@@ -24,7 +24,7 @@ class DetailFragment : Fragment() {
 
         binding = EstateDetailBinding.inflate(inflater, container, false)
 
-        val adapter = DetailAdapter{}
+        val adapter = DetailAdapter {}
         binding.rvDetailPhoto.adapter = adapter
 
         viewModel.detailLiveData.observe(viewLifecycleOwner) {
@@ -41,15 +41,54 @@ class DetailFragment : Fragment() {
                 tvDetailLandSize.text = "Land size : ${it.landSize ?: "-"}"
 
                 tvDetailSchool.visibility = if (it.school) View.VISIBLE else View.GONE
-                tvDetailStore.visibility = if(it.store)View.VISIBLE else View.GONE
+                tvDetailStore.visibility = if (it.store) View.VISIBLE else View.GONE
                 tvDetailPark.visibility = if (it.park) View.VISIBLE else View.GONE
-                tvDetailRestaurant.visibility = if(it.restaurant)View.VISIBLE else View.GONE
+                tvDetailRestaurant.visibility = if (it.restaurant) View.VISIBLE else View.GONE
                 tvDetailMovie.visibility = if (it.movie) View.VISIBLE else View.GONE
-                tvDetailTheatre.visibility = if(it.theatre)View.VISIBLE else View.GONE
+                tvDetailTheatre.visibility = if (it.theatre) View.VISIBLE else View.GONE
                 tvDetailSubway.visibility = if (it.subway) View.VISIBLE else View.GONE
-                tvDetailNightlife.visibility = if(it.nightlife)View.VISIBLE else View.GONE
+                tvDetailNightlife.visibility = if (it.nightlife) View.VISIBLE else View.GONE
+                tvDetailSold.visibility = if (it.onSale) View.GONE else View.VISIBLE
+
+                tvDetailMapAddress.text = it.address
+                tvDetailRealtor.text = "Realtor : ${it.realtor}"
+                tvDetailEntryDate.text = "Entry date : ${it.entryDate}"
+
+                tvDetailModDate.visibility =
+                    if (it.modificationDate.isNotBlank()) View.VISIBLE else View.GONE
+                tvDetailModDate.text = "Modification date : ${it.modificationDate}"
+
+                tvDetailSoldDate.visibility =
+                    if (it.soldDate.isNotBlank()) View.VISIBLE else View.GONE
+                tvDetailSoldDate.text = "Sold date : ${it.soldDate}"
+
                 adapter.submitList(it.photoList)
 
+            }
+
+            if (resources.getBoolean(R.bool.portrait_only)) {
+                binding.apply {
+                    btDetailDetail?.setOnClickListener {
+                        tlDetailDetail?.visibility =
+                            if (tlDetailDetail?.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                    }
+                    btDetailTitleDescription.setOnClickListener {
+                        tvDetailDescription.visibility =
+                            if (tvDetailDescription.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                    }
+                    btDetailInterest?.setOnClickListener {
+                        tlDetailInterest.visibility =
+                            if (tlDetailInterest.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                    }
+                    btDetailMap?.setOnClickListener {
+                        clDetailMap?.visibility =
+                            if (clDetailMap?.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                    }
+                    btDetailInformation?.setOnClickListener {
+                        clDetailInformation?.visibility =
+                            if (clDetailInformation?.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                    }
+                }
             }
 
 
