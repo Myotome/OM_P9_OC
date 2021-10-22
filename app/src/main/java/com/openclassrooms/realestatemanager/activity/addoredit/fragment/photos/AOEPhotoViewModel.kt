@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos
 
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,8 +44,9 @@ class AOEPhotoViewModel @Inject constructor(
 //
 //    }
 
-    fun addPhoto(name: String, location: Uri) {
-        listPhoto.add(Photo(name, location))
+    fun addPhoto(name: String, path: String) {
+//        val pathString = image.toString()
+        listPhoto.add(Photo(name, path))
         listPhotoLiveData.value = listPhoto
     }
 

@@ -9,6 +9,7 @@ import com.openclassrooms.realestatemanager.di.ApplicationScope
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Interest
+import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -30,6 +31,11 @@ abstract class EstateRoomDatabase : RoomDatabase() {
             super.onCreate(db)
             val dao = database.get().EstateDAO()
 
+            val listPhoto = ArrayList<Photo>()
+            listPhoto.add(Photo(image="content://com.android.providers.media.documents/document/image%3A109",name = "Living"))
+            listPhoto.add(Photo(image="content://com.android.providers.media.documents/document/image%3A108",name="Kitchen"))
+            listPhoto.add(Photo(image="content://com.android.providers.media.documents/document/image%3A104",name="Bathroom"))
+
             applicationScope.launch {
                 dao.insertEstate(
                     Estate(
@@ -49,7 +55,7 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                             city = "New York"
                         ),
                         entryDate = Utils.getTodayDate(),
-                        listPhoto = null,
+                        listPhoto = listPhoto,
                         interest = Interest(),
                         landSize = null,
                         soldDate = null
@@ -82,10 +88,11 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                             city = "New York"
                         ),
                         entryDate = Utils.getTodayDate(),
-                        listPhoto = null,
+                        listPhoto = listPhoto,
                         interest = Interest(),
                         landSize = null,
-                        soldDate = null
+                        soldDate = null,
+                        onSale = false
                     )
                 )
             }

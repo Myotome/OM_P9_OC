@@ -6,7 +6,7 @@ import androidx.room.*
 data class Estate(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "estate_id", index = true) val id: Int = 0,
     val estateType: String,
-    val price: Int ,
+    val price: Int,
     val surface: Double,
     val room: Int?,
     val bedrooms: Int?,
@@ -17,7 +17,7 @@ data class Estate(
     val entryDate: String,
     val soldDate: String?,
     val realtor: String?,
-    @Embedded val address: Address?,
+    @Embedded val address: Address,
     val listPhoto: List<Photo>?,
     @Embedded val interest: Interest
 

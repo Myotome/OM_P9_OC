@@ -26,7 +26,8 @@ class AddRepository @Inject constructor(
     private val bathrooms = MutableLiveData<Int?>()
     private val description = MutableLiveData<String?>()
     private val realtor = MutableLiveData<String?>()
-    private val addressLiveData = MutableLiveData<Address>()
+//    private val addressLiveData = MutableLiveData<Address>()
+    private lateinit var address: Address
     private val interestLiveData = MutableLiveData<Interest>()
 //    private var listPhoto = ArrayList<Photo>()
 
@@ -53,7 +54,8 @@ class AddRepository @Inject constructor(
     }
 
     fun setAddress(address: Address) {
-        addressLiveData.value = address
+        this.address = address
+//        addressLiveData.value = address
     }
 
     fun setInterest(interest: Interest) {
@@ -75,7 +77,7 @@ class AddRepository @Inject constructor(
             bathrooms = bathrooms.value,
             description = description.value,
             realtor = realtor.value,
-            address = addressLiveData.value,
+            address = address,
             interest = interestLiveData.value!!,
             listPhoto = listPhoto,
             entryDate = Utils.getTodayDate(),

@@ -1,10 +1,12 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.databinding.ImageListContentBinding
 import com.openclassrooms.realestatemanager.model.Photo
@@ -24,10 +26,12 @@ class AOEPhotoAdapter(private val listener: (Photo) -> Unit) :
     class AddPhotoViewHolder(private val binding: ImageListContentBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photo : Photo, listener: (Photo) -> Unit) {
-            Glide.with(binding.root)
-                .load(photo.location)
-                .fitCenter()
-                .into(binding.ivContentList)
+//            Glide.with(binding.root)
+//                .load(photo.location)
+//                .fitCenter()
+//                .into(binding.ivContentList)
+
+            binding.ivContentList.load(Uri.parse(photo.image))
 
             binding.tvContentList.text = photo.name
         }
