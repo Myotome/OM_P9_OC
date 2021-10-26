@@ -7,6 +7,7 @@ import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.AddRepository
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
@@ -25,9 +26,10 @@ class AOEPartOneViewModel @Inject constructor(
     private val addEditOneChannel = Channel<AddEditOneEvent>()
     val addEditOneEvent = addEditOneChannel.receiveAsFlow()
 
-    var type: String =""
-    var price: Int = -1
-    var surface: Double = -1.0
+    var onSale = true
+    var type =""
+    var price = -1
+    var surface = -1.0
     var rooms: Int? = null
     var landsize: Double? = null
 
@@ -36,11 +38,13 @@ class AOEPartOneViewModel @Inject constructor(
         .asLiveData(coroutineDispatchers.ioDispatchers)
 
     private fun map(estate: Estate?) : AOEPartOneViewState? = if (estate?.address != null){
-        AOEPartOneViewState(type = estate.estateType,
+        AOEPartOneViewState(
+            onSale = estate.onSale,
+            type = estate.estateType,
             price = estate.price,
             surface = estate.surface,
             room = estate.room,
-            landsize = estate.landSize
+            landSize = estate.landSize
         )
     }else{
         null
@@ -67,7 +71,9 @@ class AOEPartOneViewModel @Inject constructor(
     }
 
     private fun createPartOne() = viewModelScope.launch {
-        addRepo.setPartOne(type, price, surface, rooms, landsize)
+        var soldTime: String? = null
+        if(onSale) soldTime = Utils.getTodayDate()
+        addRepo.setPartOne(onSale, type, price, surface, rooms, landsize, soldTime)
         addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }
 

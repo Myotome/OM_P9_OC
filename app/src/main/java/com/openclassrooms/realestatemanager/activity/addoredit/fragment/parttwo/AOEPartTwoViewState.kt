@@ -5,5 +5,6 @@ data class AOEPartTwoViewState(
     val bedroom: Int?,
     val bathroom: Int?,
     val description: String?,
-    val realtor: String?
+    val realtor: String?,
+    val dateEntry: String
 )

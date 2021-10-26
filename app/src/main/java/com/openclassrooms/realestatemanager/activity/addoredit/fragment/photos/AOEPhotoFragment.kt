@@ -15,11 +15,13 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPhotoBinding
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import java.io.ByteArrayOutputStream
 
@@ -36,13 +38,8 @@ class AOEPhotoFragment : Fragment() {
     ): View {
         binding = FragmentAddPhotoBinding.inflate(inflater, container, false)
 
-        val adapter = AOEPhotoAdapter {}
-        //TODO : add listener click to edit picture?
-        binding.rvAddPhoto.adapter = adapter
 
-        viewModel.listPhotoLive().observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
+
 
         binding.apply {
             btAddTakePhoto.setOnClickListener { dispatchTakePictureIntent() }
@@ -58,10 +55,25 @@ class AOEPhotoFragment : Fragment() {
                     is AOEPhotoViewModel.AddEditPhotoEvent.NavigateResult -> {
                         (activity as AOEActivity).clickToRightOrLeft(event.result)
                     }
+                    is AOEPhotoViewModel.AddEditPhotoEvent.ShowInvalidInputMessage -> {
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
+                    }
                 }
             }
         }
         return binding.root
+    }
+
+    @FlowPreview
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val adapter = AOEPhotoAdapter {}
+        //TODO : add listener click to edit picture?
+        binding.rvAddPhoto.adapter = adapter
+
+        viewModel.listPhotoLive().observe(viewLifecycleOwner) {
+            adapter.submitList(it.listPhoto)
+        }
+
     }
 
     private fun dispatchGalleryPhoto() {

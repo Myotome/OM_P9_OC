@@ -8,6 +8,20 @@
     tools:context=".activity.addoredit.fragment.partone.AOEPartOneFragment"
     android:padding="10dp">
 
+    <Switch
+        android:id="@+id/sw_one_sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:switchPadding="15dp"
+        android:text="@string/on_sale"
+        android:textOff="Sold"
+        android:textOn="On Sale"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tv_add_type"
         android:layout_width="wrap_content"
@@ -26,7 +40,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/obligatory"
         android:textColorHint="#50ff0000"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sw_one_sale"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_add_type"
         app:layout_constraintBottom_toTopOf="@id/et_add_price"

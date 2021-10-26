@@ -33,6 +33,7 @@ class AOEPartTwoFragment : Fragment() {
                      etAddDescription.setText(vs.description)
                      etAddRealtor.setText(vs.realtor)
                      viewModel.estateId = vs.id
+                     viewModel.entryDate = vs.dateEntry
                  }
              }
 

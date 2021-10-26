@@ -41,5 +41,6 @@
     <string name="subway">Subway</string>
     <string name="nightlife">Nightlife</string>
     <string name="sold">SOLD</string>
+    <string name="on_sale">This estate is on Sale</string>
 
 </resources>

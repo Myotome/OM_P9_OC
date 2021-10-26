@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:background="#fff">
+    android:background="@color/ocherLight">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,6 +15,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/tv_detail_sold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/sold"
+                android:textSize="50sp"
+                android:textStyle="bold|italic"
+                android:visibility="gone"
+                android:textColor="@color/ocherDark"
+                android:background="@color/englishGreen50"
+                app:layout_constraintBottom_toTopOf="@id/rv_detail_photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_detail_photo"
                 android:layout_width="match_parent"
@@ -23,7 +40,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_sold"
                 tools:listitem="@layout/image_list_content" />
 
             <TextView
@@ -33,6 +50,7 @@
                 android:layout_margin="10dp"
                 android:textSize="25sp"
                 android:textStyle="bold"
+                android:textColor="@color/englishGreenDark"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_detail_photo"
                 tools:text="Penthouse 7 rooms 200 m2" />
@@ -44,6 +62,7 @@
                 android:layout_margin="10dp"
                 android:textSize="20sp"
                 android:textStyle="italic"
+                android:textColor="@color/englishGreenDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_fast_description"
                 tools:text="3 000 000 $" />
@@ -57,79 +76,101 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_price">
 
-                <TextView
-                    android:id="@+id/tv_detail_surface"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textStyle="bold"
-                    app:drawableStartCompat="@drawable/square"
-                    app:layout_constraintEnd_toStartOf="@id/tv_detail_rooms"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/surface" />
-
-                <TextView
-                    android:id="@+id/tv_detail_rooms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textStyle="bold"
-                    app:drawableStartCompat="@drawable/rooms"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_detail_surface"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/rooms" />
-
-                <TextView
-                    android:id="@+id/tv_detail_land_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="@string/landsize"
-                    android:textStyle="bold"
-
-                    app:drawableStartCompat="@drawable/landsize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_rooms" />
-
-                <TextView
-                    android:id="@+id/tv_detail_bathrooms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/bathrooms"
-                    android:textStyle="bold"
-
-                    app:drawableStartCompat="@drawable/bathrooms"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_detail_bedrooms"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size" />
-
-                <TextView
-                    android:id="@+id/tv_detail_bedrooms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/bedrooms"
-                    android:textStyle="bold"
-                    app:drawableStartCompat="@drawable/bedrooms"
-                    app:layout_constraintEnd_toStartOf="@id/tv_detail_bathrooms"
-                    app:layout_constraintStart_toStartOf="@id/tv_detail_surface"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size" />
-
-
-                <TextView
-                    android:id="@+id/tv_detail_title_description"
+                <Button
+                    android:id="@+id/bt_detail_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="15dp"
+                    android:text="Show detail"
+                    android:textColor="@color/ocherDark"
+                    android:background="@color/englishGreen50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cl3" />
+
+                <TableLayout
+                    android:id="@+id/tl_detail_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foregroundGravity="center"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bt_detail_detail">
+
+                    <TableRow android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_detail_surface"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/square"
+                            app:layout_constraintEnd_toStartOf="@id/tv_detail_rooms"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@string/surface" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_rooms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/rooms"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_detail_surface"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@string/rooms" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_land_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/landsize"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/landsize"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_detail_rooms" />
+                    </TableRow>
+
+                    <TableRow android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_detail_bathrooms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bathrooms"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/bathrooms"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tv_detail_bedrooms"
+                            app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_bedrooms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bedrooms"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/bedrooms"
+                            app:layout_constraintEnd_toStartOf="@id/tv_detail_bathrooms"
+                            app:layout_constraintStart_toStartOf="@id/tv_detail_surface"
+                            app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size" />
+                    </TableRow>
+
+
+                </TableLayout>
+
+                <Button
+                    android:id="@+id/bt_detail_title_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/description"
                     android:textSize="20sp"
+                    android:textColor="@color/ocherDark"
+                    android:background="@color/englishGreen50"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_bedrooms" />
+                    app:layout_constraintTop_toBottomOf="@id/tl_detail_detail" />
 
                 <TextView
                     android:id="@+id/tv_detail_description"
@@ -137,112 +178,223 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:padding="5dp"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_title_description"
+                    app:layout_constraintTop_toBottomOf="@id/bt_detail_title_description"
                     tools:text="@tools:sample/lorem" />
+
+                <Button
+                    android:id="@+id/bt_detail_interest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Point of interest"
+                    android:textColor="@color/ocherDark"
+                    android:background="@color/englishGreen50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_description" />
+
+                <TableLayout
+                    android:id="@+id/tl_detail_interest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:foregroundGravity="center"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bt_detail_interest">
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_detail_school"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/school"
+                            android:visibility="gone"
+                            app:drawableStartCompat="@drawable/baseline_school_24"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_store"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/store"
+                            android:visibility="gone"
+                            app:drawableStartCompat="@drawable/baseline_storefront_24"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_park"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/park"
+                            android:visibility="gone"
+                            app:drawableStartCompat="@drawable/baseline_park_24"
+                            tools:visibility="visible" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_detail_restaurant"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/restaurant"
+                            android:visibility="gone"
+                            app:drawableStartCompat="@drawable/baseline_restaurant_24"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_movie"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/movie_theatre"
+                            android:visibility="gone"
+                            app:drawableStartCompat="@drawable/baseline_theaters_24"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_theatre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/theatre"
+                            android:visibility="gone"
+                            app:drawableStartCompat="@drawable/baseline_theater_comedy_24"
+                            tools:visibility="visible" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_detail_subway"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/subway"
+                            android:visibility="gone"
+                            app:drawableStartCompat="@drawable/baseline_directions_subway_24"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_nightlife"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/nightlife"
+                            android:visibility="gone"
+                            app:drawableStartCompat="@drawable/baseline_nightlife_24"
+                            tools:visibility="visible" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <Button
+                    android:id="@+id/bt_detail_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Map"
+                    android:textColor="@color/ocherDark"
+                    android:background="@color/englishGreen50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tl_detail_interest" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_detail_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bt_detail_map">
+
+                    <TextView
+                        android:id="@+id/tv_detail_map_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_detail_map"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/cl_detail_map"
+                        tools:src="@drawable/ic_baseline_image_not_supported_24" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <Button
+                    android:id="@+id/bt_detail_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Information"
+                    android:textColor="@color/ocherDark"
+                    android:background="@color/englishGreen50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_detail_map" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_detail_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bt_detail_information"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_detail_realtor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Realtor : Antoine Daniel"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_detail_entry_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Entry date : 01/01/1999"
+                        app:layout_constraintTop_toBottomOf="@id/tv_detail_realtor"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_detail_mod_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Modification : 02/02/1999"
+                        app:layout_constraintTop_toBottomOf="@id/tv_detail_entry_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:visibility="gone"
+                        tools:visibility="visible"/>
+
+                    <TextView
+                        android:id="@+id/tv_detail_sold_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Sold on : 03/03/1999"
+                        tools:visibility="visible"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/tv_detail_mod_date"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TableLayout
-                android:id="@+id/cl4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl3"
-                android:foregroundGravity="center">
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/tv_detail_school"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/school"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/baseline_school_24"
-                        tools:visibility="visible"
-                        android:padding="5dp"/>
-
-                    <TextView
-                        android:id="@+id/tv_detail_store"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/store"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/baseline_storefront_24"
-                        tools:visibility="visible"
-                        android:padding="5dp"/>
-
-                    <TextView
-                        android:id="@+id/tv_detail_park"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/park"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/baseline_park_24"
-                        tools:visibility="visible"
-                        android:padding="5dp"/>
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/tv_detail_restaurant"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/restaurant"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/baseline_restaurant_24"
-                        android:padding="5dp"
-                        tools:visibility="visible" />
-
-                    <TextView
-                        android:id="@+id/tv_detail_movie"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/movie_theatre"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/baseline_theaters_24"
-                        tools:visibility="visible"
-                        android:padding="5dp"/>
-
-                    <TextView
-                        android:id="@+id/tv_detail_theatre"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/theatre"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/baseline_theater_comedy_24"
-                        tools:visibility="visible"
-                        android:padding="5dp"/>
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/tv_detail_subway"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/subway"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/baseline_directions_subway_24"
-                        tools:visibility="visible"
-                        android:padding="5dp"/>
-
-                    <TextView
-                        android:id="@+id/tv_detail_nightlife"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/nightlife"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/baseline_nightlife_24"
-                        tools:visibility="visible"
-                        android:padding="5dp"/>
-                </TableRow>
-
-            </TableLayout>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -20,5 +20,11 @@ data class DetailViewState (
     val theatre: Boolean,
     val subway: Boolean,
     val nightlife: Boolean,
-    val photoList: List<Photo>?
+    val photoList: List<Photo>?,
+    val address: String,
+    val realtor: String,
+    val entryDate: String,
+    val modificationDate: String,
+    val soldDate: String,
+    val onSale: Boolean
 )
