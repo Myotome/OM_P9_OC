@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.interest
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,11 +19,15 @@ class AOEInterestFragment : Fragment() {
 
     private val viewModel by viewModels<AOEInterestViewModel>()
 
+    private val TAG = "DEBUGKEY"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentAddInterestBinding.inflate(inflater, container, false)
+
+        Log.d(TAG, "onCreateView: Interest Fragment is call")
 
         viewModel.currentEstate.observe(viewLifecycleOwner){vs->
             binding.apply {

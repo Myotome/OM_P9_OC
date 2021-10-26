@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.repository
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.openclassrooms.realestatemanager.database.EstateDAO
 import com.openclassrooms.realestatemanager.model.Estate
 import kotlinx.coroutines.FlowPreview
@@ -23,6 +24,10 @@ class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDA
     fun isCurrentEstate(estateId: Int) {
         setCurrentId.value = estateId
     }
+
+//    fun searchQuery(query: SimpleSQLiteQuery){
+//        estateDAO.getSearchEstate(query = query)
+//    }
 }
 
 

@@ -15,8 +15,6 @@
         android:checked="true"
         android:switchPadding="15dp"
         android:text="@string/on_sale"
-        android:textOff="Sold"
-        android:textOn="On Sale"
         app:layout_constraintBottom_toTopOf="@id/tv_add_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,20 +29,30 @@
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/type"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/et_add_type"
-        app:layout_constraintBottom_toBottomOf="@id/et_add_type"/>
+        app:layout_constraintTop_toTopOf="@id/sp_add_type"
+        app:layout_constraintBottom_toBottomOf="@id/sp_add_type"/>
 
-    <EditText
-        android:id="@+id/et_add_type"
+<!--    <EditText-->
+<!--        android:id="@+id/et_add_type"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="@string/obligatory"-->
+<!--        android:textColorHint="#50ff0000"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/sw_one_sale"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/tv_add_type"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/et_add_price"-->
+<!--        android:inputType="text" />-->
+
+    <Spinner
+        android:id="@+id/sp_add_type"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/obligatory"
-        android:textColorHint="#50ff0000"
-        app:layout_constraintTop_toBottomOf="@id/sw_one_sale"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sw_one_sale"
         app:layout_constraintStart_toEndOf="@id/tv_add_type"
-        app:layout_constraintBottom_toTopOf="@id/et_add_price"
-        android:inputType="text" />
+        app:layout_constraintBottom_toTopOf="@id/et_add_price"/>
 
     <TextView
         android:id="@+id/tv_add_price"
@@ -64,7 +72,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/obligatory"
         android:textColorHint="#50ff0000"
-        app:layout_constraintTop_toBottomOf="@id/et_add_type"
+        app:layout_constraintTop_toBottomOf="@id/sp_add_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_add_price"
         app:layout_constraintBottom_toTopOf="@id/et_add_surface"

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.databinding.ImageListContentBinding
 import com.openclassrooms.realestatemanager.model.Photo
 
@@ -16,20 +15,19 @@ class AOEPhotoAdapter(private val listener: (Photo) -> Unit) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AddPhotoViewHolder(
-        ImageListContentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        ImageListContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    )
 
 
     override fun onBindViewHolder(holder: AddPhotoViewHolder, position: Int) {
         holder.bind(getItem(position), listener)
     }
 
-    class AddPhotoViewHolder(private val binding: ImageListContentBinding) : RecyclerView.ViewHolder(binding.root) {
+    class AddPhotoViewHolder(private val binding: ImageListContentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(photo : Photo, listener: (Photo) -> Unit) {
-//            Glide.with(binding.root)
-//                .load(photo.location)
-//                .fitCenter()
-//                .into(binding.ivContentList)
+
+        fun bind(photo: Photo, listener: (Photo) -> Unit) {
 
             binding.ivContentList.load(Uri.parse(photo.image))
 
