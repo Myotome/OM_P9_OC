@@ -1,9 +1,8 @@
 package com.openclassrooms.realestatemanager.activity.main.list
 
-import android.net.Uri
 import com.openclassrooms.realestatemanager.model.Photo
 
-data class MainViewState(
+data class ListViewState(
     val id: Int,
     val type: String,
     val district: String,

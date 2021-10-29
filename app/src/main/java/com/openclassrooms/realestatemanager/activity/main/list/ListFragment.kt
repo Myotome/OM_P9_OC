@@ -1,9 +1,11 @@
 package com.openclassrooms.realestatemanager.activity.main.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.main.detail.DetailFragment
@@ -14,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ListFragment : Fragment() {
 
     private lateinit var binding: EstateListBinding
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<ListViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +32,7 @@ class ListFragment : Fragment() {
         }
 
         val recyclerView = binding.rvEstateList
-        val adapter = MainAdapter {
+        val adapter = ListAdapter {
             viewModel.isCurrentEstate(it.id)
             displayMasterDetailScreen(mId)
         }
@@ -39,6 +41,11 @@ class ListFragment : Fragment() {
 
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+        }
+
+        binding.apply {
+            btEstateListClearSearch.visibility = View.VISIBLE
+            btEstateListClearSearch.setOnClickListener { viewModel.clearSearch() }
         }
 
         return binding.root

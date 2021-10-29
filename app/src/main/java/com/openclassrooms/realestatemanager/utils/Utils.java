@@ -5,6 +5,7 @@ import android.net.wifi.WifiManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -48,5 +49,21 @@ public class Utils {
     public static Boolean isInternetAvailable(Context context){
         WifiManager wifi = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         return wifi.isWifiEnabled();
+    }
+
+    public static long getLongFormatDate(){
+        Calendar calendar = Calendar.getInstance();
+        return calendar.getTime().getTime();
+    }
+    public static long getLongFormatDate(int years, int month, int day){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(years, month, day);
+        return calendar.getTime().getTime();
+    }
+
+    public static String getLongToString(long longToConvert){
+        Date date = new Date(longToConvert);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(date);
     }
 }

@@ -2,10 +2,11 @@ package com.openclassrooms.realestatemanager.activity.main.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.openclassrooms.realestatemanager.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.mapNotNull
@@ -44,18 +45,18 @@ class DetailViewModel @Inject constructor(
             photoList = estate.listPhoto,
             address = getAddressString(estate.address),
             realtor = estate.realtor?: "",
-            entryDate =estate.entryDate,
-            modificationDate = estate.modificationDate?:"",
-            soldDate = estate.soldDate?:"",
+            entryDate =Utils.getLongToString(estate.entryDate),
+            modificationDate = if(estate.modificationDate!=null)Utils.getLongToString(estate.modificationDate) else "",
+            soldDate = if(estate.soldDate != null) Utils.getLongToString(estate.soldDate) else "",
             onSale = estate.onSale
 
         )
 
     private fun getAddressString(address: Address): String {
 
-        return ("${address.number}   ${address.complement}" +
-                address.street +
-                address.district +
+        return ("${address.number}   ${address.complement} \n" +
+                "${address.street}\n" +
+                "${address.district}\n" +
                 "${address.postCode}  ${address.city}")
     }
 }

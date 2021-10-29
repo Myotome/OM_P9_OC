@@ -1,20 +1,18 @@
 package com.openclassrooms.realestatemanager.activity.main.list
 
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
-import com.openclassrooms.realestatemanager.R
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 @HiltViewModel
-class MainViewModel @Inject constructor(private val roomRepo: RoomDatabaseRepository) :
+class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseRepository) :
     ViewModel() {
 
 //    private val allEstate: LiveData<List<Estate>> = roomRepo.allProperty.asLiveData()
@@ -28,17 +26,20 @@ class MainViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
     }.asLiveData()
 
 
-    private fun map(estate: Estate): MainViewState =
+    private fun map(estate: Estate): ListViewState =
 
-            MainViewState(estate.id,
-                estate.estateType,
-                estate.address.district,
-                estate.price,
-                estate.onSale,
-                if(!estate.listPhoto.isNullOrEmpty()) estate.listPhoto[0] else null
-            )
+        ListViewState(
+            estate.id,
+            estate.estateType,
+            estate.address.district,
+            estate.price,
+            estate.onSale,
+            if (!estate.listPhoto.isNullOrEmpty()) estate.listPhoto[0] else null
+        )
 
-
+    fun clearSearch() {
+        roomRepo.searchQuery(null)
+    }
 
 
 }

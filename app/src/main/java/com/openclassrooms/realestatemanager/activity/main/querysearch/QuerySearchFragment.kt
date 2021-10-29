@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FragmentQuerySearchBinding
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -154,31 +155,31 @@ class QuerySearchFragment : Fragment() {
                 clSearchEntryDate.visibility =
                     if (clSearchEntryDate.visibility == View.VISIBLE) View.GONE else View.VISIBLE
             }
-            rgSearchEntry.setOnCheckedChangeListener { group, id ->
+            rgSearchEntry.setOnCheckedChangeListener { _, id ->
                 when (id) {
                     R.id.rb_search_entry_before -> viewModel.entryDateCode = 0
-                    R.id.rb_search_entry_at -> viewModel.entryDateCode = 1
-                    R.id.rb_search_entry_after -> viewModel.entryDateCode = 2
+//                    R.id.rb_search_entry_at -> viewModel.entryDateCode = 1
+                    R.id.rb_search_entry_after -> viewModel.entryDateCode = 1
                 }
             }
-            dpSearchEntryDate.init(2020,0,1) { _, years, month, day ->
-                viewModel.entryDateText = "$day/${month + 1}/$years"
+            dpSearchEntryDate.init(2021,0,1) { _, years, month, day ->
+                viewModel.entryDateText = Utils.getLongFormatDate(years, month+1, day)
             }
 
             btSearchSoldDate.setOnClickListener {
                 clSearchSoldDate.visibility =
                     if (clSearchSoldDate.visibility == View.VISIBLE) View.GONE else View.VISIBLE
             }
-            rgSearchSold.setOnCheckedChangeListener { group, id ->
+            rgSearchSold.setOnCheckedChangeListener { _, id ->
                 when (id) {
                     R.id.rb_search_sold_before -> viewModel.soldDateCode = 0
-                    R.id.rb_search_sold_at -> viewModel.soldDateCode = 1
-                    R.id.rb_search_sold_after -> viewModel.soldDateCode = 2
+//                    R.id.rb_search_sold_at -> viewModel.soldDateCode = 1
+                    R.id.rb_search_sold_after -> viewModel.soldDateCode = 1
                 }
             }
             dpSearchDateSold.init(2022,8,1){
                 _,years,month, day->
-                viewModel.soldDateText = "$day/${month + 1}/$years"
+                viewModel.soldDateText = Utils.getLongFormatDate(years, month+1, day)
             }
 
 

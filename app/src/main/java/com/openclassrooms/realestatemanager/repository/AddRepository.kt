@@ -7,7 +7,6 @@ import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Interest
 import com.openclassrooms.realestatemanager.model.Photo
-import com.openclassrooms.realestatemanager.utils.Utils
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,13 +22,13 @@ class AddRepository @Inject constructor(
     private val surface = MutableLiveData<Double?>()
     private val rooms = MutableLiveData<Int?>()
     private val landSize = MutableLiveData<Double?>()
-    private var soldDate: String? = null
+    private var soldDate: Long? = null
     private val bedrooms = MutableLiveData<Int?>()
     private val bathrooms = MutableLiveData<Int?>()
     private val description = MutableLiveData<String?>()
     private val realtor = MutableLiveData<String?>()
-    private var dateEntry: String? = null
-    private var modifDate: String? = null
+    private var dateEntry: Long? = null
+    private var modifyDate: Long? = null
 
     //    private val addressLiveData = MutableLiveData<Address>()
     private lateinit var address: Address
@@ -43,7 +42,7 @@ class AddRepository @Inject constructor(
         surface: Double,
         rooms: Int?,
         landSize: Double?,
-        soldDate: String?
+        soldDate: Long?
     ) {
         this.onSale = onSale
         this.type.value = type
@@ -60,8 +59,8 @@ class AddRepository @Inject constructor(
         bathroom: Int?,
         description: String?,
         realtor: String?,
-        entryDate: String?,
-        modificationDate: String?
+        entryDate: Long?,
+        modificationDate: Long?
     ) {
         estateId = id
         bedrooms.value = bedroom
@@ -69,7 +68,7 @@ class AddRepository @Inject constructor(
         this.description.value = description
         this.realtor.value = realtor
         dateEntry = entryDate
-        modifDate = modificationDate
+        modifyDate = modificationDate
     }
 
     fun setAddress(address: Address) {
@@ -96,7 +95,7 @@ class AddRepository @Inject constructor(
             listPhoto = listPhoto,
             entryDate = dateEntry!!,
             soldDate = soldDate,
-            modificationDate = modifDate,
+            modificationDate = modifyDate,
             onSale = onSale
         )
         if (estateId != null) {

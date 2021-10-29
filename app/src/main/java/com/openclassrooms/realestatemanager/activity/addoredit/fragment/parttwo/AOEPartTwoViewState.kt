@@ -6,5 +6,5 @@ data class AOEPartTwoViewState(
     val bathroom: Int?,
     val description: String?,
     val realtor: String?,
-    val dateEntry: String
+    val dateEntry: Long
 )

@@ -1,10 +1,7 @@
-package com.openclassrooms.realestatemanager
+package com.openclassrooms.realestatemanager.utils
 
 import android.app.Application
-import com.openclassrooms.realestatemanager.database.EstateRoomDatabase
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 
 @HiltAndroidApp
 class MainApplication : Application() {

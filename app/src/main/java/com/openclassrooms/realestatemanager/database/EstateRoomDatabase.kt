@@ -55,7 +55,7 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                             postCode = 10006,
                             city = "New York"
                         ),
-                        entryDate = Utils.getTodayDate(),
+                        entryDate = Utils.getLongFormatDate(),
                         listPhoto = listPhoto,
                         interest = Interest(),
                         landSize = null,
@@ -89,11 +89,11 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                             postCode = 10026,
                             city = "New York"
                         ),
-                        entryDate = Utils.getTodayDate(),
+                        entryDate = Utils.getLongFormatDate(),
                         listPhoto = listPhoto,
                         interest = Interest(),
                         landSize = null,
-                        soldDate = null,
+                        soldDate = Utils.getLongFormatDate(),
                         modificationDate = null,
                         onSale = false
                     )
