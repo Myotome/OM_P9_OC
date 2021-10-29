@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.main.querysearch.QuerySearchFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@id/bt_search_cancel"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/cb_search_on_sale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:checked="true"
+                android:text="@string/sale"
+                app:layout_constraintEnd_toStartOf="@id/cb_search_sold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/cb_search_sold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:checked="false"
+                android:text="@string/sold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cb_search_on_sale"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/bt_search_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/type"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cb_search_on_sale" />
+
+            <Spinner
+                android:id="@+id/sp_search_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_type"
+                tools:text="Penthouse" />
+
+
+            <Button
+                android:id="@+id/bt_search_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sp_search_type" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_price">
+
+                <EditText
+                    android:id="@+id/et_search_price_min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/minimum_price"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toStartOf="@+id/et_search_price_max"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_search_price_max"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/maximum_price"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_search_price_min"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/bt_search_surface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/surface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_price" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_surface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_surface">
+
+                <EditText
+                    android:id="@+id/et_search_surface_min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/min_surface"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toStartOf="@+id/et_search_surface_max"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_search_surface_max"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/max_surface"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_search_surface_min"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/bt_search_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rooms"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_surface" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_room">
+
+                <EditText
+                    android:id="@+id/et_search_room_min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/min_room"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toStartOf="@+id/et_search_room_max"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_search_room_max"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/max_room"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_search_room_min"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/bt_search_bedroom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bedrooms"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_room" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_bedroom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_bedroom">
+
+                <EditText
+                    android:id="@+id/et_search_bedroom_min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/min_bedroom"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toStartOf="@+id/et_search_bedroom_max"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_search_bedroom_max"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/max_bedroom"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_search_bedroom_min"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/bt_search_bathroom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bathrooms"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_bedroom" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_bathroom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_bathroom">
+
+                <EditText
+                    android:id="@+id/et_search_bathroom_min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/min_bathroom"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toStartOf="@+id/et_search_bathroom_max"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_search_bathroom_max"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/max_bathroom"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_search_bathroom_min"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/bt_search_landsize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/landsize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_bathroom" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_landsize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_landsize">
+
+                <EditText
+                    android:id="@+id/et_search_landsize_min"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/min_landsize"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toStartOf="@+id/et_search_landsize_max"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_search_landsize_max"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/max_landsize"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/et_search_landsize_min"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/bt_search_interest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/point_of_interest"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_landsize" />
+
+            <TableLayout
+                android:id="@+id/tl_search_interest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_interest">
+
+                <TableRow>
+
+                    <CheckBox
+                        android:id="@+id/cb_search_school"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_school_24"
+                        android:text="@string/school" />
+
+                    <CheckBox
+                        android:id="@+id/cb_search_store"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_storefront_24"
+                        android:text="@string/store" />
+
+                    <CheckBox
+                        android:id="@+id/cb_search_park"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_park_24"
+                        android:text="@string/park" />
+                </TableRow>
+
+                <TableRow>
+
+                    <CheckBox
+                        android:id="@+id/cb_search_restaurant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_restaurant_24"
+                        android:text="@string/restaurant" />
+
+                    <CheckBox
+                        android:id="@+id/cb_search_movie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_theaters_24"
+                        android:text="@string/movie_theatre" />
+
+                    <CheckBox
+                        android:id="@+id/cb_search_theatre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_theater_comedy_24"
+                        android:text="@string/theatre" />
+                </TableRow>
+
+                <TableRow>
+
+                    <CheckBox
+                        android:id="@+id/cb_search_subway"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_directions_subway_24"
+                        android:text="@string/subway" />
+
+                    <CheckBox
+                        android:id="@+id/cb_search_nightlife"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/baseline_nightlife_24"
+                        android:text="@string/nightlife" />
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                android:id="@+id/bt_search_entry_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date_of_entry"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tl_search_interest" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_entry_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_entry_date">
+
+                <RadioGroup
+                    android:id="@+id/rg_search_entry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rb_search_entry_before"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/before" />
+
+                    <RadioButton
+                        android:id="@+id/rb_search_entry_at"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/at" />
+
+                    <RadioButton
+                        android:id="@+id/rb_search_entry_after"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/after" />
+
+                </RadioGroup>
+
+                <DatePicker
+                    android:id="@+id/dp_search_entry_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_search_entry" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/bt_search_sold_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sold_date"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_entry_date"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_sold_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_sold_date">
+
+                <RadioGroup
+                    android:id="@+id/rg_search_sold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rb_search_sold_before"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/before" />
+
+                    <RadioButton
+                        android:id="@+id/rb_search_sold_at"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/at" />
+
+                    <RadioButton
+                        android:id="@+id/rb_search_sold_after"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/after" />
+
+                </RadioGroup>
+
+                <DatePicker
+                    android:id="@+id/dp_search_date_sold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_search_sold" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/bt_search_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/photo_of_estate"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_sold_date" />
+
+            <EditText
+                android:id="@+id/et_search_photo_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Minimum photo"
+                android:inputType="number"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/bt_search_photo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/bt_search_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_search_search"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bt_search_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bt_search_cancel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

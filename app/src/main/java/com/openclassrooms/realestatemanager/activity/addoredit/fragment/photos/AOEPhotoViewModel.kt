@@ -1,9 +1,9 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.openclassrooms.realestatemanager.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_FINISH_RESULT
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.partone.AOEPartOneViewModel
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.AddRepository
@@ -23,15 +23,21 @@ class AOEPhotoViewModel @Inject constructor(
     coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
-    private val addEditPhotoChannel = Channel<AOEPhotoViewModel.AddEditPhotoEvent>()
+    private val addEditPhotoChannel = Channel<AddEditPhotoEvent>()
     val addEditTwoEvent = addEditPhotoChannel.receiveAsFlow()
 
-    private var listPhotoLiveData: MutableLiveData<Photo> = MutableLiveData<Photo>()
+    private val TAG = "DEBUGKEY"
+
+    private var listPhotoLiveData = MutableLiveData<MutableList<Photo>>()
+
+    init {
+        listPhotoLiveData.value = ArrayList()
+    }
 
     @FlowPreview
     private var currentEstate: LiveData<Estate> =
         roomRepo.estateById.asLiveData(coroutineDispatchers.ioDispatchers)
-//    private var listPhoto = ArrayList<Photo>()
+
 
     @FlowPreview
     private var mediator = MediatorLiveData<AOEPhotoViewState>().apply {
@@ -40,87 +46,34 @@ class AOEPhotoViewModel @Inject constructor(
     }
 
     @FlowPreview
-    private fun mediatorCombine(photo: Photo?, value: Estate?) {
+    private fun mediatorCombine(listPhoto: MutableList<Photo>?, value: Estate?) {
+        Log.d(TAG, "mediatorCombine: is call")
         val localList = ArrayList<Photo>()
         if (value?.listPhoto != null) {
             for (estatePhoto in value.listPhoto.listIterator()) {
                 localList.add(estatePhoto)
             }
         }
-        if (photo != null) localList.add(photo)
-//        listPhoto = localList
+        if (listPhoto != null) {
+            for (photo in listPhoto)
+                localList.add(photo)
+        }
         mediator.value = AOEPhotoViewState(localList)
     }
 
     @FlowPreview
-    fun listPhotoLive(): LiveData<AOEPhotoViewState> = mediator
+    fun listPhotoLive(): LiveData<AOEPhotoViewState> {
+        Log.d(TAG, "listPhotoLive: is call")
+        return mediator
+    }
 
     fun addPhoto(name: String, path: String) {
-        listPhotoLiveData.value = Photo(name, path)
+        listPhotoLiveData.value?.add(Photo(name, path))
+        Log.d(TAG, "addPhoto: ${listPhotoLiveData.value.toString()}")
+        listPhotoLiveData.value = listPhotoLiveData.value
     }
-//    @FlowPreview
-//    private val currentEstate = roomRepo.estateById.mapNotNull { estate -> map(estate) }.asLiveData(coroutineDispatchers.ioDispatchers)
-//
-//    private fun map(estate: Estate) : List<Photo>? = estate.listPhoto
-//
-//    private fun map(estate: Estate): AOEPhotoViewState =
-//        AOEPhotoViewState(listPhoto = estate.listPhoto)
 
-
-//    @FlowPreview
-//    fun listPhotoLive(): LiveData<AOEPhotoViewState> =
-//        mediatorCombine(listPhotoLiveData, currentEstate)
-
-
-//    private fun mediatorCombine(
-//        listPhotoLiveData: MutableLiveData<Photo>,
-//        currentEstate: LiveData<List<Photo>>
-//    ): LiveData<List<Photo>?> {
-//        val result = MediatorLiveData<List<Photo>?>()
-//        val currentList = ArrayList<Photo>()
-//        val transformPhoto = Observer<Photo>{
-//            listPhotoLiveData.value?.let {
-//                photo -> currentList.add(photo)}
-//            }
-//        val getFromEstate = Observer<List<Photo>>{
-//            currentList += (currentEstate.value as ArrayList<Photo>)
-//        }
-//
-//        result.addSource(listPhotoLiveData, transformPhoto)
-//        result.addSource(currentEstate, getFromEstate)
-//
-//        listPhoto = currentList
-//
-//        return result
-//    }
-
-
-//    private fun mediatorCombine(
-//        photoLiveData: MutableLiveData<Photo>,
-//        currentEstate: LiveData<Estate>
-//    ): LiveData<AOEPhotoViewState> {
-//        val result = MediatorLiveData<AOEPhotoViewState>()
-//        val currentList = ArrayList<Photo>()
-//        val transformPhoto = Observer<Photo> {
-//            photoLiveData.value?.let { it1 -> currentList.add(it1) }
-//            result.value = AOEPhotoViewState(currentList)
-//        }
-//        val transformEstate = Observer<Estate> {
-//            for (photo in currentEstate.value?.listPhoto!!) {
-//                currentList.add(photo)
-//            }
-//            result.value = AOEPhotoViewState(currentList)
-//        }
-//
-//        result.addSource(photoLiveData, transformPhoto)
-//        result.addSource(currentEstate, transformEstate)
-//
-//        listPhoto = currentList
-//
-//        return result
-//    }
-
-
+    @FlowPreview
     fun getAllData() {
         if (mediator.value == null || mediator.value?.listPhoto.isNullOrEmpty()) {
             showInvalidInputMessage()
@@ -142,6 +95,6 @@ class AOEPhotoViewModel @Inject constructor(
 
     sealed class AddEditPhotoEvent {
         data class NavigateResult(val result: Int) : AddEditPhotoEvent()
-        data class ShowInvalidInputMessage(val msg: String): AddEditPhotoEvent()
+        data class ShowInvalidInputMessage(val msg: String) : AddEditPhotoEvent()
     }
 }

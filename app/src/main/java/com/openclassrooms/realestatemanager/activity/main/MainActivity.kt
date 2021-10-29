@@ -15,6 +15,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.activity.main.list.ListFragment
 import com.openclassrooms.realestatemanager.activity.main.maps.MapsFragment
+import com.openclassrooms.realestatemanager.activity.main.querysearch.QuerySearchFragment
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -88,7 +89,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, AOEActivity::class.java))
                 true
             }
-            R.id.main_menu_search -> true
+            R.id.main_menu_search -> {
+                displayCurrentFragment(QuerySearchFragment())
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

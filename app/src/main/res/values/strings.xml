@@ -20,8 +20,6 @@
     <string name="district">District :</string>
     <string name="postcode">Postcode :</string>
     <string name="city">"City : "</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add">Add</string>
     <string name="edit">Edit</string>
     <string name="search">Search</string>
@@ -42,5 +40,34 @@
     <string name="nightlife">Nightlife</string>
     <string name="sold">SOLD</string>
     <string name="on_sale">This estate is on Sale</string>
+    <string name="minimum_price">Min. price</string>
+    <string name="maximum_price">Max. price</string>
+    <string name="min_surface">Min. surface</string>
+    <string name="max_surface">Max. surface</string>
+    <string name="min_room">Min. room</string>
+    <string name="max_room">Max. room</string>
+    <string name="min_bedroom">Min. Bedroom</string>
+    <string name="max_bedroom">Max. bedroom</string>
+    <string name="min_bathroom">Min. bathroom</string>
+    <string name="max_bathroom">Max. bathroom</string>
+    <string name="min_landsize">Min. land size</string>
+    <string name="max_landsize">Maw. land size</string>
+    <string name="point_of_interest">Point of interest : </string>
+    <string name="date_of_entry">Entry date : </string>
+    <string name="before">Before :</string>
+    <string name="at">At :</string>
+    <string name="after">After :</string>
+    <string name="sold_date">Sold date :</string>
+    <string name="sale">On Sale</string>
+
+
+    <string-array name="type">
+        <item>Penthouse</item>
+        <item>House</item>
+        <item>Loft</item>
+        <item>Apartment</item>
+        <item>Castle</item>
+        <item>Mansion</item>
+    </string-array>
 
 </resources>

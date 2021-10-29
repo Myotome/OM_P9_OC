@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.address
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,11 +21,15 @@ class AOEAddressFragment : Fragment() {
 
     private val viewModel by viewModels<AOEAddressViewModel>()
 
+    private val TAG = "DEBUGKEY"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentAddAddressBinding.inflate(inflater, container, false)
+
+        Log.d(TAG, "onCreateView: address fragment is call")
 
         viewModel.currentEstate.observe(viewLifecycleOwner) { vs ->
             if (vs != null) {

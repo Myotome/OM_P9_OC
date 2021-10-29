@@ -72,7 +72,7 @@ class AOEPartOneViewModel @Inject constructor(
 
     private fun createPartOne() = viewModelScope.launch {
         var soldTime: String? = null
-        if(onSale) soldTime = Utils.getTodayDate()
+        if(!onSale) soldTime = Utils.getTodayDate()
         addRepo.setPartOne(onSale, type, price, surface, rooms, landsize, soldTime)
         addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }
