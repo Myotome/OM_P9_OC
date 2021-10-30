@@ -52,7 +52,6 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                             district = "Financial District",
                             number = 123,
                             street = "Broadway",
-                            postCode = 10006,
                             city = "New York"
                         ),
                         entryDate = Utils.getLongFormatDate(),
@@ -86,7 +85,6 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                             number = 1801,
                             complement = " Appt 58",
                             street = "Adam Clayton Powell Jr Blvd",
-                            postCode = 10026,
                             city = "New York"
                         ),
                         entryDate = Utils.getLongFormatDate(),

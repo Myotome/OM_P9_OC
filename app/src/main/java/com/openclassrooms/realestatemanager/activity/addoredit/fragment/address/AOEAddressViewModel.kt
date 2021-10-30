@@ -27,8 +27,7 @@ class AOEAddressViewModel @Inject constructor(
     var district: String = ""
     var number: Int? = null
     var complement: String? = null
-    var street: String? = null
-    var postCode: Int? = null
+    var street: String = ""
     var city: String = ""
 
 
@@ -41,7 +40,6 @@ class AOEAddressViewModel @Inject constructor(
             complement = estate.address.complement,
             street = estate.address.street,
             district = estate.address.district,
-            postcode = estate.address.postCode,
             city = estate.address.city
         )
     }else{
@@ -50,6 +48,14 @@ class AOEAddressViewModel @Inject constructor(
 
     fun onSaveClick(){
         when {
+            number == null -> {
+                showInvalidInputMessage("Number cannot be empty")
+                return
+            }
+            street.isBlank() ->{
+                showInvalidInputMessage("Street cannot be empty")
+                return
+            }
             district.isBlank() -> {
                 showInvalidInputMessage("District cannot be empty")
                 return
@@ -66,10 +72,9 @@ class AOEAddressViewModel @Inject constructor(
         val address = withContext(Dispatchers.Default) {
             Address(
                 district,
-                number,
+                number!!,
                 complement,
                 street,
-                postCode,
                 city
             )
         }

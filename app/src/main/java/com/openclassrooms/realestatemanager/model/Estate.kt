@@ -19,7 +19,7 @@ data class Estate(
     val soldDate: Long?,
     val realtor: String?,
     @Embedded val address: Address,
-    val listPhoto: List<Photo>?,
+    val listPhoto: List<Photo>,
     @Embedded val interest: Interest
 
 ){

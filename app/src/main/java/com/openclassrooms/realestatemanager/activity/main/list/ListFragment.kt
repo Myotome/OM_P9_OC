@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.activity.main.list
 
 import android.os.Bundle
+
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -27,7 +28,7 @@ class ListFragment : Fragment() {
 
 
         val mId = when (resources.getBoolean(R.bool.portrait_only)) {
-            true -> R.id.cl_estate_list
+            true -> R.id.frameLayout
             false -> R.id.fl_estate_detail_container
         }
 
@@ -42,11 +43,18 @@ class ListFragment : Fragment() {
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
-
-        binding.apply {
-            btEstateListClearSearch.visibility = View.VISIBLE
-            btEstateListClearSearch.setOnClickListener { viewModel.clearSearch() }
+        viewModel.isSearching.observe(viewLifecycleOwner){
+            if(it){
+                binding.apply {
+                    btEstateListClearSearch.visibility = View.VISIBLE
+                    btEstateListClearSearch.setOnClickListener { viewModel.clearSearch() }
+                }
+            }else{
+                binding.btEstateListClearSearch.visibility = View.GONE
+            }
         }
+
+
 
         return binding.root
     }

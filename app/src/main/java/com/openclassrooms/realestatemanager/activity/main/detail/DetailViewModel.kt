@@ -1,7 +1,9 @@
 package com.openclassrooms.realestatemanager.activity.main.detail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.openclassrooms.realestatemanager.BuildConfig
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
@@ -48,7 +50,8 @@ class DetailViewModel @Inject constructor(
             entryDate =Utils.getLongToString(estate.entryDate),
             modificationDate = if(estate.modificationDate!=null)Utils.getLongToString(estate.modificationDate) else "",
             soldDate = if(estate.soldDate != null) Utils.getLongToString(estate.soldDate) else "",
-            onSale = estate.onSale
+            onSale = estate.onSale,
+            formattedAddress = getFormattedAddress(estate.address)
 
         )
 
@@ -57,6 +60,14 @@ class DetailViewModel @Inject constructor(
         return ("${address.number}   ${address.complement} \n" +
                 "${address.street}\n" +
                 "${address.district}\n" +
-                "${address.postCode}  ${address.city}")
+                address.city)
     }
+     private fun getFormattedAddress(address: Address): String {
+         val street = address.street.trim().replace(" ", "+")
+         val city = address.city.trim().replace(" ", "+")
+         return ("https://maps.googleapis.com/maps/api/" +
+                 "staticmap?size=200x200&scale=2" +
+                 "&center=${address.number}+$street+$city" +
+                 "&key=${BuildConfig.MAPS_API_KEY}")
+     }
 }

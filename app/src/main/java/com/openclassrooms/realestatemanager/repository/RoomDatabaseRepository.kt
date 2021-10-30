@@ -18,6 +18,7 @@ class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDA
 
     private val setCurrentId = MutableLiveData<Int>()
     private val setQuerySearch = MutableLiveData<SimpleSQLiteQuery?>(null)
+    val isSearching = MutableLiveData(false)
 
     @FlowPreview
     val estateById = setCurrentId.asFlow().flatMapConcat { id -> estateDAO.getCurrentEstate(id) }
@@ -31,6 +32,10 @@ class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDA
 
     fun searchQuery(query: SimpleSQLiteQuery?) {
         setQuerySearch.value = query
+    }
+
+    fun isSearching(status: Boolean){
+        isSearching.value = status
     }
 }
 

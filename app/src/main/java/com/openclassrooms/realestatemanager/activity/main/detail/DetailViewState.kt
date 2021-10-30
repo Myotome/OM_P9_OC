@@ -26,5 +26,6 @@ data class DetailViewState (
     val entryDate: String,
     val modificationDate: String,
     val soldDate: String,
-    val onSale: Boolean
+    val onSale: Boolean,
+    val formattedAddress: String
 )

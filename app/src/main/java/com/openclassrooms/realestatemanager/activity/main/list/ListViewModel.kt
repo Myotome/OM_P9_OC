@@ -18,6 +18,7 @@ class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
 //    private val allEstate: LiveData<List<Estate>> = roomRepo.allProperty.asLiveData()
 
 //    fun insertEstate(estate: Estate) = viewModelScope.launch { roomRepo.insertEstate(estate) }
+    val isSearching = roomRepo.isSearching
 
     fun isCurrentEstate(estateId: Int) = roomRepo.isCurrentEstate(estateId)
 
@@ -39,6 +40,7 @@ class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
 
     fun clearSearch() {
         roomRepo.searchQuery(null)
+        roomRepo.isSearching(false)
     }
 
 

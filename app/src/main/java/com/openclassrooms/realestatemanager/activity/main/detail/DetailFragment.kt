@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import coil.load
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.EstateDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,8 @@ class DetailFragment : Fragment() {
                 tvDetailSurface.text = "Surface : ${it.surface}"
                 tvDetailRooms.text = "Rooms : ${it.rooms ?: "-"}"
                 tvDetailLandSize.text = "Land size : ${it.landSize ?: "-"}"
+
+                ivDetailMap.load(it.formattedAddress)
 
                 tvDetailSchool.visibility = if (it.school) View.VISIBLE else View.GONE
                 tvDetailStore.visibility = if (it.store) View.VISIBLE else View.GONE
