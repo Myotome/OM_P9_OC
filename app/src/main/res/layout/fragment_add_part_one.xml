@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
-    tools:context=".activity.addoredit.fragment.partone.AOEPartOneFragment"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:context=".activity.addoredit.fragment.partone.AOEPartOneFragment">
 
     <Switch
         android:id="@+id/sw_one_sale"
@@ -15,6 +15,7 @@
         android:checked="true"
         android:switchPadding="15dp"
         android:text="@string/on_sale"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@id/tv_add_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,147 +29,122 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/type"
+        app:layout_constraintBottom_toBottomOf="@id/sp_add_type"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/sp_add_type"
-        app:layout_constraintBottom_toBottomOf="@id/sp_add_type"/>
+        app:layout_constraintTop_toTopOf="@id/sp_add_type" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/et_add_type"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="@string/obligatory"-->
-<!--        android:textColorHint="#50ff0000"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/sw_one_sale"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@id/tv_add_type"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/et_add_price"-->
-<!--        android:inputType="text" />-->
 
     <Spinner
         android:id="@+id/sp_add_type"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_price"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sw_one_sale"
         app:layout_constraintStart_toEndOf="@id/tv_add_type"
-        app:layout_constraintBottom_toTopOf="@id/et_add_price"/>
+        app:layout_constraintTop_toBottomOf="@id/sw_one_sale" />
 
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_price"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/price"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:drawableStartCompat="@drawable/dollar"
+        android:hint="@string/price"
+        app:helperText="@string/obligatory"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="#50ff0000"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_surface"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/et_add_price"
-        app:layout_constraintBottom_toBottomOf="@id/et_add_price"/>
-
-    <EditText
-        android:id="@+id/et_add_price"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/obligatory"
-        android:textColorHint="#50ff0000"
         app:layout_constraintTop_toBottomOf="@id/sp_add_type"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_add_price"
-        app:layout_constraintBottom_toTopOf="@id/et_add_surface"
-        android:inputType="number" />
+        app:startIconDrawable="@drawable/dollar">
 
-    <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_add_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_surface"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/surface"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:drawableStartCompat="@drawable/square"
+        android:hint="@string/surface"
+        app:helperText="@string/obligatory"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="#50ff0000"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_rooms"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/et_add_surface"
-        app:layout_constraintBottom_toBottomOf="@id/et_add_surface"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_add_price"
+        app:startIconDrawable="@drawable/square">
 
-    <EditText
-        android:id="@+id/et_add_surface"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/obligatory"
-        android:textColorHint="#50ff0000"
-        app:layout_constraintTop_toBottomOf="@id/et_add_price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_add_surface"
-        app:layout_constraintBottom_toTopOf="@id/et_add_rooms"
-        android:inputType="number" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_add_surface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
 
-    <TextView
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_rooms"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/rooms"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:drawableStartCompat="@drawable/rooms"
+        android:hint="@string/rooms"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_landsize"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/et_add_rooms"
-        app:layout_constraintBottom_toBottomOf="@id/et_add_rooms"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_add_surface"
+        app:startIconDrawable="@drawable/rooms">
 
-    <EditText
-        android:id="@+id/et_add_rooms"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/et_add_surface"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_add_rooms"
-        app:layout_constraintBottom_toTopOf="@id/et_add_landsize"
-        android:inputType="number" />
+        <EditText
+            android:id="@+id/et_add_rooms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
 
-    <TextView
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_landsize"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/landsize"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:drawableStartCompat="@drawable/landsize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/et_add_landsize"
-        app:layout_constraintBottom_toBottomOf="@id/et_add_landsize"/>
-
-    <EditText
-        android:id="@+id/et_add_landsize"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/et_add_rooms"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_add_landsize"
+        android:hint="@string/landsize"
         app:layout_constraintBottom_toTopOf="@id/bt_one_next"
-        android:inputType="number" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_rooms"
+        app:startIconDrawable="@drawable/landsize">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_add_landsize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/bt_one_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
         android:text="@string/next"
-        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/bt_one_back"/>
+        app:layout_constraintStart_toEndOf="@id/bt_one_back" />
 
     <Button
         android:id="@+id/bt_one_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
         android:drawableLeft="@drawable/ic_baseline_close_24"
         android:text="@string/cancel"
-        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/bt_one_next"/>
-
-
+        app:layout_constraintEnd_toStartOf="@id/bt_one_next"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

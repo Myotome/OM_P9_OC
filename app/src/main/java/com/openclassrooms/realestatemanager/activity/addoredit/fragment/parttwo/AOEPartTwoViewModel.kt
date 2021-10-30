@@ -1,9 +1,8 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.parttwo
 
 import androidx.lifecycle.*
-import com.openclassrooms.realestatemanager.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.AOEAddressViewState
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.AddRepository
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
@@ -31,8 +30,8 @@ class AOEPartTwoViewModel @Inject constructor(
     var bathrooms: Int? = null
     var description: String? = null
     var realtor: String? = null
-    var entryDate: String? = null
-    var modificationDate: String? = null
+    var entryDate: Long? = null
+    var modificationDate: Long? = null
 
     @FlowPreview
     val currentEstate : LiveData<AOEPartTwoViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
@@ -51,7 +50,7 @@ class AOEPartTwoViewModel @Inject constructor(
     }
 
     fun onSaveClick() = viewModelScope.launch {
-        if(entryDate == null) entryDate = Utils.getTodayDate() else modificationDate = Utils.getTodayDate()
+        if(entryDate == null) entryDate = Utils.getLongFormatDate() else modificationDate = Utils.getLongFormatDate()
         addRepo.setPartTwo(estateId, bedrooms, bathrooms, description, realtor, entryDate, modificationDate)
         addEditTwoChannel.send(AddEditTwoEvent.NavigateResult(ADD_EDIT_NEXT_RESULT))
     }

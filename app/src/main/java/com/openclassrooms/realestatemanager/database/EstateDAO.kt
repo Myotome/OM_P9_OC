@@ -20,6 +20,12 @@ interface EstateDAO {
     @Query("SELECT * FROM estate_table WHERE estate_id =:id")
     fun getCurrentEstate(id: Int): Flow<Estate>
 
-//    @RawQuery
-//    fun getSearchEstate(query : SupportSQLiteQuery): Flow<List<Estate>?>
+    @RawQuery(observedEntities = [Estate::class])
+    fun getSearchEstate(query : SupportSQLiteQuery): Flow<List<Estate>?>
+
+    fun getEstate(query : SupportSQLiteQuery?) =
+        when(query){
+            null -> getAllEstate()
+            else -> getSearchEstate(query)
+        }
 }

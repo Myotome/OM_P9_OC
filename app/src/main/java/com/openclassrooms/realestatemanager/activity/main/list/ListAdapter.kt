@@ -12,8 +12,8 @@ import com.openclassrooms.realestatemanager.databinding.EstateListContentBinding
 import java.text.DecimalFormat
 
 
-class MainAdapter(private val listener: (MainViewState) -> Unit) :
-    ListAdapter<MainViewState, MainAdapter.EstateViewHolder>(
+class ListAdapter(private val listener: (ListViewState) -> Unit) :
+    ListAdapter<ListViewState, com.openclassrooms.realestatemanager.activity.main.list.ListAdapter.EstateViewHolder>(
         EstateDiffCallback()
     ) {
 
@@ -29,7 +29,7 @@ class MainAdapter(private val listener: (MainViewState) -> Unit) :
     class EstateViewHolder(private val binding: EstateListContentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(estateViewState: MainViewState, listener: (MainViewState) -> Unit) {
+        fun bind(estateViewState: ListViewState, listener: (ListViewState) -> Unit) {
 
 //            Glide.with(binding.root)
 //                .load(estateViewState.photo.path)
@@ -51,11 +51,11 @@ class MainAdapter(private val listener: (MainViewState) -> Unit) :
         }
     }
 
-    private class EstateDiffCallback : DiffUtil.ItemCallback<MainViewState>() {
-        override fun areItemsTheSame(oldItem: MainViewState, newItem: MainViewState) =
+    private class EstateDiffCallback : DiffUtil.ItemCallback<ListViewState>() {
+        override fun areItemsTheSame(oldItem: ListViewState, newItem: ListViewState) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: MainViewState, newItem: MainViewState) =
+        override fun areContentsTheSame(oldItem: ListViewState, newItem: ListViewState) =
             oldItem == newItem
     }
 

@@ -14,12 +14,12 @@ data class Estate(
     val description: String?,
     val landSize: Double?,
     val onSale: Boolean = true,
-    val entryDate: String,
-    val modificationDate: String?,
-    val soldDate: String?,
+    val entryDate: Long,
+    val modificationDate: Long?,
+    val soldDate: Long?,
     val realtor: String?,
     @Embedded val address: Address,
-    val listPhoto: List<Photo>?,
+    val listPhoto: List<Photo>,
     @Embedded val interest: Interest
 
 ){

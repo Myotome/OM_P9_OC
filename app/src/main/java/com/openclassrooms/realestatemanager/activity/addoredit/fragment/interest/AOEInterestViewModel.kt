@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.openclassrooms.realestatemanager.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.AOEAddressViewState
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Interest
 import com.openclassrooms.realestatemanager.repository.AddRepository

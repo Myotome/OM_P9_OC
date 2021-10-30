@@ -411,11 +411,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/before" />
 
-                    <RadioButton
-                        android:id="@+id/rb_search_entry_at"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/at" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_search_entry_at"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/at" />-->
 
                     <RadioButton
                         android:id="@+id/rb_search_entry_after"
@@ -471,11 +471,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/before" />
 
-                    <RadioButton
-                        android:id="@+id/rb_search_sold_at"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/at" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_search_sold_at"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/at" />-->
 
                     <RadioButton
                         android:id="@+id/rb_search_sold_after"

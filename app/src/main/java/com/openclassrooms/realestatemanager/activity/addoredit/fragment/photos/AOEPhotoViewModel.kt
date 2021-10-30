@@ -2,7 +2,7 @@ package com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.openclassrooms.realestatemanager.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_FINISH_RESULT
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Photo

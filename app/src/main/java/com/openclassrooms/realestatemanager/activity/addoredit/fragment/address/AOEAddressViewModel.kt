@@ -1,9 +1,7 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.address
 
-import android.util.Log
 import androidx.lifecycle.*
-import androidx.lifecycle.Transformations.map
-import com.openclassrooms.realestatemanager.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
@@ -12,10 +10,8 @@ import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,8 +27,7 @@ class AOEAddressViewModel @Inject constructor(
     var district: String = ""
     var number: Int? = null
     var complement: String? = null
-    var street: String? = null
-    var postCode: Int? = null
+    var street: String = ""
     var city: String = ""
 
 
@@ -45,7 +40,6 @@ class AOEAddressViewModel @Inject constructor(
             complement = estate.address.complement,
             street = estate.address.street,
             district = estate.address.district,
-            postcode = estate.address.postCode,
             city = estate.address.city
         )
     }else{
@@ -54,6 +48,14 @@ class AOEAddressViewModel @Inject constructor(
 
     fun onSaveClick(){
         when {
+            number == null -> {
+                showInvalidInputMessage("Number cannot be empty")
+                return
+            }
+            street.isBlank() ->{
+                showInvalidInputMessage("Street cannot be empty")
+                return
+            }
             district.isBlank() -> {
                 showInvalidInputMessage("District cannot be empty")
                 return
@@ -70,10 +72,9 @@ class AOEAddressViewModel @Inject constructor(
         val address = withContext(Dispatchers.Default) {
             Address(
                 district,
-                number,
+                number!!,
                 complement,
                 street,
-                postCode,
                 city
             )
         }

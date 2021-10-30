@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/iv_estate_content"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="100dp"
         tools:src="@tools:sample/avatars"
         app:layout_constraintTop_toTopOf="parent"

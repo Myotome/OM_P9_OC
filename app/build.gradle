@@ -3,6 +3,7 @@ plugins {
     id "kotlin-kapt"
     id "kotlin-android"
     id "dagger.hilt.android.plugin"
+    id 'com.google.secrets_gradle_plugin' version '0.4'
 }
 
 android {
@@ -15,6 +16,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+//        buildConfigField 'String', 'MAPS_API_KEY', MAPS_API_KEY
+//        resValue 'string', 'MAPS_API_KEY', MAPS_API_KEY
     }
     buildTypes {
         release {

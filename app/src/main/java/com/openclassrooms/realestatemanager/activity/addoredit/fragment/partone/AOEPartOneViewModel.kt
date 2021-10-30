@@ -1,9 +1,8 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.partone
 
 import androidx.lifecycle.*
-import com.openclassrooms.realestatemanager.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.AOEAddressViewState
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.AddRepository
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
@@ -71,8 +70,8 @@ class AOEPartOneViewModel @Inject constructor(
     }
 
     private fun createPartOne() = viewModelScope.launch {
-        var soldTime: String? = null
-        if(!onSale) soldTime = Utils.getTodayDate()
+        var soldTime: Long? = null
+        if(!onSale) soldTime = Utils.getLongFormatDate()
         addRepo.setPartOne(onSale, type, price, surface, rooms, landsize, soldTime)
         addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }

@@ -5,6 +5,5 @@ data class AOEAddressViewState(
     val complement: String?,
     val street: String?,
     val district: String,
-    val postcode: Int?,
     val city: String
     )

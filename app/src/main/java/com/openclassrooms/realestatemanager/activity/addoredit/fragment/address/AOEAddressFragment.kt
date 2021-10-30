@@ -38,7 +38,6 @@ class AOEAddressFragment : Fragment() {
                     etAddComplement.setText(vs.complement)
                     etAddStreet.setText(vs.street)
                     etAddDistrict.setText(vs.district)
-                    etAddPostcode.setText(vs.postcode.toString())
                     etAddCity.setText(vs.city)
                 }
             }
@@ -49,9 +48,6 @@ class AOEAddressFragment : Fragment() {
             etAddNumber.addTextChangedListener { viewModel.number = (it.toString().toIntOrNull()) }
             etAddComplement.addTextChangedListener { viewModel.complement = (it.toString()) }
             etAddStreet.addTextChangedListener { viewModel.street = (it.toString()) }
-            etAddPostcode.addTextChangedListener {
-                viewModel.postCode = (it.toString().toIntOrNull())
-            }
             etAddCity.addTextChangedListener { viewModel.city = (it.toString()) }
 
             btAddressNext.setOnClickListener { viewModel.onSaveClick() }
