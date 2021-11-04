@@ -2,11 +2,9 @@ package com.openclassrooms.realestatemanager.activity.main.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.sqlite.db.SimpleSQLiteQuery
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
@@ -20,7 +18,7 @@ class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
 //    fun insertEstate(estate: Estate) = viewModelScope.launch { roomRepo.insertEstate(estate) }
     val isSearching = roomRepo.isSearching
 
-    fun isCurrentEstate(estateId: Int) = roomRepo.isCurrentEstate(estateId)
+    fun setCurrentEstateId(estateId: Int) = roomRepo.setCurrentEstateId(estateId)
 
     val uiStateLiveData = roomRepo.allProperty.mapLatest { estates ->
         estates?.map { estate -> map(estate) }

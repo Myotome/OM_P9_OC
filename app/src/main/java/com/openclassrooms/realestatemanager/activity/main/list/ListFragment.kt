@@ -34,7 +34,7 @@ class ListFragment : Fragment() {
 
         val recyclerView = binding.rvEstateList
         val adapter = ListAdapter {
-            viewModel.isCurrentEstate(it.id)
+            viewModel.setCurrentEstateId(it.id)
             displayMasterDetailScreen(mId)
         }
         recyclerView.adapter = adapter

@@ -96,7 +96,10 @@ class AddRepository @Inject constructor(
             entryDate = dateEntry!!,
             soldDate = soldDate,
             modificationDate = modifyDate,
-            onSale = onSale
+            onSale = onSale,
+            lat = 0.0,
+            lng = 0.0
+
         )
         if (estateId != null) {
             val updateEstate = estate.copy(id = estateId!!)

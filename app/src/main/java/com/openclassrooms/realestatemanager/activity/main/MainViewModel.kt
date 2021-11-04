@@ -11,6 +11,6 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun clearCurrentEstate(){
-        roomDatabaseRepository.isCurrentEstate(-1)
+        roomDatabaseRepository.setCurrentEstateId(-1)
     }
 }

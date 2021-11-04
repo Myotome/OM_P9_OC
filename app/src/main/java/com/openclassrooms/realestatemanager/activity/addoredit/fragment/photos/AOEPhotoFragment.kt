@@ -28,8 +28,6 @@ class AOEPhotoFragment : Fragment() {
     private val viewModel by viewModels<AOEPhotoViewModel>()
     lateinit var binding: FragmentAddPhotoBinding
 
-    private val TAG = "DEBUGKEY"
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
