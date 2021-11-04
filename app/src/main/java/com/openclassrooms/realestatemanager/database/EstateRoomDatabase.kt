@@ -54,6 +54,8 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                             street = "Broadway",
                             city = "New York"
                         ),
+                        lat= 40.708839,
+                        lng = -74.011133,
                         entryDate = Utils.getLongFormatDate(),
                         listPhoto = listPhoto,
                         interest = Interest(),
@@ -87,6 +89,8 @@ abstract class EstateRoomDatabase : RoomDatabase() {
                             street = "Adam Clayton Powell Jr Blvd",
                             city = "New York"
                         ),
+                        lat = 40.799528,
+                        lng = -73.954833,
                         entryDate = Utils.getLongFormatDate(),
                         listPhoto = listPhoto,
                         interest = Interest(),

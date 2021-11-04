@@ -14,6 +14,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -40,9 +41,15 @@ class AOEInterestViewModel @Inject constructor(
     var nightlife = false
 
 
-    @FlowPreview
-    val currentEstate : LiveData<AOEInterestViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
-        .asLiveData(coroutineDispatchers.ioDispatchers)
+//    @FlowPreview
+//    val currentEstate : LiveData<AOEInterestViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
+//        .asLiveData(coroutineDispatchers.ioDispatchers)
+
+    val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
+        roomRepo.getEstateById(estateId)
+    }.mapNotNull { estate ->
+        map(estate)
+    }.asLiveData(coroutineDispatchers.ioDispatchers)
 
     private fun map(estate: Estate?) : AOEInterestViewState? = if (estate?.address != null){
         AOEInterestViewState(school = estate.interest.school,

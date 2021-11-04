@@ -10,6 +10,7 @@ import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -32,9 +33,15 @@ class AOEPartOneViewModel @Inject constructor(
     var rooms: Int? = null
     var landsize: Double? = null
 
-    @FlowPreview
-    val currentEstate : LiveData<AOEPartOneViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
-        .asLiveData(coroutineDispatchers.ioDispatchers)
+//    @FlowPreview
+//    val currentEstate : LiveData<AOEPartOneViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
+//        .asLiveData(coroutineDispatchers.ioDispatchers)
+
+    val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
+        roomRepo.getEstateById(estateId)
+    }.mapNotNull { estate ->
+        map(estate)
+    }.asLiveData(coroutineDispatchers.ioDispatchers)
 
     private fun map(estate: Estate?) : AOEPartOneViewState? = if (estate?.address != null){
         AOEPartOneViewState(

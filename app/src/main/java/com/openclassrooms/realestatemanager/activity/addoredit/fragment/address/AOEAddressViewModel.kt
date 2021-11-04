@@ -10,6 +10,7 @@ import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
@@ -30,10 +31,16 @@ class AOEAddressViewModel @Inject constructor(
     var street: String = ""
     var city: String = ""
 
+//
+//    @FlowPreview
+//    val currentEstate : LiveData<AOEAddressViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
+//        .asLiveData(coroutineDispatchers.ioDispatchers)
 
-    @FlowPreview
-    val currentEstate : LiveData<AOEAddressViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
-        .asLiveData(coroutineDispatchers.ioDispatchers)
+    val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
+        roomRepo.getEstateById(estateId)
+    }.mapNotNull { estate ->
+        map(estate)
+    }.asLiveData(coroutineDispatchers.ioDispatchers)
 
     private fun map(estate: Estate?) : AOEAddressViewState? = if (estate?.address != null){
         AOEAddressViewState(number = estate.address.number,

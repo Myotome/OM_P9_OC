@@ -11,6 +11,8 @@ import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,8 +38,9 @@ class AOEPhotoViewModel @Inject constructor(
 
     @FlowPreview
     private var currentEstate: LiveData<Estate> =
-        roomRepo.estateById.asLiveData(coroutineDispatchers.ioDispatchers)
-
+        roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
+            roomRepo.getEstateById(estateId)
+        }.asLiveData(coroutineDispatchers.ioDispatchers)
 
     @FlowPreview
     private var mediator = MediatorLiveData<AOEPhotoViewState>().apply {

@@ -1,7 +1,16 @@
 package com.openclassrooms.realestatemanager.utils;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.provider.Settings;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,7 +72,7 @@ public class Utils {
 
     public static String getLongToString(long longToConvert){
         Date date = new Date(longToConvert);
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(date);
     }
 }
