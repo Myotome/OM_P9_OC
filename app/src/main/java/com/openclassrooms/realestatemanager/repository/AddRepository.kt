@@ -29,6 +29,8 @@ class AddRepository @Inject constructor(
     private val realtor = MutableLiveData<String?>()
     private var dateEntry: Long? = null
     private var modifyDate: Long? = null
+    private var lat: Double? = null
+    private var lng: Double? = null
 
     //    private val addressLiveData = MutableLiveData<Address>()
     private lateinit var address: Address
@@ -71,8 +73,10 @@ class AddRepository @Inject constructor(
         modifyDate = modificationDate
     }
 
-    fun setAddress(address: Address) {
+    fun setAddress(address: Address, lat: Double, lng: Double) {
         this.address = address
+        this.lat = lat
+        this.lng = lng
     }
 
     fun setInterest(interest: Interest) {
@@ -97,8 +101,8 @@ class AddRepository @Inject constructor(
             soldDate = soldDate,
             modificationDate = modifyDate,
             onSale = onSale,
-            lat = 0.0,
-            lng = 0.0
+            lat = lat!!,
+            lng = lng!!
 
         )
         if (estateId != null) {

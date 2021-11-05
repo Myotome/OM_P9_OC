@@ -40,6 +40,8 @@ class AOEAddressFragment : Fragment() {
                     etAddDistrict.setText(vs.district)
                     etAddCity.setText(vs.city)
                 }
+                viewModel.lat = vs.lat
+                viewModel.lng = vs.lng
             }
         }
 
