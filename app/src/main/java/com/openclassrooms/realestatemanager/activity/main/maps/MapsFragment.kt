@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -15,13 +13,14 @@ import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.UiSettings
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.activity.main.detail.DetailFragment
 import com.openclassrooms.realestatemanager.databinding.FragmentMapsBinding
+import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.utils.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,6 +42,8 @@ class MapsFragment : Fragment() {
             displayMarker(it.listEstate)
         }
 
+        if(Utils.isInternetAvailable(requireContext())) viewModel.assertAllEstateHadLatLng()
+
         return binding.root
     }
 
@@ -52,9 +53,24 @@ class MapsFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync { googleMap ->
 
-            if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                ||ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 googleMap.isMyLocationEnabled = true
+            }else {
+                shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+                    Toast.makeText(
+                        requireContext(), "${
+                            permissionNameForUser(Manifest.permission.ACCESS_FINE_LOCATION)
+                        } is required for use map", Toast.LENGTH_LONG
+                    ).show()
+
             }
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16F))
             googleMap.uiSettings.isZoomControlsEnabled = true

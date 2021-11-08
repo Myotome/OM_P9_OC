@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.activity.main
 
 
-import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -22,6 +21,8 @@ import com.openclassrooms.realestatemanager.activity.main.list.ListFragment
 import com.openclassrooms.realestatemanager.activity.main.maps.MapsFragment
 import com.openclassrooms.realestatemanager.activity.main.querysearch.QuerySearchFragment
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
+import com.openclassrooms.realestatemanager.utils.appPerms
+import com.openclassrooms.realestatemanager.utils.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -37,14 +38,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        val appPerms = arrayOf(
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_WIFI_STATE
-        )
-        checkForPermissions(appPerms)
+        checkForPermissions()
 
         val listFragment = ListFragment()
         val mapFragment = MapsFragment()
@@ -130,9 +124,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkForPermissions(listPerms: Array<String>) {
+    private fun checkForPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (permission in listPerms)
+            for (permission in appPerms)
                 when {
                     ContextCompat.checkSelfPermission(
                         applicationContext,
@@ -140,10 +134,14 @@ class MainActivity : AppCompatActivity() {
                     ) == PackageManager.PERMISSION_GRANTED -> {
                     }
                     shouldShowRequestPermissionRationale(permission) -> {
-                        Toast.makeText(this, "$permission is required", Toast.LENGTH_SHORT).show()
-                        ActivityCompat.requestPermissions(this, listPerms, 1245)
+                        Toast.makeText(
+                            this, "${
+                                permissionNameForUser(permission)
+                            } is required for complete usage", Toast.LENGTH_SHORT
+                        ).show()
+                        ActivityCompat.requestPermissions(this, appPerms, 1245)
                     }
-                    else -> ActivityCompat.requestPermissions(this, listPerms, 1245)
+                    else -> ActivityCompat.requestPermissions(this, appPerms, 1245)
                 }
         }
     }
