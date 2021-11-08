@@ -18,6 +18,7 @@ import javax.inject.Singleton
 class DatabaseModule {
 
     @Provides
+    @Singleton
     fun provideEstateDao(database: EstateRoomDatabase) = database.EstateDAO()
 
     @Provides

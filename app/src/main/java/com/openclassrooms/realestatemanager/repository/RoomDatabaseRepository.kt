@@ -43,6 +43,10 @@ class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDA
         currentEstateIdMutableSharedFlow.tryEmit(estateId)
     }
     fun getEstateById(estateId: Int) = estateDAO.getCurrentEstate(estateId)
+
+    suspend fun updateLatLngById(id: Int, lat: Double, lng: Double) {
+        estateDAO.updateLatLngById(id, lat, lng)
+    }
 }
 
 

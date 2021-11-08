@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
@@ -56,8 +58,12 @@ public class Utils {
      * @return
      */
     public static Boolean isInternetAvailable(Context context){
-        WifiManager wifi = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-        return wifi.isWifiEnabled();
+//        WifiManager wifi = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+//        return wifi.isWifiEnabled();
+        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        //we are connected to a network
+        return connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED;
     }
 
     public static long getLongFormatDate(){

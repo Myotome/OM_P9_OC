@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.database
 
+import android.database.Cursor
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.openclassrooms.realestatemanager.model.Estate
@@ -13,6 +14,9 @@ interface EstateDAO {
 
     @Update
     suspend fun updateEstate(estate: Estate)
+
+    @Query("UPDATE estate_table SET lat=:lat, lng=:lng WHERE estate_id=:id")
+    suspend fun updateLatLngById(id: Int, lat: Double, lng: Double)
 
     @Query("SELECT * FROM estate_table")
     fun getAllEstate(): Flow<List<Estate>?>
@@ -28,4 +32,7 @@ interface EstateDAO {
             null -> getAllEstate()
             else -> getSearchEstate(query)
         }
+
+    @Query("SELECT * FROM estate_table" )
+    fun findAllEstate(): Cursor
 }
