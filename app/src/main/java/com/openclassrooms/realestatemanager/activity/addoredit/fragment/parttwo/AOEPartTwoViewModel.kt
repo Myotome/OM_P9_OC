@@ -34,9 +34,6 @@ class AOEPartTwoViewModel @Inject constructor(
     var entryDate: Long? = null
     var modificationDate: Long? = null
 
-//    @FlowPreview
-//    val currentEstate : LiveData<AOEPartTwoViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
-//        .asLiveData(coroutineDispatchers.ioDispatchers)
 
     val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
         roomRepo.getEstateById(estateId)

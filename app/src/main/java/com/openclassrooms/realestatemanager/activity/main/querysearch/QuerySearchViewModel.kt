@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.activity.main.querysearch
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.sqlite.db.SimpleSQLiteQuery
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,14 @@ class QuerySearchViewModel @Inject constructor(
 
     var onSale = true
     var sold = false
-    var type: String? = null
+//    var type: String? = null
+    var penthouse = false
+    var house = false
+    var loft = false
+    var apartment = false
+    var castle = false
+    var mansion = false
+    var distric: String? = null
     var priceMin: Int? = null
     var priceMax: Int? = null
     var surfaceMin: Double? = null
@@ -42,30 +50,62 @@ class QuerySearchViewModel @Inject constructor(
     var soldDateCode: Int = 0
     var soldDateText: Long? = null
     var photoMin: Int? = null
-    var interestIsUse = false
+    var typeIsUsed = false
+    var interestIsUsed = false
 
 
     fun search() {
-        val interestList =
-            listOf(school, store, park, restaurant, movie, theatre, subway, nightlife)
+        val typeList = listOf(penthouse, house, loft, apartment, castle, mansion)
+        val interestList = listOf(school, store, park, restaurant, movie, theatre, subway, nightlife)
         var queryString = "SELECT * FROM estate_table"
         val args = ArrayList<Any>()
         var condition = false
 
         if ((onSale && !sold) || (!onSale && sold)) {
+            Log.d(TAG, "search: sale : $onSale, sold : $sold")
             queryString += " WHERE"
             queryString += " onSale =?"
             condition = true
             when {
-                onSale -> args.add(onSale)
-                sold -> args.add(!sold)
+                onSale -> args.add(true)
+                sold -> args.add(false)
             }
         }
 
-        if (type != null) {
+        if(!condition && typeList.contains(true)){
+            queryString += " WHERE("
+            condition = true
+            typeIsUsed = true
+        }else if(condition && typeList.contains(true)) {
+            queryString += " AND("
+            typeIsUsed = true
+        }
+        var booleanTypeCondition = false
+        for ((index, value) in typeList.withIndex()) {
+            if (value) {
+                if (booleanTypeCondition) queryString += " OR" else booleanTypeCondition = true
+                when (index) {
+                    0 -> {queryString += " estateType=?"; args.add("Penthouse")}
+                    1 -> {queryString += " estateType=?"; args.add("House")}
+                    2 -> {queryString += " estateType=?"; args.add("Loft")}
+                    3 -> {queryString += " estateType=?"; args.add("Apartment")}
+                    4 -> {queryString += " estateType=?"; args.add("Castle")}
+                    5 -> {queryString += " estateType=?"; args.add("Mansion")}
+                }
+            }
+        }
+        if(typeIsUsed)queryString += ")"
+
+//        if (type != null) {
+//            queryString += if (condition) " AND" else " WHERE"; condition = true
+//            queryString += " estateType =?"
+//            args.add(type!!)
+//        }
+
+        if (distric != null){
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " estateType =?"
-            args.add(type!!)
+            queryString += " district LIKE '%' || ? || '%'"
+            args.add(distric!!)
         }
 
         if (priceMin != null && priceMax != null) {
@@ -158,61 +198,13 @@ class QuerySearchViewModel @Inject constructor(
             args.add(landSizeMax!!)
         }
 
-
-//        if(school){
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " school =?"
-//            args.add(school)
-//        }
-//        if(store){
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " store =?"
-//            args.add(store)
-//        }
-//
-//        if(park){
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " park =?"
-//            args.add(park)
-//        }
-//
-//        if(restaurant){
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " restaurant =?"
-//            args.add(restaurant)
-//        }
-//
-//        if(movie){
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " movie =?"
-//            args.add(movie)
-//        }
-//
-//        if(theatre){
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " theatre =?"
-//            args.add(theatre)
-//        }
-//
-//        if(subway){
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " subway =?"
-//            args.add(subway)
-//        }
-//
-//        if(nightlife){
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " nightlife =?"
-//            args.add(nightlife)
-//        }
-
         if(!condition && interestList.contains(true)){
             queryString += " WHERE("
             condition = true
-            interestIsUse = true
+            interestIsUsed = true
         }else if(condition && interestList.contains(true)) {
             queryString += " AND("
-            interestIsUse = true
+            interestIsUsed = true
         }
             var booleanCondition = false
             for ((index, value) in interestList.withIndex()) {
@@ -230,7 +222,7 @@ class QuerySearchViewModel @Inject constructor(
                     }
                 }
             }
-            if(interestIsUse)queryString += ")"
+            if(interestIsUsed)queryString += ")"
 
         if(entryDateText!=null){
             queryString += if (condition) " AND" else " WHERE"; condition = true
@@ -262,7 +254,8 @@ class QuerySearchViewModel @Inject constructor(
     }
 
     private fun setSearch(query: SimpleSQLiteQuery) {
-        roomRepo.searchQuery(query)
+//        roomRepo.searchQuery(query)
+        roomRepo.setSearchQuery(query)
         roomRepo.isSearching(true)
     }
 }

@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_BACK_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPartOneBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -23,8 +24,6 @@ import kotlinx.coroutines.flow.collect
 class AOEPartOneFragment : Fragment() {
 
     private val viewModel by viewModels<AOEPartOneViewModel>()
-
-    private val TAG = "DEBUGKEY"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +38,7 @@ class AOEPartOneFragment : Fragment() {
                 binding.apply {
                     swOneSale.isChecked = vs.onSale
                     swOneSale.jumpDrawablesToCurrentState()
-//                    etAddType.setText(vs.type)
+                    spAddType.setSelection((spAddType.adapter as ArrayAdapter<String>).getPosition(vs.type))
                     etAddPrice.setText(vs.price.toString())
                     etAddSurface.setText(vs.surface.toString())
                     etAddRooms.setText(vs.room?.toString()?:"")
@@ -61,7 +60,6 @@ class AOEPartOneFragment : Fragment() {
                         }
                     }
                 }
-//            etAddType.addTextChangedListener { viewModel.type = (it.toString()) }
                 etAddPrice.addTextChangedListener { viewModel.price = (it.toString().toInt()) }
                 etAddSurface.addTextChangedListener { viewModel.surface = (it.toString().toDouble()) }
                 etAddRooms.addTextChangedListener { viewModel.rooms = (it.toString().toIntOrNull()) }

@@ -25,7 +25,6 @@ class DatabaseModule {
     @Singleton
     fun provideDatabase(@ApplicationContext appContext: Context, callback: EstateRoomDatabase.Callback) =
         Room.databaseBuilder(appContext, EstateRoomDatabase::class.java, "estate_database")
-            .fallbackToDestructiveMigration()
             .addCallback(callback)
             .build()
 

@@ -37,14 +37,10 @@ class AOEActivity : AppCompatActivity() {
             AOEInterestFragment(),
             AOEPhotoFragment()
         )
-//        val title = arrayListOf("One", "Two", "Three", "Four", "Five")
+
 
         val adapter = AOEPagerAdapter(fragments, this)
         binding.vpAddPager.adapter = adapter
-//        TabLayoutMediator(binding.tbAddTabs, binding.vpAddPager){
-//            tab, position ->
-//            tab.text = title[position]
-//        }.attach()
 
     }
 

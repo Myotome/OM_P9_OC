@@ -59,6 +59,12 @@
     <string name="after">After :</string>
     <string name="sold_date">Sold date :</string>
     <string name="sale">On Sale</string>
+    <string name="min_photo">Min. photo :</string>
+    <string name="penthouse">Penthouse</string>
+    <string name="house">House</string>
+    <string name="loft">Loft</string>
+    <string name="apartment">Apartment</string>
+    <string name="castle">Castle</string>
 
 
     <string-array name="type">

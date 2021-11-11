@@ -27,7 +27,8 @@ class MapsViewModel @Inject constructor(
     private val currentPosition = locationRepository.getCurrentPosition()
 
     @FlowPreview
-    private val estateLiveData = roomRepo.allProperty.asLiveData()
+//    private val estateLiveData = roomRepo.allProperty.asLiveData()
+    private val estateLiveData = roomRepo.querySearchFlow.asLiveData()
 
     @FlowPreview
     private val mediator = MediatorLiveData<MapsPositionViewState>().apply {

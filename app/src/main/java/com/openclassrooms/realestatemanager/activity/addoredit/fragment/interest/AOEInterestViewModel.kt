@@ -28,7 +28,7 @@ class AOEInterestViewModel @Inject constructor(
     coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
-    private val addEditInterestChannel = Channel<AOEInterestViewModel.AddEditInterestEvent>()
+    private val addEditInterestChannel = Channel<AddEditInterestEvent>()
     val addEditAddressEvent = addEditInterestChannel.receiveAsFlow()
 
     var school = false
@@ -40,10 +40,6 @@ class AOEInterestViewModel @Inject constructor(
     var subway = false
     var nightlife = false
 
-
-//    @FlowPreview
-//    val currentEstate : LiveData<AOEInterestViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
-//        .asLiveData(coroutineDispatchers.ioDispatchers)
 
     val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
         roomRepo.getEstateById(estateId)

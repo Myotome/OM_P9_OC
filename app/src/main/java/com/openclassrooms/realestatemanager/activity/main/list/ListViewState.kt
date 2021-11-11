@@ -8,5 +8,5 @@ data class ListViewState(
     val district: String,
     val price: Int,
     val onSale: Boolean,
-    val photo: Photo?
+    val photo: Photo
 )

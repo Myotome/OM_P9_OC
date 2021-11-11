@@ -33,9 +33,6 @@ class AOEPartOneViewModel @Inject constructor(
     var rooms: Int? = null
     var landsize: Double? = null
 
-//    @FlowPreview
-//    val currentEstate : LiveData<AOEPartOneViewState?> = roomRepo.estateById.mapNotNull { estate -> map(estate) }
-//        .asLiveData(coroutineDispatchers.ioDispatchers)
 
     val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
         roomRepo.getEstateById(estateId)
