@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.database
 
 
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 
-@Database(entities = [Estate::class], version = 1, exportSchema = false)
+@Database(entities = [Estate::class], version = 1, exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class EstateRoomDatabase : RoomDatabase() {
 

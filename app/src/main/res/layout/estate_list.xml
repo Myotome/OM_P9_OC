@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cl_estate_list">
+    android:id="@+id/cl_estate_list"
+    android:tag="fragment_list">
 
     <TextView
         android:id="@+id/tv_estate_list_search_result"

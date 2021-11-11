@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.activity.main.list
 
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.EstateListContentBinding
 import java.text.DecimalFormat
 
@@ -31,11 +34,6 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
 
         fun bind(estateViewState: ListViewState, listener: (ListViewState) -> Unit) {
 
-//            Glide.with(binding.root)
-//                .load(estateViewState.photo.path)
-//                .fitCenter()
-//                .into(binding.ivEstateContent)
-
             binding.tvContentDistrict.text = estateViewState.district
             binding.tvContentPrice.text =
                 DecimalFormat("#,###")
@@ -43,8 +41,9 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
                     .toString()
             binding.tvContentType.text = estateViewState.type
 
-            binding.ivEstateContent.load(Uri.parse(estateViewState.photo?.image))
+            binding.ivEstateContent.load(Uri.parse(estateViewState.photo.image))
 
+            Log.d(TAG, "bind: ${estateViewState.onSale}")
             if(!estateViewState.onSale) binding.tvContentSold.visibility = View.VISIBLE
 
             itemView.setOnClickListener { listener(estateViewState) }

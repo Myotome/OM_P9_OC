@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.activity.main.list.ListFragment
 import com.openclassrooms.realestatemanager.activity.main.maps.MapsFragment
 import com.openclassrooms.realestatemanager.activity.main.querysearch.QuerySearchFragment
@@ -43,18 +45,16 @@ class MainActivity : AppCompatActivity() {
         val listFragment = ListFragment()
         val mapFragment = MapsFragment()
 
-
-        displayCurrentFragment(listFragment)
-
+        displayCurrentFragment(listFragment, false)
 
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.bottom_menu_list -> {
-                    displayCurrentFragment(listFragment)
+                    displayCurrentFragment(listFragment, false)
                     true
                 }
                 R.id.bottom_menu_map -> {
-                    displayCurrentFragment(mapFragment)
+                    displayCurrentFragment(mapFragment,false)
                     true
                 }
                 else -> super.onOptionsItemSelected(it)
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun displayCurrentFragment(fragment: Fragment) {
+    private fun displayCurrentFragment(fragment: Fragment, isQuery: Boolean) {
         val mId = when (resources.getBoolean(R.bool.portrait_only)) {
             true -> R.id.cl_estate_list
             false -> R.id.fl_estate_detail_container
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(mId)?.let { remove(it) }
             replace(R.id.frameLayout, fragment)
             setReorderingAllowed(true)
-//            addToBackStack("main")
+            if(isQuery)addToBackStack("query")
         }
     }
 
@@ -102,7 +102,12 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.main_menu_search -> {
-                displayCurrentFragment(QuerySearchFragment())
+//                supportFragmentManager.commit {
+//                    replace(R.id.frameLayout, QuerySearchFragment())
+//                    setReorderingAllowed(true)
+//                    addToBackStack("query")
+//                }
+                displayCurrentFragment(QuerySearchFragment(), true)
                 true
             }
             else -> super.onOptionsItemSelected(item)

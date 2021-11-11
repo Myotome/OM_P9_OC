@@ -72,7 +72,7 @@ class MapsFragment : Fragment() {
                     ).show()
 
             }
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16F))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 13F))
             googleMap.uiSettings.isZoomControlsEnabled = true
         }
     }
@@ -82,6 +82,7 @@ class MapsFragment : Fragment() {
         Log.d(TAG, "displayMarker: I'm here")
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync { googleMap ->
+            googleMap.clear()
 
             if (list != null) {
                 for (estate in list) {

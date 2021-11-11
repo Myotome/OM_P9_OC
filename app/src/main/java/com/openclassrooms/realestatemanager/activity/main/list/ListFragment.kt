@@ -45,15 +45,14 @@ class ListFragment : Fragment() {
         }
         viewModel.isSearching.observe(viewLifecycleOwner){
             if(it){
-                binding.apply {
-                    btEstateListClearSearch.visibility = View.VISIBLE
-                    btEstateListClearSearch.setOnClickListener { viewModel.clearSearch() }
+                binding.btEstateListClearSearch.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener { viewModel.clearSearch() }
                 }
             }else{
                 binding.btEstateListClearSearch.visibility = View.GONE
             }
         }
-
 
 
         return binding.root

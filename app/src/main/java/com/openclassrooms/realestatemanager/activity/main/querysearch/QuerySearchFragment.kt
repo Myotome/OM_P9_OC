@@ -38,27 +38,41 @@ class QuerySearchFragment : Fragment() {
             }
 
             btSearchType.setOnClickListener {
-                spSearchType.visibility =
-                    if (spSearchType.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                tlQueryType.visibility =
+                    if (tlQueryType.visibility == View.VISIBLE) View.GONE else View.VISIBLE
             }
-            spSearchType.apply {
-                adapter = ArrayAdapter(
-                    requireContext(),
-                    android.R.layout.simple_spinner_item,
-                    resources.getStringArray(R.array.type)
-                )
-                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        viewModel.type = parent?.getItemAtPosition(position).toString()
-                    }
+            cbQueryPenthouse.setOnCheckedChangeListener { _, isChecked -> viewModel.penthouse = isChecked }
+            cbQueryHouse.setOnCheckedChangeListener { _, isChecked -> viewModel.house = isChecked }
+            cbQueryLoft.setOnCheckedChangeListener { _, isChecked -> viewModel.loft = isChecked }
+            cbQueryApartment.setOnCheckedChangeListener { _, isChecked -> viewModel.apartment = isChecked }
+            cbQueryCastle.setOnCheckedChangeListener { _, isChecked -> viewModel.castle = isChecked }
+            cbQueryMansion.setOnCheckedChangeListener { _, isChecked -> viewModel.mansion = isChecked }
+//            spSearchType.apply {
+//                adapter = ArrayAdapter(
+//                    requireContext(),
+//                    android.R.layout.simple_spinner_item,
+//                    resources.getStringArray(R.array.type)
+//                )
+//                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//                    override fun onItemSelected(
+//                        parent: AdapterView<*>?,
+//                        view: View?,
+//                        position: Int,
+//                        id: Long
+//                    ) {
+//                        viewModel.type = parent?.getItemAtPosition(position).toString()
+//                    }
+//
+//                    override fun onNothingSelected(p0: AdapterView<*>?) {}
+//                }
+//            }
 
-                    override fun onNothingSelected(p0: AdapterView<*>?) {}
-                }
+            btSearchDistrict.setOnClickListener {
+                tilQueryDistrict.visibility =
+                    if(tilQueryDistrict.visibility == View.VISIBLE)View.GONE else View.VISIBLE
+            }
+            etSearchDistrict.addTextChangedListener {
+                viewModel.distric = it.toString()
             }
 
             btSearchPrice.setOnClickListener {
@@ -184,8 +198,8 @@ class QuerySearchFragment : Fragment() {
 
 
             btSearchPhoto.setOnClickListener {
-                etSearchPhotoMin.visibility =
-                    if (etSearchPhotoMin.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                tilQueryPhotoMin.visibility =
+                    if (tilQueryPhotoMin.visibility == View.VISIBLE) View.GONE else View.VISIBLE
             }
             etSearchPhotoMin.addTextChangedListener {
                 viewModel.photoMin = it.toString().toIntOrNull()
@@ -193,12 +207,16 @@ class QuerySearchFragment : Fragment() {
 
             btSearchSearch.setOnClickListener {
                 viewModel.search()
+                activity?.supportFragmentManager?.popBackStack()
             }
+
+            btSearchCancel.setOnClickListener { activity?.supportFragmentManager?.popBackStack() }
         }
 
 
         return binding.root
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPartTwoBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -19,8 +20,6 @@ import kotlinx.coroutines.flow.collect
 class AOEPartTwoFragment : Fragment() {
 
     private val viewModel by viewModels<AOEPartTwoViewModel>()
-
-    private val TAG = "DEBUGKEY"
 
      override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_FINISH_RESULT
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.AddRepository
@@ -28,8 +29,6 @@ class AOEPhotoViewModel @Inject constructor(
     private val addEditPhotoChannel = Channel<AddEditPhotoEvent>()
     val addEditTwoEvent = addEditPhotoChannel.receiveAsFlow()
 
-    private val TAG = "DEBUGKEY"
-
     private var listPhotoLiveData = MutableLiveData<MutableList<Photo>>()
 
     init {
@@ -50,7 +49,6 @@ class AOEPhotoViewModel @Inject constructor(
 
     @FlowPreview
     private fun mediatorCombine(listPhoto: MutableList<Photo>?, value: Estate?) {
-        Log.d(TAG, "mediatorCombine: is call")
         val localList = ArrayList<Photo>()
         if (value?.listPhoto != null) {
             for (estatePhoto in value.listPhoto.listIterator()) {
@@ -66,13 +64,11 @@ class AOEPhotoViewModel @Inject constructor(
 
     @FlowPreview
     fun listPhotoLive(): LiveData<AOEPhotoViewState> {
-        Log.d(TAG, "listPhotoLive: is call")
         return mediator
     }
 
     fun addPhoto(name: String, path: String) {
         listPhotoLiveData.value?.add(Photo(name, path))
-        Log.d(TAG, "addPhoto: ${listPhotoLiveData.value.toString()}")
         listPhotoLiveData.value = listPhotoLiveData.value
     }
 

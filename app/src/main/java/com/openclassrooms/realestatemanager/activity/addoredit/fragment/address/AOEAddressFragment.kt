@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddAddressBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -20,8 +21,6 @@ import kotlinx.coroutines.flow.collect
 class AOEAddressFragment : Fragment() {
 
     private val viewModel by viewModels<AOEAddressViewModel>()
-
-    private val TAG = "DEBUGKEY"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

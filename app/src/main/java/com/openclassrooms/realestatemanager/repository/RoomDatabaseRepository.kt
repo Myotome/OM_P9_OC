@@ -14,27 +14,33 @@ import javax.inject.Singleton
 @Singleton
 class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDAO) {
 
-//    private val setCurrentId = MutableLiveData<Int>()
-    private val setQuerySearch = MutableLiveData<SimpleSQLiteQuery?>(null)
+
+//    private val setQuerySearch = MutableLiveData<SimpleSQLiteQuery?>(null)
     val isSearching = MutableLiveData(false)
 
+
 //    @FlowPreview
-//    val estateById = setCurrentId.asFlow().flatMapConcat { id -> estateDAO.getCurrentEstate(id) }
+//    val allProperty = setQuerySearch.asFlow().flatMapMerge { query -> estateDAO.getEstate(query) }
 
-    @FlowPreview
-    val allProperty = setQuerySearch.asFlow().flatMapMerge { query -> estateDAO.getEstate(query) }
 
-//    fun setCurrentEstateId(estateId: Int) {
-//        setCurrentId.value = estateId
+//    fun searchQuery(query: SimpleSQLiteQuery?) {
+//        setQuerySearch.value = query
 //    }
-
-    fun searchQuery(query: SimpleSQLiteQuery?) {
-        setQuerySearch.value = query
-    }
 
     fun isSearching(status: Boolean){
         isSearching.value = status
     }
+//    private val allEstateFlow = estateDAO.getAllEstate()
+    private val querySearchMutableSharedFlow = MutableSharedFlow<SimpleSQLiteQuery?>(1)
+    val querySearchFlow = querySearchMutableSharedFlow.asSharedFlow().flatMapLatest { query -> estateDAO.getEstate(query) }
+//    val allEstateQueryFlowGetTrcquetuveux = flowOf(querySearchFlow, allEstateFlow).flattenMerge()
+
+    fun setSearchQuery(query: SimpleSQLiteQuery?) {
+        querySearchMutableSharedFlow.tryEmit(query)
+    }
+    fun getSearchQuery() = estateDAO.getAllEstate()
+
+
 
     private val currentEstateIdMutableSharedFlow = MutableSharedFlow<Int>(replay = 1)
     val currentEstateIdFlow  = currentEstateIdMutableSharedFlow.asSharedFlow()
@@ -43,6 +49,8 @@ class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDA
         currentEstateIdMutableSharedFlow.tryEmit(estateId)
     }
     fun getEstateById(estateId: Int) = estateDAO.getCurrentEstate(estateId)
+
+
 
     suspend fun updateLatLngById(id: Int, lat: Double, lng: Double) {
         estateDAO.updateLatLngById(id, lat, lng)

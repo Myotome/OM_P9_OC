@@ -33,6 +33,9 @@ interface EstateDAO {
             else -> getSearchEstate(query)
         }
 
+    /**
+     * Usefully for content provider
+     */
     @Query("SELECT * FROM estate_table" )
     fun findAllEstate(): Cursor
 }
