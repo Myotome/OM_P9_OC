@@ -9,6 +9,7 @@ import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import javax.inject.Inject
@@ -21,17 +22,13 @@ class DetailViewModel @Inject constructor(
 ) :
     ViewModel() {
 
+    @ExperimentalCoroutinesApi
     val detailLiveData = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
         roomRepo.getEstateById(estateId)
     }.mapNotNull { estate ->
         map(estate)
     }.asLiveData(coroutineDispatchers.ioDispatchers)
-
-
-//
-//    @FlowPreview
-//    val detailLiveData = roomRepo.estateById.mapNotNull { estate -> map(estate) }
-//        .asLiveData(coroutineDispatchers.ioDispatchers)
+    
 
 private fun map(estate: Estate): DetailViewState =
     DetailViewState(
@@ -58,24 +55,25 @@ private fun map(estate: Estate): DetailViewState =
         modificationDate = if (estate.modificationDate != null) Utils.getLongToString(estate.modificationDate) else "",
         soldDate = if (estate.soldDate != null) Utils.getLongToString(estate.soldDate) else "",
         onSale = estate.onSale,
-        formattedAddress = getFormattedAddress(estate.address)
+        formattedAddress = getFormattedAddress(estate.address, estate.lat, estate.lng)
 
     )
 
 private fun getAddressString(address: Address): String {
 
-    return ("${address.number}   ${address.complement} \n" +
+    return ("${address.number}   ${address.complement?:""} \n" +
             "${address.street}\n" +
             "${address.district}\n" +
             address.city)
 }
 
-private fun getFormattedAddress(address: Address): String {
+private fun getFormattedAddress(address: Address, lat:Double?, lng:Double? ): String {
     val street = address.street.trim().replace(" ", "+")
     val city = address.city.trim().replace(" ", "+")
     return ("https://maps.googleapis.com/maps/api/" +
             "staticmap?size=200x200&scale=2" +
             "&center=${address.number}+$street+$city" +
+            "&markers=color:blue|$lat,$lng" +
             "&key=${BuildConfig.MAPS_API_KEY}")
 }
 }

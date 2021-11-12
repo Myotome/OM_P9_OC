@@ -2,8 +2,14 @@ package com.openclassrooms.realestatemanager.activity.addoredit
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.AOEAddressFragment
@@ -11,8 +17,11 @@ import com.openclassrooms.realestatemanager.activity.addoredit.fragment.interest
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.partone.AOEPartOneFragment
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.parttwo.AOEPartTwoFragment
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.activity.main.MainActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityAddBinding
+import com.openclassrooms.realestatemanager.utils.appPerms
+import com.openclassrooms.realestatemanager.utils.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
 
 const val ADD_EDIT_BACK_RESULT = 0
@@ -30,6 +39,8 @@ class AOEActivity : AppCompatActivity() {
         binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        checkForPermissions()
+
         val fragments = arrayListOf(
             AOEPartOneFragment(),
             AOEPartTwoFragment(),
@@ -41,6 +52,8 @@ class AOEActivity : AppCompatActivity() {
 
         val adapter = AOEPagerAdapter(fragments, this)
         binding.vpAddPager.adapter = adapter
+        binding.vpAddPager.isUserInputEnabled = false
+
 
     }
 
@@ -52,6 +65,7 @@ class AOEActivity : AppCompatActivity() {
     }
 
     internal fun clickToRightOrLeft(int: Int){
+        Log.d(TAG, "clickToRightOrLeft: int : $int, currentItem : ${binding.vpAddPager.currentItem}")
         when(int){
             0->onBackPressed()
             1-> binding.vpAddPager.currentItem-= 1
@@ -61,6 +75,28 @@ class AOEActivity : AppCompatActivity() {
                 finish()
             }
 
+        }
+    }
+
+    private fun checkForPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (permission in appPerms)
+                when {
+                    ContextCompat.checkSelfPermission(
+                        applicationContext,
+                        permission
+                    ) == PackageManager.PERMISSION_GRANTED -> {
+                    }
+                    shouldShowRequestPermissionRationale(permission) -> {
+                        Toast.makeText(
+                            this, "${
+                                permissionNameForUser(permission)
+                            } is required for complete usage", Toast.LENGTH_SHORT
+                        ).show()
+                        ActivityCompat.requestPermissions(this, appPerms, 1245)
+                    }
+                    else -> ActivityCompat.requestPermissions(this, appPerms, 1245)
+                }
         }
     }
 }

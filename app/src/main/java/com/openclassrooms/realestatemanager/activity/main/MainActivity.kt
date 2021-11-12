@@ -41,9 +41,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         checkForPermissions()
+        viewModel.clearSearch()
 
         val listFragment = ListFragment()
         val mapFragment = MapsFragment()
+
 
         displayCurrentFragment(listFragment, false)
 
@@ -102,11 +104,6 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.main_menu_search -> {
-//                supportFragmentManager.commit {
-//                    replace(R.id.frameLayout, QuerySearchFragment())
-//                    setReorderingAllowed(true)
-//                    addToBackStack("query")
-//                }
                 displayCurrentFragment(QuerySearchFragment(), true)
                 true
             }

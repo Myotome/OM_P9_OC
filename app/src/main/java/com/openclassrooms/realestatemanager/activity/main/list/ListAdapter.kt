@@ -43,7 +43,7 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
 
             binding.ivEstateContent.load(Uri.parse(estateViewState.photo.image))
 
-            Log.d(TAG, "bind: ${estateViewState.onSale}")
+//            Log.d(TAG, "bind: ${estateViewState.onSale}")
             if(!estateViewState.onSale) binding.tvContentSold.visibility = View.VISIBLE
 
             itemView.setOnClickListener { listener(estateViewState) }

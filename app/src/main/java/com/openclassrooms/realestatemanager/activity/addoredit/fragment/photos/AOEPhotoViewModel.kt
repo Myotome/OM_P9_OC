@@ -50,7 +50,9 @@ class AOEPhotoViewModel @Inject constructor(
     @FlowPreview
     private fun mediatorCombine(listPhoto: MutableList<Photo>?, value: Estate?) {
         val localList = ArrayList<Photo>()
+        var id: Int? = null
         if (value?.listPhoto != null) {
+            id = value.id
             for (estatePhoto in value.listPhoto.listIterator()) {
                 localList.add(estatePhoto)
             }
@@ -59,7 +61,7 @@ class AOEPhotoViewModel @Inject constructor(
             for (photo in listPhoto)
                 localList.add(photo)
         }
-        mediator.value = AOEPhotoViewState(localList)
+        mediator.value = AOEPhotoViewState(id, localList)
     }
 
     @FlowPreview

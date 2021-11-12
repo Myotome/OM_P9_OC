@@ -27,19 +27,18 @@ class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDA
 //        setQuerySearch.value = query
 //    }
 
-    fun isSearching(status: Boolean){
-        isSearching.value = status
-    }
-//    private val allEstateFlow = estateDAO.getAllEstate()
+//    fun isSearching(status: Boolean){
+//        isSearching.value = status
+//    }
+
     private val querySearchMutableSharedFlow = MutableSharedFlow<SimpleSQLiteQuery?>(1)
     val querySearchFlow = querySearchMutableSharedFlow.asSharedFlow().flatMapLatest { query -> estateDAO.getEstate(query) }
-//    val allEstateQueryFlowGetTrcquetuveux = flowOf(querySearchFlow, allEstateFlow).flattenMerge()
 
-    fun setSearchQuery(query: SimpleSQLiteQuery?) {
+
+    fun setSearchQuery(query: SimpleSQLiteQuery?, searchStatus: Boolean = false) {
         querySearchMutableSharedFlow.tryEmit(query)
+        isSearching.value = searchStatus
     }
-    fun getSearchQuery() = estateDAO.getAllEstate()
-
 
 
     private val currentEstateIdMutableSharedFlow = MutableSharedFlow<Int>(replay = 1)

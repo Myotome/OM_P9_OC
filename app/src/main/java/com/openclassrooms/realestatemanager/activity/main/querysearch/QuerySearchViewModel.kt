@@ -255,7 +255,7 @@ class QuerySearchViewModel @Inject constructor(
 
     private fun setSearch(query: SimpleSQLiteQuery) {
 //        roomRepo.searchQuery(query)
-        roomRepo.setSearchQuery(query)
-        roomRepo.isSearching(true)
+        roomRepo.setSearchQuery(query, true)
+//        roomRepo.isSearching(true)
     }
 }

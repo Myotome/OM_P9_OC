@@ -106,6 +106,8 @@ class DetailFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.findItem(R.id.main_menu_edit).isVisible = true
+        menu.findItem(R.id.main_menu_search).isVisible = false
+        menu.findItem(R.id.main_menu_add).isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
     }
 }

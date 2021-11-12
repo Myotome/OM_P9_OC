@@ -43,13 +43,13 @@ class ListFragment : Fragment() {
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
-        viewModel.isSearching.observe(viewLifecycleOwner){
-            if(it){
+        viewModel.isSearching.observe(viewLifecycleOwner) {
+            if (it) {
                 binding.btEstateListClearSearch.apply {
                     visibility = View.VISIBLE
                     setOnClickListener { viewModel.clearSearch() }
                 }
-            }else{
+            } else {
                 binding.btEstateListClearSearch.visibility = View.GONE
             }
         }

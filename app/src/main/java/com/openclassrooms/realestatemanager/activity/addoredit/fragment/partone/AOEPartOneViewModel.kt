@@ -1,8 +1,10 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.partone
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
+import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.AddRepository
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
@@ -14,13 +16,15 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class AOEPartOneViewModel @Inject constructor(
     private val addRepo: AddRepository,
     roomRepo: RoomDatabaseRepository,
-    coroutineDispatchers: CoroutineDispatchers
+    private val coroutineDispatchers: CoroutineDispatchers
 ): ViewModel() {
 
     private val addEditOneChannel = Channel<AddEditOneEvent>()
@@ -32,6 +36,7 @@ class AOEPartOneViewModel @Inject constructor(
     var surface = -1.0
     var rooms: Int? = null
     var landsize: Double? = null
+    var soldTime: Long? = null
 
 
     val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
@@ -54,6 +59,7 @@ class AOEPartOneViewModel @Inject constructor(
     }
 
     fun onSaveClick(){
+        Log.d(TAG, "onSaveClick: is clicked")
         when{
             type.isBlank()-> {
                 showInvalidInputMessage("Property type cannot be empty")
@@ -68,20 +74,27 @@ class AOEPartOneViewModel @Inject constructor(
                 return
             }
             else ->{
+                Log.d(TAG, "onSaveClick:  create part in when")
                 createPartOne()
+
             }
         }
     }
 
     private fun createPartOne() = viewModelScope.launch {
-        var soldTime: Long? = null
+        Log.d(TAG, "createPartOne: is called")
         if(!onSale) soldTime = Utils.getLongFormatDate()
-        addRepo.setPartOne(onSale, type, price, surface, rooms, landsize, soldTime)
+        withContext(coroutineDispatchers.ioDispatchers){
+        addRepo.setPartOne(onSale, type, price, surface, rooms, landsize, soldTime)}
         addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }
 
     private fun showInvalidInputMessage(text : String) = viewModelScope.launch {
         addEditOneChannel.send(AddEditOneEvent.ShowInvalidInputMessage(text))
+    }
+
+    private fun navigateWithResult() = viewModelScope.launch {
+        addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }
 
     sealed class AddEditOneEvent{
