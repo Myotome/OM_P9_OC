@@ -13,4 +13,10 @@ class MainViewModel @Inject constructor(
     fun clearCurrentEstate(){
         roomDatabaseRepository.setCurrentEstateId(-1)
     }
+
+    fun clearSearch() {
+//        roomRepo.searchQuery(null)
+//        roomDatabaseRepository.isSearching(false)
+        roomDatabaseRepository.setSearchQuery(null)
+    }
 }

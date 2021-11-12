@@ -67,13 +67,15 @@ class AOEPartOneFragment : Fragment() {
                     viewModel.landsize = (it.toString().toDoubleOrNull())
                 }
 
-                btOneNext.setOnClickListener { viewModel.onSaveClick() }
+                btOneNext.setOnClickListener {
+                    Log.d(TAG, "onCreateView: click next")
+                    viewModel.onSaveClick() }
                 btOneBack.setOnClickListener {
                     (activity as AOEActivity).clickToRightOrLeft(ADD_EDIT_BACK_RESULT)
                 }
             }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.addEditOneEvent.collect { event ->
                 when (event) {
                     is AOEPartOneViewModel.AddEditOneEvent.ShowInvalidInputMessage -> {

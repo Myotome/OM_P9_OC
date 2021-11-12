@@ -17,11 +17,11 @@ class AddRepository @Inject constructor(
 
     private var onSale = true
     private var estateId: Int? = null
-    private val type = MutableLiveData<String?>()
-    private val price = MutableLiveData<Int?>()
-    private val surface = MutableLiveData<Double?>()
-    private val rooms = MutableLiveData<Int?>()
-    private val landSize = MutableLiveData<Double?>()
+    private var type: String? = null
+    private var price: Int? = null
+    private var surface: Double? = null
+    private var rooms: Int? = null
+    private var landSize: Double? = null
     private var soldDate: Long? = null
     private val bedrooms = MutableLiveData<Int?>()
     private val bathrooms = MutableLiveData<Int?>()
@@ -47,11 +47,11 @@ class AddRepository @Inject constructor(
         soldDate: Long?
     ) {
         this.onSale = onSale
-        this.type.value = type
-        this.price.value = price
-        this.surface.value = surface
-        this.rooms.value = rooms
-        this.landSize.value = landSize
+        this.type = type
+        this.price = price
+        this.surface = surface
+        this.rooms = rooms
+        this.landSize = landSize
         this.soldDate = soldDate
     }
 
@@ -85,11 +85,11 @@ class AddRepository @Inject constructor(
 
     suspend fun createEstateInDatabase(listPhoto: List<Photo>) {
         val estate = Estate(
-            estateType = type.value!!,
-            price = price.value!!,
-            surface = surface.value!!,
-            room = rooms.value,
-            landSize = landSize.value,
+            estateType = type!!,
+            price = price!!,
+            surface = surface!!,
+            room = rooms,
+            landSize = landSize,
             bedrooms = bedrooms.value,
             bathrooms = bathrooms.value,
             description = description.value,
@@ -108,10 +108,10 @@ class AddRepository @Inject constructor(
         if (estateId != null) {
             val updateEstate = estate.copy(id = estateId!!)
             estateDAO.updateEstate(updateEstate)
-            Log.d("DEBUGKEY", "UpdateEstateInDatabase: estate is update")
+//            Log.d("DEBUGKEY", "UpdateEstateInDatabase: estate is update")
         } else {
             estateDAO.insertEstate(estate)
-            Log.d("DEBUGKEY", "createEstateInDatabase: estate created")
+//            Log.d("DEBUGKEY", "createEstateInDatabase: estate created")
         }
     }
 }

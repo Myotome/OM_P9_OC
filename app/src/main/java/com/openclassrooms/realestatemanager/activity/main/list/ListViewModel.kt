@@ -29,7 +29,7 @@ class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
 //    }.asLiveData()
 
     val uiStateLiveData = roomRepo.querySearchFlow.mapNotNull { estates ->
-        Log.d(TAG, "uistate: ${estates?.size}")
+//        Log.d(TAG, "uistate: ${estates?.size}")
         estates?.map{estate -> map(estate) }
     }.asLiveData()
 
@@ -47,7 +47,7 @@ class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
 
     fun clearSearch() {
 //        roomRepo.searchQuery(null)
-        roomRepo.isSearching(false)
+//        roomRepo.isSearching(false)
         roomRepo.setSearchQuery(null)
     }
 

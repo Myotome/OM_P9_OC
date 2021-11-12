@@ -28,7 +28,7 @@ class LocationRepository @Inject constructor(
 
     fun getCurrentPosition(): LiveData<LatLng> {
         if (currentPosition.value == null) getDeviceLocation()
-        Log.d("DEBUGKEY", "getCurrentPosition: current Position ${currentPosition.value}")
+//        Log.d("DEBUGKEY", "getCurrentPosition: current Position ${currentPosition.value}")
         return currentPosition
     }
 
@@ -62,7 +62,6 @@ class LocationRepository @Inject constructor(
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                Log.d(TAG, "onLocationResult: callback is call")
                 super.onLocationResult(locationResult)
                 val currentLat = locationResult.lastLocation.latitude
                 val currentLng = locationResult.lastLocation.longitude

@@ -22,22 +22,24 @@ import com.openclassrooms.realestatemanager.databinding.FragmentMapsBinding
 import com.openclassrooms.realestatemanager.utils.Utils
 import com.openclassrooms.realestatemanager.utils.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.FlowPreview
 
 @AndroidEntryPoint
 class MapsFragment : Fragment() {
 
     private val viewModel by viewModels<MapsViewModel>()
 
+    @FlowPreview
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentMapsBinding.inflate(inflater, container, false)
-        Log.d(TAG, "onCreateView: I'm here")
+//        Log.d(TAG, "onCreateView: I'm here")
 
         viewModel.getViewState().observe(viewLifecycleOwner) {
-            Log.d(TAG, "onCreateView:  viewModelObserve is call")
+//            Log.d(TAG, "onCreateView:  viewModelObserve is call")
             displayCurrentPosition(it.currentLat, it.currentLng)
             displayMarker(it.listEstate)
         }
@@ -48,7 +50,7 @@ class MapsFragment : Fragment() {
     }
 
     private fun displayCurrentPosition(currentLat: Double, currentLng: Double) {
-        Log.d(TAG, "displayCurrentPosition: is call")
+//        Log.d(TAG, "displayCurrentPosition: is call")
         val currentLocation = LatLng(currentLat, currentLng)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync { googleMap ->
@@ -79,14 +81,14 @@ class MapsFragment : Fragment() {
 
 
     private fun displayMarker(list: List<MapsEstateViewState>?) {
-        Log.d(TAG, "displayMarker: I'm here")
+//        Log.d(TAG, "displayMarker: I'm here")
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync { googleMap ->
             googleMap.clear()
 
             if (list != null) {
                 for (estate in list) {
-                    Log.d(TAG, "displayMarker: value of Lat ${estate.lat} and lng ${estate.lng}")
+//                    Log.d(TAG, "displayMarker: value of Lat ${estate.lat} and lng ${estate.lng}")
                     val estatePosition = LatLng(estate.lat, estate.lng)
                     val marker = googleMap.addMarker(MarkerOptions().position(estatePosition))
                     marker!!.tag = estate.id
