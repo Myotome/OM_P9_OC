@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.activity.addoredit
 
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayoutMediator
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.AOEAddressFragment
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.interest.AOEInterestFragment
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.partone.AOEPartOneFragment
@@ -54,23 +52,26 @@ class AOEActivity : AppCompatActivity() {
         binding.vpAddPager.adapter = adapter
         binding.vpAddPager.isUserInputEnabled = false
 
-
     }
 
     override fun onBackPressed() {
-        when(binding.vpAddPager.currentItem){
-            0-> super.onBackPressed()
-            else-> binding.vpAddPager.currentItem -= 1
+        when (binding.vpAddPager.currentItem) {
+            0 -> super.onBackPressed()
+            else -> binding.vpAddPager.currentItem -= 1
         }
     }
 
-    internal fun clickToRightOrLeft(int: Int){
-        Log.d(TAG, "clickToRightOrLeft: int : $int, currentItem : ${binding.vpAddPager.currentItem}")
-        when(int){
-            0->onBackPressed()
-            1-> binding.vpAddPager.currentItem-= 1
-            2-> binding.vpAddPager.currentItem+= 1
-            3->{Snackbar.make(binding.root, "Estate created", Snackbar.LENGTH_LONG).show()
+    internal fun clickToRightOrLeft(int: Int) {
+        Log.d(
+            TAG,
+            "clickToRightOrLeft: int : $int, currentItem : ${binding.vpAddPager.currentItem}"
+        )
+        when (int) {
+            0 -> onBackPressed()
+            1 -> binding.vpAddPager.currentItem -= 1
+            2 -> binding.vpAddPager.currentItem += 1
+            3 -> {
+                Snackbar.make(binding.root, "Estate created", Snackbar.LENGTH_LONG).show()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }

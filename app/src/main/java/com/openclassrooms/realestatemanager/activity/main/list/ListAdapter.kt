@@ -52,10 +52,10 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
 
     private class EstateDiffCallback : DiffUtil.ItemCallback<ListViewState>() {
         override fun areItemsTheSame(oldItem: ListViewState, newItem: ListViewState) =
-            oldItem.id == newItem.id
+            oldItem == newItem
 
         override fun areContentsTheSame(oldItem: ListViewState, newItem: ListViewState) =
-            oldItem == newItem
+            oldItem.id == newItem.id
     }
 
 

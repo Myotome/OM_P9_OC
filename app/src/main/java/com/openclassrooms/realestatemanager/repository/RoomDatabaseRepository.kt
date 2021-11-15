@@ -1,13 +1,12 @@
 package com.openclassrooms.realestatemanager.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.openclassrooms.realestatemanager.database.EstateDAO
-import com.openclassrooms.realestatemanager.model.Estate
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,7 +14,7 @@ import javax.inject.Singleton
 class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDAO) {
 
 
-//    private val setQuerySearch = MutableLiveData<SimpleSQLiteQuery?>(null)
+    //    private val setQuerySearch = MutableLiveData<SimpleSQLiteQuery?>(null)
     val isSearching = MutableLiveData(false)
 
 
@@ -31,24 +30,28 @@ class RoomDatabaseRepository @Inject constructor(private val estateDAO: EstateDA
 //        isSearching.value = status
 //    }
 
-    private val querySearchMutableSharedFlow = MutableSharedFlow<SimpleSQLiteQuery?>(1)
-    val querySearchFlow = querySearchMutableSharedFlow.asSharedFlow().flatMapLatest { query -> estateDAO.getEstate(query) }
-
-
+    private val querySearchMutableStateFlow = MutableStateFlow<SimpleSQLiteQuery?>(null)
+    val querySearchFlow = querySearchMutableStateFlow.asSharedFlow().flatMapLatest { query ->
+        if (query != null) {
+            estateDAO.getSearchEstate(query)
+        } else {
+            estateDAO.getAllEstate()
+        }
+    }
     fun setSearchQuery(query: SimpleSQLiteQuery?, searchStatus: Boolean = false) {
-        querySearchMutableSharedFlow.tryEmit(query)
+        querySearchMutableStateFlow.tryEmit(query)
         isSearching.value = searchStatus
     }
 
 
     private val currentEstateIdMutableSharedFlow = MutableSharedFlow<Int>(replay = 1)
-    val currentEstateIdFlow  = currentEstateIdMutableSharedFlow.asSharedFlow()
+    val currentEstateIdFlow = currentEstateIdMutableSharedFlow.asSharedFlow()
 
     fun setCurrentEstateId(estateId: Int) {
         currentEstateIdMutableSharedFlow.tryEmit(estateId)
     }
-    fun getEstateById(estateId: Int) = estateDAO.getCurrentEstate(estateId)
 
+    fun getEstateById(estateId: Int) = estateDAO.getCurrentEstate(estateId)
 
 
     suspend fun updateLatLngById(id: Int, lat: Double, lng: Double) {

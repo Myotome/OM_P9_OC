@@ -44,6 +44,17 @@ class MapsFragment : Fragment() {
             displayMarker(it.listEstate)
         }
 
+        viewModel.isSearching.observe(viewLifecycleOwner){
+            if (it){
+                binding.btMapClear.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener { viewModel.clearSearch() }
+                }
+            }else {
+                binding.btMapClear.visibility = View.GONE
+            }
+        }
+
         if(Utils.isInternetAvailable(requireContext())) viewModel.assertAllEstateHadLatLng()
 
         return binding.root

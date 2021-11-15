@@ -25,6 +25,7 @@ class MapsViewModel @Inject constructor(
     ViewModel() {
 
     private val currentPosition = locationRepository.getCurrentPosition()
+    val isSearching = roomRepo.isSearching
 
     @FlowPreview
 //    private val estateLiveData = roomRepo.allProperty.asLiveData()
@@ -69,4 +70,10 @@ class MapsViewModel @Inject constructor(
     fun getViewState() = mediator
 
     fun isCurrentEstate(estateId: Int) = roomRepo.setCurrentEstateId(estateId)
+
+    fun clearSearch(){
+        roomRepo.apply {
+            setSearchQuery(null)
+        }
+    }
 }

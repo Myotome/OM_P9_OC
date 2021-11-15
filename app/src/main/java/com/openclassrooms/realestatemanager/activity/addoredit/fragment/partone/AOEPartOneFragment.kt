@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_BACK_RESULT
@@ -19,6 +21,7 @@ import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.A
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPartOneBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AOEPartOneFragment : Fragment() {
@@ -38,42 +41,55 @@ class AOEPartOneFragment : Fragment() {
                 binding.apply {
                     swOneSale.isChecked = vs.onSale
                     swOneSale.jumpDrawablesToCurrentState()
-                    spAddType.setSelection((spAddType.adapter as ArrayAdapter<String>).getPosition(vs.type))
+                    spAddType.setSelection(
+                        (spAddType.adapter as ArrayAdapter<String>).getPosition(
+                            vs.type
+                        )
+                    )
                     etAddPrice.setText(vs.price.toString())
                     etAddSurface.setText(vs.surface.toString())
-                    etAddRooms.setText(vs.room?.toString()?:"")
-                    etAddLandsize.setText(vs.landSize?.toString()?:"")
+                    etAddRooms.setText(vs.room?.toString() ?: "")
+                    etAddLandsize.setText(vs.landSize?.toString() ?: "")
                 }
             }
         }
 
         binding.apply {
             swOneSale.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.onSale = isChecked  }
+                viewModel.onSale = isChecked
+            }
 
             spAddType.apply {
-                adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, resources.getStringArray(R.array.type))
+                adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_spinner_item,
+                    resources.getStringArray(R.array.type)
+                )
                 onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
-                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
                         viewModel.type = parent?.getItemAtPosition(position).toString()
-                        }
                     }
                 }
-                etAddPrice.addTextChangedListener { viewModel.price = (it.toString().toInt()) }
-                etAddSurface.addTextChangedListener { viewModel.surface = (it.toString().toDouble()) }
-                etAddRooms.addTextChangedListener { viewModel.rooms = (it.toString().toIntOrNull()) }
-                etAddLandsize.addTextChangedListener {
-                    viewModel.landsize = (it.toString().toDoubleOrNull())
-                }
-
-                btOneNext.setOnClickListener {
-                    Log.d(TAG, "onCreateView: click next")
-                    viewModel.onSaveClick() }
-                btOneBack.setOnClickListener {
-                    (activity as AOEActivity).clickToRightOrLeft(ADD_EDIT_BACK_RESULT)
-                }
             }
+            etAddPrice.addTextChangedListener { viewModel.price = (it.toString().toIntOrNull()) }
+            etAddSurface.addTextChangedListener { viewModel.surface = (it.toString().toDoubleOrNull()) }
+            etAddRooms.addTextChangedListener { viewModel.rooms = (it.toString().toIntOrNull()) }
+            etAddLandsize.addTextChangedListener {
+                viewModel.landsize = (it.toString().toDoubleOrNull())
+            }
+
+            btOneNext.setOnClickListener { viewModel.onSaveClick() }
+            btOneBack.setOnClickListener {
+                (activity as AOEActivity).clickToRightOrLeft(ADD_EDIT_BACK_RESULT)
+            }
+        }
+
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.addEditOneEvent.collect { event ->
@@ -83,6 +99,7 @@ class AOEPartOneFragment : Fragment() {
                     }
                     is AOEPartOneViewModel.AddEditOneEvent.NavigateWithResult -> {
                         (activity as AOEActivity).clickToRightOrLeft(event.result)
+
                     }
                 }
             }
