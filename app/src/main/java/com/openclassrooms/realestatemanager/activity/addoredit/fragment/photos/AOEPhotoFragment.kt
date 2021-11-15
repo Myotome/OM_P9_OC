@@ -4,7 +4,6 @@ import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.InputType
@@ -23,7 +22,6 @@ import com.openclassrooms.realestatemanager.database.uriToString
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPhotoBinding
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import gun0912.tedimagepicker.builder.TedImagePicker
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import java.io.ByteArrayOutputStream
@@ -48,8 +46,6 @@ class AOEPhotoFragment : Fragment() {
             btAddTakePhoto.setOnClickListener { dispatchTakePictureIntent() }
             btAddGallery.setOnClickListener {
                 dispatchGalleryPhoto()
-//                TedImagePicker.with(requireContext())
-//                    .start { uri -> popupName(uri) }
             }
             btPhotoFinish.setOnClickListener { viewModel.getAllData() }
             btPhotoBack.setOnClickListener {
@@ -82,7 +78,7 @@ class AOEPhotoFragment : Fragment() {
 
         viewModel.listPhotoLive().observe(viewLifecycleOwner) {
             adapter.submitList(it.listPhoto)
-            if(it.id != null)binding.btPhotoFinish.text = "Update"
+            if (it.id != null) binding.btPhotoFinish.text = "Update"
         }
 
     }
@@ -95,30 +91,24 @@ class AOEPhotoFragment : Fragment() {
         intent.type = "image/*"
         startActivityForResult(intent, REQUEST_IMAGE_GALLERY)
     }
-//
+
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
         Log.d(Companion.TAG, "dispatchTakePictureIntent: called")
 
     }
-//
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
             data!!.data?.let { uri ->
-                context?.contentResolver?.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                context?.contentResolver?.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
                 popupName(uriToString(uri))
 
-//                popupNameString((Environment.DIRECTORY_PICTURES +
-//                ".jpg" +
-//                "image/*" +
-//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI), data.data!!
-//                )
-//                popupName(MediaStore
-//                    .Images
-//                    .Media
-//                    .getBitmap(context?.contentResolver, data.data!!))
             }
 
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -126,18 +116,16 @@ class AOEPhotoFragment : Fragment() {
 
             val bytes = ByteArrayOutputStream()
             takenImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-            val path = MediaStore.Images.Media.insertImage(context?.contentResolver,
-            takenImage,
-            Utils.getTodayDate(),
-            null)
+            val path = MediaStore.Images.Media.insertImage(
+                context?.contentResolver,
+                takenImage,
+                Utils.getTodayDate(),
+                null
+            )
 
             popupName(path)
         }
     }
-
-//    private fun popupNameString(s: String, data: Uri) {
-//        Log.d(TAG, "popupNameString: string : $s , data : $data")
-//    }
 
 
     private fun popupName(uriString: String) {
@@ -151,12 +139,6 @@ class AOEPhotoFragment : Fragment() {
         builder.setView(input)
 
         builder.setPositiveButton("Ok") { _, _ ->
-//            val path = MediaStore.Images.Media.insertImage(
-//                context?.contentResolver,
-//                bitmap,
-//                Utils.getTodayDate(),
-//                null
-//            )
             viewModel.addPhoto(input.text.toString(), uriString)
         }
         builder.setNegativeButton("Cancel") { _, _ -> }

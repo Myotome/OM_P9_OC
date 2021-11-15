@@ -31,9 +31,9 @@ class AOEPartOneViewModel @Inject constructor(
     val addEditOneEvent = addEditOneChannel.receiveAsFlow()
 
     var onSale = true
-    var type =""
-    var price = -1
-    var surface = -1.0
+    var type: String? = null
+    var price: Int? = null
+    var surface: Double? = null
     var rooms: Int? = null
     var landsize: Double? = null
     var soldTime: Long? = null
@@ -61,15 +61,15 @@ class AOEPartOneViewModel @Inject constructor(
     fun onSaveClick(){
         Log.d(TAG, "onSaveClick: is clicked")
         when{
-            type.isBlank()-> {
+            type.isNullOrBlank()-> {
                 showInvalidInputMessage("Property type cannot be empty")
                 return
             }
-            (price < 0) -> {
+            (price == null) -> {
                 showInvalidInputMessage("Price cannot be empty")
                 return
             }
-            (surface < 0.0) ->{
+            (surface == null) ->{
                 showInvalidInputMessage("Surface cannot be empty")
                 return
             }
@@ -84,17 +84,12 @@ class AOEPartOneViewModel @Inject constructor(
     private fun createPartOne() = viewModelScope.launch {
         Log.d(TAG, "createPartOne: is called")
         if(!onSale) soldTime = Utils.getLongFormatDate()
-        withContext(coroutineDispatchers.ioDispatchers){
-        addRepo.setPartOne(onSale, type, price, surface, rooms, landsize, soldTime)}
+        addRepo.setPartOne(onSale, type!!, price!!, surface!!, rooms, landsize, soldTime)
         addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }
 
     private fun showInvalidInputMessage(text : String) = viewModelScope.launch {
         addEditOneChannel.send(AddEditOneEvent.ShowInvalidInputMessage(text))
-    }
-
-    private fun navigateWithResult() = viewModelScope.launch {
-        addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }
 
     sealed class AddEditOneEvent{

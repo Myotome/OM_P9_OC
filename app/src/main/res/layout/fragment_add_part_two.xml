@@ -64,6 +64,7 @@
             android:maxLines="3"
             android:ellipsize="middle"/>
 
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

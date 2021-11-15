@@ -27,12 +27,6 @@ interface EstateDAO {
     @RawQuery(observedEntities = [Estate::class])
     fun getSearchEstate(query : SupportSQLiteQuery): Flow<List<Estate>?>
 
-    fun getEstate(query : SupportSQLiteQuery?) =
-        when(query){
-            null -> getAllEstate()
-            else -> getSearchEstate(query)
-        }
-
     /**
      * Usefully for content provider
      */

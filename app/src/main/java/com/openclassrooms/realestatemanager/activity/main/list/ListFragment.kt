@@ -40,7 +40,7 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        viewModel.uiStateLiveData.observe(viewLifecycleOwner) {
+        viewModel.uiStateLiveData.observe(viewLifecycleOwner) {it->
             adapter.submitList(it)
         }
         viewModel.isSearching.observe(viewLifecycleOwner) {
