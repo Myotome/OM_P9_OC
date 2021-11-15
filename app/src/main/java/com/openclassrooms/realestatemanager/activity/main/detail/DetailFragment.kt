@@ -28,7 +28,7 @@ class DetailFragment : Fragment() {
         val adapter = DetailAdapter {}
         binding.rvDetailPhoto.adapter = adapter
 
-        viewModel.detailLiveData.observe(viewLifecycleOwner) {
+        viewModel.detailFlow?.observe(viewLifecycleOwner) {
 
             binding.apply {
                 tvDetailFastDescription.text =

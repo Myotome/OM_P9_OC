@@ -34,11 +34,9 @@ class AOEPartOneViewModel @Inject constructor(
     var landsize: Double? = null
 
 
-    val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
-        roomRepo.getEstateById(estateId)
-    }.mapNotNull { estate ->
+    val currentEstate = roomRepo.getEstateById()?.mapNotNull { estate ->
         map(estate)
-    }.asLiveData(coroutineDispatchers.ioDispatchers)
+    }?.asLiveData(coroutineDispatchers.ioDispatchers)
 
     private fun map(estate: Estate?) : AOEPartOneViewState? = if (estate?.address != null){
         AOEPartOneViewState(

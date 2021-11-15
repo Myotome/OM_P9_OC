@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         checkForPermissions()
 
+//        viewModel.setQueryToNull()
         val listFragment = ListFragment()
         val mapFragment = MapsFragment()
 

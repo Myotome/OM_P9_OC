@@ -10,7 +10,12 @@ class MainViewModel @Inject constructor(
     private val roomDatabaseRepository: RoomDatabaseRepository
 ) : ViewModel() {
 
-    fun clearCurrentEstate(){
-        roomDatabaseRepository.setCurrentEstateId(-1)
+    fun clearCurrentEstate() {
+//        roomDatabaseRepository.setCurrentEstateId(-1)
+        roomDatabaseRepository.setCurrentEstateId(null)
+    }
+
+    fun setQueryToNull() {
+        roomDatabaseRepository.setSearchQuery(null)
     }
 }

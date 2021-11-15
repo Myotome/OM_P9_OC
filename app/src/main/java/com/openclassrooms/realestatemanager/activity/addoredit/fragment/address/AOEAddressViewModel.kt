@@ -40,11 +40,9 @@ class AOEAddressViewModel @Inject constructor(
     var lat: Double = 0.0
     var lng: Double = 0.0
 
-    val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
-        roomRepo.getEstateById(estateId)
-    }.mapNotNull { estate ->
+    val currentEstate = roomRepo.getEstateById()?.mapNotNull { estate ->
         map(estate)
-    }.asLiveData(coroutineDispatchers.ioDispatchers)
+    }?.asLiveData(coroutineDispatchers.ioDispatchers)
 
     private fun map(estate: Estate?): AOEAddressViewState? = if (estate?.address != null) {
         AOEAddressViewState(
