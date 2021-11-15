@@ -69,7 +69,7 @@ class MapsViewModel @Inject constructor(
     @FlowPreview
     fun getViewState() = mediator
 
-    fun isCurrentEstate(estateId: Int) = roomRepo.setCurrentEstateId(estateId)
+    fun isCurrentEstate(estateId: Int) = roomRepo.setCurrentEstateById(estateId)
 
     fun clearSearch(){
         roomRepo.apply {

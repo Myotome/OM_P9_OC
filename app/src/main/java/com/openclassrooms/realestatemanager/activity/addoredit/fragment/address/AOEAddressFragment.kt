@@ -30,7 +30,7 @@ class AOEAddressFragment : Fragment() {
 
         Log.d(TAG, "onCreateView: address fragment is call")
 
-        viewModel.currentEstate.observe(viewLifecycleOwner) { vs ->
+        viewModel.currentEstate?.observe(viewLifecycleOwner) { vs ->
             if (vs != null) {
                 binding.apply {
                     etAddNumber.setText(vs.number.toString())
