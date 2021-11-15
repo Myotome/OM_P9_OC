@@ -36,7 +36,7 @@ class AOEPartOneFragment : Fragment() {
 
         Log.d(TAG, "onCreateView: part one is call")
 
-        viewModel.currentEstate.observe(viewLifecycleOwner) { vs ->
+        viewModel.currentEstate?.observe(viewLifecycleOwner) { vs ->
             if (vs != null) {
                 binding.apply {
                     swOneSale.isChecked = vs.onSale

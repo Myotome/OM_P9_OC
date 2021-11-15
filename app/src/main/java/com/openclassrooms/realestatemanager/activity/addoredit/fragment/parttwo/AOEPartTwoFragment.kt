@@ -29,7 +29,7 @@ class AOEPartTwoFragment : Fragment() {
 
          Log.d(TAG, "onCreateView: part two fragment is call")
 
-         viewModel.currentEstate.observe(viewLifecycleOwner){vs->
+         viewModel.currentEstate?.observe(viewLifecycleOwner){vs->
              if(vs!=null){
                  binding.apply {
                      etAddBedrooms.setText(vs.bedroom?.toString()?: "")

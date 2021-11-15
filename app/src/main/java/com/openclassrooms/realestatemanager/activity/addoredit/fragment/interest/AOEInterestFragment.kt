@@ -28,7 +28,7 @@ class AOEInterestFragment : Fragment() {
 
         Log.d(TAG, "onCreateView: Interest Fragment is call")
 
-        viewModel.currentEstate.observe(viewLifecycleOwner){vs->
+        viewModel.currentEstate?.observe(viewLifecycleOwner){vs->
             binding.apply {
                 if (vs != null) {
                     cbInterestSchool.isChecked = vs.school

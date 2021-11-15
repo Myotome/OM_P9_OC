@@ -23,9 +23,7 @@ class DetailViewModel @Inject constructor(
     ViewModel() {
 
     @ExperimentalCoroutinesApi
-    val detailLiveData = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
-        roomRepo.getEstateById(estateId)
-    }.mapNotNull { estate ->
+    val detailLiveData = roomRepo.getEstateById()!!.mapNotNull { estate ->
         map(estate)
     }.asLiveData(coroutineDispatchers.ioDispatchers)
     

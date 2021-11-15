@@ -11,7 +11,7 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun clearCurrentEstate(){
-        roomDatabaseRepository.setCurrentEstateId(-1)
+        roomDatabaseRepository.setCurrentEstateById(null)
     }
 
     fun clearSearch() {

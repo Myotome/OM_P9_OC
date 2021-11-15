@@ -10,14 +10,11 @@ import com.openclassrooms.realestatemanager.repository.AddRepository
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,11 +36,9 @@ class AOEPartOneViewModel @Inject constructor(
     var soldTime: Long? = null
 
 
-    val currentEstate = roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
-        roomRepo.getEstateById(estateId)
-    }.mapNotNull { estate ->
+    val currentEstate = roomRepo.getEstateById()?.mapNotNull { estate ->
         map(estate)
-    }.asLiveData(coroutineDispatchers.ioDispatchers)
+    }?.asLiveData(coroutineDispatchers.ioDispatchers)
 
     private fun map(estate: Estate?) : AOEPartOneViewState? = if (estate?.address != null){
         AOEPartOneViewState(
@@ -81,7 +76,7 @@ class AOEPartOneViewModel @Inject constructor(
         }
     }
 
-    private fun createPartOne() = viewModelScope.launch {
+    private fun createPartOne() = GlobalScope.launch {
         Log.d(TAG, "createPartOne: is called")
         if(!onSale) soldTime = Utils.getLongFormatDate()
         addRepo.setPartOne(onSale, type!!, price!!, surface!!, rooms, landsize, soldTime)

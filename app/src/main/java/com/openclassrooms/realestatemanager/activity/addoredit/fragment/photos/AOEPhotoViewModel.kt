@@ -37,9 +37,7 @@ class AOEPhotoViewModel @Inject constructor(
 
     @FlowPreview
     private var currentEstate: LiveData<Estate> =
-        roomRepo.currentEstateIdFlow.flatMapLatest { estateId ->
-            roomRepo.getEstateById(estateId)
-        }.asLiveData(coroutineDispatchers.ioDispatchers)
+        roomRepo.getEstateById()!!.asLiveData(coroutineDispatchers.ioDispatchers)
 
     @FlowPreview
     private var mediator = MediatorLiveData<AOEPhotoViewState>().apply {

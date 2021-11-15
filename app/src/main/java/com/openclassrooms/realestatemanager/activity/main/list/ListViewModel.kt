@@ -22,7 +22,7 @@ class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
 //    fun insertEstate(estate: Estate) = viewModelScope.launch { roomRepo.insertEstate(estate) }
     val isSearching = roomRepo.isSearching
 
-    fun setCurrentEstateId(estateId: Int) = roomRepo.setCurrentEstateId(estateId)
+    fun setCurrentEstateId(estateId: Int) = roomRepo.setCurrentEstateById(estateId)
 
 //    val uiStateLiveData = roomRepo.allProperty.mapNotNull { estates ->
 //        estates?.map { estate -> map(estate) }
