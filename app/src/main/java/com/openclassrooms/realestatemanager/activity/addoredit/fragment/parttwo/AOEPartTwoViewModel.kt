@@ -9,6 +9,7 @@ import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
@@ -51,7 +52,7 @@ class AOEPartTwoViewModel @Inject constructor(
         null
     }
 
-    fun onSaveClick() = viewModelScope.launch {
+    fun onSaveClick() = GlobalScope.launch {
         if(entryDate == null) entryDate = Utils.getLongFormatDate() else modificationDate = Utils.getLongFormatDate()
         addRepo.setPartTwo(estateId, bedrooms, bathrooms, description, realtor, entryDate, modificationDate)
         addEditTwoChannel.send(AddEditTwoEvent.NavigateResult(ADD_EDIT_NEXT_RESULT))

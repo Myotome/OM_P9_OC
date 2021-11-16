@@ -17,19 +17,11 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseRepository) :
     ViewModel() {
 
-//    private val allEstate: LiveData<List<Estate>> = roomRepo.allProperty.asLiveData()
-
-//    fun insertEstate(estate: Estate) = viewModelScope.launch { roomRepo.insertEstate(estate) }
     val isSearching = roomRepo.isSearching
 
     fun setCurrentEstateId(estateId: Int) = roomRepo.setCurrentEstateById(estateId)
 
-//    val uiStateLiveData = roomRepo.allProperty.mapNotNull { estates ->
-//        estates?.map { estate -> map(estate) }
-//    }.asLiveData()
-
     val uiStateLiveData = roomRepo.querySearchFlow.mapNotNull { estates ->
-//        Log.d(TAG, "uistate: ${estates?.size}")
         estates?.map{estate -> map(estate) }
     }.asLiveData()
 
@@ -46,8 +38,6 @@ class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
         )
 
     fun clearSearch() {
-//        roomRepo.searchQuery(null)
-//        roomRepo.isSearching(false)
         roomRepo.setSearchQuery(null)
     }
 

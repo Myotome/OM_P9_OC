@@ -1,12 +1,14 @@
 package com.openclassrooms.realestatemanager.activity.main.detail
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.databinding.EstateDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
@@ -29,6 +31,7 @@ class DetailFragment : Fragment() {
         binding.rvDetailPhoto.adapter = adapter
 
         viewModel.detailLiveData.observe(viewLifecycleOwner) {
+
 
             binding.apply {
                 tvDetailFastDescription.text =
@@ -107,7 +110,7 @@ class DetailFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.findItem(R.id.main_menu_edit).isVisible = true
         menu.findItem(R.id.main_menu_search).isVisible = false
-        menu.findItem(R.id.main_menu_add).isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
     }
+
 }

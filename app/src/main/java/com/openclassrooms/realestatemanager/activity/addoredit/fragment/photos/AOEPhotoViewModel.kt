@@ -11,6 +11,7 @@ import com.openclassrooms.realestatemanager.repository.AddRepository
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
@@ -83,7 +84,7 @@ class AOEPhotoViewModel @Inject constructor(
     }
 
     @FlowPreview
-    private fun createEstateInDB() = viewModelScope.launch {
+    private fun createEstateInDB() = GlobalScope.launch {
         mediator.value?.listPhoto?.let { addRepo.createEstateInDatabase(it) }
         addEditPhotoChannel.send(AddEditPhotoEvent.NavigateResult(ADD_EDIT_FINISH_RESULT))
     }

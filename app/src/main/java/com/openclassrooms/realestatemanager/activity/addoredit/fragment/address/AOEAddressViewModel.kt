@@ -12,6 +12,7 @@ import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
@@ -84,7 +85,7 @@ class AOEAddressViewModel @Inject constructor(
         }
     }
 
-    private fun setGeocoding() = viewModelScope.launch {
+    private fun setGeocoding() = GlobalScope.launch {
         val formatStreet = street.trim().replace(" ", "+")
         val formatCity = city.trim().replace(" ", "+")
         retrofitRepository.setGeocoding("${number}+${formatStreet}+${formatCity}")

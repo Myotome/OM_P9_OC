@@ -23,19 +23,16 @@ class AddRepository @Inject constructor(
     private var rooms: Int? = null
     private var landSize: Double? = null
     private var soldDate: Long? = null
-    private val bedrooms = MutableLiveData<Int?>()
-    private val bathrooms = MutableLiveData<Int?>()
-    private val description = MutableLiveData<String?>()
-    private val realtor = MutableLiveData<String?>()
+    private var bedrooms: Int? = null
+    private var bathrooms: Int? = null
+    private var description: String? = null
+    private var realtor: String? = null
     private var dateEntry: Long? = null
     private var modifyDate: Long? = null
     private var lat: Double? = null
     private var lng: Double? = null
-
-    //    private val addressLiveData = MutableLiveData<Address>()
     private lateinit var address: Address
-    private val interestLiveData = MutableLiveData<Interest>()
-//    private var listPhoto = ArrayList<Photo>()
+    private lateinit var interest: Interest
 
     fun setPartOne(
         onSale: Boolean,
@@ -65,10 +62,10 @@ class AddRepository @Inject constructor(
         modificationDate: Long?
     ) {
         estateId = id
-        bedrooms.value = bedroom
-        bathrooms.value = bathroom
-        this.description.value = description
-        this.realtor.value = realtor
+        bedrooms = bedroom
+        bathrooms = bathroom
+        this.description = description
+        this.realtor = realtor
         dateEntry = entryDate
         modifyDate = modificationDate
     }
@@ -80,7 +77,7 @@ class AddRepository @Inject constructor(
     }
 
     fun setInterest(interest: Interest) {
-        interestLiveData.value = interest
+        this.interest = interest
     }
 
     suspend fun createEstateInDatabase(listPhoto: List<Photo>) {
@@ -90,12 +87,12 @@ class AddRepository @Inject constructor(
             surface = surface!!,
             room = rooms,
             landSize = landSize,
-            bedrooms = bedrooms.value,
-            bathrooms = bathrooms.value,
-            description = description.value,
-            realtor = realtor.value,
+            bedrooms = bedrooms,
+            bathrooms = bathrooms,
+            description = description,
+            realtor = realtor,
             address = address,
-            interest = interestLiveData.value!!,
+            interest = interest,
             listPhoto = listPhoto,
             entryDate = dateEntry!!,
             soldDate = soldDate,

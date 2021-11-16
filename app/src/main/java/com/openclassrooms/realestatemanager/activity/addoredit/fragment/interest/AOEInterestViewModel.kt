@@ -11,14 +11,11 @@ import com.openclassrooms.realestatemanager.model.Interest
 import com.openclassrooms.realestatemanager.repository.AddRepository
 import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -59,7 +56,7 @@ class AOEInterestViewModel @Inject constructor(
         null
     }
 
-    fun onSaveClick() = viewModelScope.launch {
+    fun onSaveClick() = GlobalScope.launch {
         val interest = withContext(Dispatchers.Default) {
             Interest(
                 school = school,
