@@ -5,7 +5,7 @@ import androidx.lifecycle.asLiveData
 import com.openclassrooms.realestatemanager.BuildConfig
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
-import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
+import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val roomRepo: RoomDatabaseRepository,
+    private val roomRepo: DataSourceRepository,
     coroutineDispatchers: CoroutineDispatchers
 ) :
     ViewModel() {
@@ -30,14 +30,14 @@ class DetailViewModel @Inject constructor(
     private fun map(estate: Estate): DetailViewState =
         DetailViewState(
             id = estate.id,
-            type = estate.estateType,
-            price = estate.price,
-            surface = estate.surface,
-            rooms = estate.room,
-            bedrooms = estate.bedrooms,
-            bathrooms = estate.bathrooms,
-            description = estate.description,
-            landSize = estate.landSize,
+            type = estate.primaryEstateData.estateType,
+            price = estate.primaryEstateData.price,
+            surface = estate.primaryEstateData.surface,
+            rooms = estate.primaryEstateData.rooms,
+            bedrooms = estate.secondaryEstateData.bedroom,
+            bathrooms = estate.secondaryEstateData.bathroom,
+            description = estate.secondaryEstateData.description,
+            landSize = estate.primaryEstateData.landSize,
             school = estate.interest.school,
             store = estate.interest.store,
             park = estate.interest.park,
@@ -48,11 +48,11 @@ class DetailViewModel @Inject constructor(
             nightlife = estate.interest.nightlife,
             photoList = estate.listPhoto,
             address = getAddressString(estate.address),
-            realtor = estate.realtor ?: "",
-            entryDate = Utils.getLongToString(estate.entryDate),
-            modificationDate = if (estate.modificationDate != null) Utils.getLongToString(estate.modificationDate) else "",
-            soldDate = if (estate.soldDate != null) Utils.getLongToString(estate.soldDate) else "",
-            onSale = estate.onSale,
+            realtor = estate.secondaryEstateData.realtor ?: "",
+            entryDate = Utils.getLongToString(estate.secondaryEstateData.entryDate!!),
+            modificationDate = if (estate.secondaryEstateData.modificationDate != null) Utils.getLongToString(estate.secondaryEstateData.modificationDate) else "",
+            soldDate = if (estate.primaryEstateData.soldDate != null) Utils.getLongToString(estate.primaryEstateData.soldDate) else "",
+            onSale = estate.primaryEstateData.onSale,
             formattedAddress = getFormattedAddress(estate.address, estate.lat, estate.lng)
 
         )

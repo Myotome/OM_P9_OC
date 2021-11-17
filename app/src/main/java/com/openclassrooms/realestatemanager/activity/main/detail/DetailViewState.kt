@@ -4,7 +4,7 @@ package com.openclassrooms.realestatemanager.activity.main.detail
 import com.openclassrooms.realestatemanager.model.Photo
 
 data class DetailViewState (
-    val id: Int,
+    val id: Long,
     val type: String,
     val price: Int,
     val surface: Double,

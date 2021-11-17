@@ -1,25 +1,23 @@
 package com.openclassrooms.realestatemanager.activity.main.list
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.model.Estate
-import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
+import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import javax.inject.Inject
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 @HiltViewModel
-class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseRepository) :
+class ListViewModel @Inject constructor(
+    private val roomRepo: DataSourceRepository
+    ) :
     ViewModel() {
 
     val isSearching = roomRepo.isSearching
 
-    fun setCurrentEstateId(estateId: Int) = roomRepo.setCurrentEstateById(estateId)
+    fun setCurrentEstateId(estateId: Long) = roomRepo.setCurrentEstateById(estateId)
 
     val uiStateLiveData = roomRepo.querySearchFlow.mapNotNull { estates ->
         estates?.map{estate -> map(estate) }
@@ -30,10 +28,10 @@ class ListViewModel @Inject constructor(private val roomRepo: RoomDatabaseReposi
 
         ListViewState(
             estate.id,
-            estate.estateType,
+            estate.primaryEstateData.estateType,
             estate.address.district,
-            estate.price,
-            estate.onSale,
+            estate.primaryEstateData.price,
+            estate.primaryEstateData.onSale,
             estate.listPhoto[0]
         )
 

@@ -7,15 +7,14 @@ import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RES
 import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.AddRepository
+import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.repository.RetrofitRepository
-import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -24,10 +23,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AOEAddressViewModel @Inject constructor(
-    private val addRepo: AddRepository,
-    roomRepo: RoomDatabaseRepository,
+//    private val addRepo: AddRepository,
+    private val dataSourceRepository: DataSourceRepository,
     private val retrofitRepository: RetrofitRepository,
-    coroutineDispatchers: CoroutineDispatchers
+    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditAddressChannel = Channel<AddEditAddressEvent>()
@@ -41,7 +40,7 @@ class AOEAddressViewModel @Inject constructor(
     var lat: Double = 0.0
     var lng: Double = 0.0
 
-    val currentEstate = roomRepo.getEstateById()?.mapNotNull { estate ->
+    val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
         map(estate)
     }?.asLiveData(coroutineDispatchers.ioDispatchers)
 
@@ -108,7 +107,7 @@ class AOEAddressViewModel @Inject constructor(
                 city
             )
         }
-        addRepo.setAddress(address, lat, lng)
+        dataSourceRepository.setAddress(address, lat, lng)
         addEditAddressChannel.send(AddEditAddressEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }
 

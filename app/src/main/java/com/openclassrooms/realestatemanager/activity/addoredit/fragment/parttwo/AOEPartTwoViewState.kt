@@ -1,7 +1,8 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.parttwo
 
 data class AOEPartTwoViewState(
-    val id: Int,
+    val id: Long,
+    val firestoreId: Long?,
     val bedroom: Int?,
     val bathroom: Int?,
     val description: String?,

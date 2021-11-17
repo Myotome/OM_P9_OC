@@ -107,7 +107,7 @@ class MapsFragment : Fragment() {
 
 
                 googleMap.setOnMarkerClickListener { marker ->
-                    viewModel.isCurrentEstate(marker.tag!!.toString().toInt())
+                    viewModel.isCurrentEstate(marker.tag!!.toString().toLong())
 
                     parentFragmentManager.commit {
                         replace<DetailFragment>(R.id.map)
