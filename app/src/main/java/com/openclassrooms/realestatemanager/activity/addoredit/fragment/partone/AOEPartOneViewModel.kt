@@ -6,21 +6,21 @@ import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.PrimaryEstateData
 import com.openclassrooms.realestatemanager.repository.AddRepository
-import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
+import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class AOEPartOneViewModel @Inject constructor(
-    private val addRepo: AddRepository,
-    roomRepo: RoomDatabaseRepository,
+//    private val addRepo: AddRepository,
+    private val dataSourceRepository: DataSourceRepository,
     private val coroutineDispatchers: CoroutineDispatchers
 ): ViewModel() {
 
@@ -36,18 +36,18 @@ class AOEPartOneViewModel @Inject constructor(
     var soldTime: Long? = null
 
 
-    val currentEstate = roomRepo.getEstateById()?.mapNotNull { estate ->
+    val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
         map(estate)
     }?.asLiveData(coroutineDispatchers.ioDispatchers)
 
     private fun map(estate: Estate?) : AOEPartOneViewState? = if (estate?.address != null){
         AOEPartOneViewState(
-            onSale = estate.onSale,
-            type = estate.estateType,
-            price = estate.price,
-            surface = estate.surface,
-            room = estate.room,
-            landSize = estate.landSize
+            onSale = estate.primaryEstateData.onSale,
+            type = estate.primaryEstateData.estateType,
+            price = estate.primaryEstateData.price,
+            surface = estate.primaryEstateData.surface,
+            room = estate.primaryEstateData.rooms,
+            landSize = estate.primaryEstateData.landSize
         )
     }else{
         null
@@ -76,10 +76,10 @@ class AOEPartOneViewModel @Inject constructor(
         }
     }
 
-    private fun createPartOne() = GlobalScope.launch {
+    private fun createPartOne() = GlobalScope.launch{
         Log.d(TAG, "createPartOne: is called")
         if(!onSale) soldTime = Utils.getLongFormatDate()
-        addRepo.setPartOne(onSale, type!!, price!!, surface!!, rooms, landsize, soldTime)
+        dataSourceRepository.setPartOne(PrimaryEstateData( onSale, type!!, price!!, surface!!, rooms, landsize, soldTime))
         addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
     }
 

@@ -3,7 +3,7 @@ package com.openclassrooms.realestatemanager.activity.main.list
 import com.openclassrooms.realestatemanager.model.Photo
 
 data class ListViewState(
-    val id: Int,
+    val id: Long,
     val type: String,
     val district: String,
     val price: Int,

@@ -1,31 +1,24 @@
 package com.openclassrooms.realestatemanager.activity.addoredit.fragment.interest
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Interest
-import com.openclassrooms.realestatemanager.repository.AddRepository
-import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
+import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class AOEInterestViewModel @Inject constructor(
-    private val addRepo: AddRepository,
-    roomRepo: RoomDatabaseRepository,
-    coroutineDispatchers: CoroutineDispatchers
+//    private val addRepo: AddRepository,
+    private val dataSourceRepository: DataSourceRepository,
+    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditInterestChannel = Channel<AddEditInterestEvent>()
@@ -41,7 +34,7 @@ class AOEInterestViewModel @Inject constructor(
     var nightlife = false
 
 
-    val currentEstate = roomRepo.getEstateById()?.mapNotNull { estate ->
+    val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
         map(estate)
     }?.asLiveData(coroutineDispatchers.ioDispatchers)
 
@@ -59,7 +52,7 @@ class AOEInterestViewModel @Inject constructor(
         null
     }
 
-    fun onSaveClick() = viewModelScope.launch {
+    fun onSaveClick() = GlobalScope.launch {
         val interest = withContext(Dispatchers.Default) {
             Interest(
                 school = school,
@@ -72,7 +65,7 @@ class AOEInterestViewModel @Inject constructor(
                 nightlife = nightlife
             )
         }
-        addRepo.setInterest(interest)
+        dataSourceRepository.setInterest(interest)
         addEditInterestChannel.send(AddEditInterestEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))
 
     }

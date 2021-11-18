@@ -16,13 +16,13 @@ interface EstateDAO {
     suspend fun updateEstate(estate: Estate)
 
     @Query("UPDATE estate_table SET lat=:lat, lng=:lng WHERE estate_id=:id")
-    suspend fun updateLatLngById(id: Int, lat: Double, lng: Double)
+    suspend fun updateLatLngById(id: Long, lat: Double, lng: Double)
 
     @Query("SELECT * FROM estate_table")
     fun getAllEstate(): Flow<List<Estate>?>
 
     @Query("SELECT * FROM estate_table WHERE estate_id =:id")
-    fun getCurrentEstate(id: Int): Flow<Estate>
+    fun getCurrentEstate(id: Long): Flow<Estate>
 
     @RawQuery(observedEntities = [Estate::class])
     fun getSearchEstate(query : SupportSQLiteQuery): Flow<List<Estate>?>

@@ -6,9 +6,9 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.repository.LocationRepository
 import com.openclassrooms.realestatemanager.repository.RetrofitRepository
-import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MapsViewModel @Inject constructor(
-    private val roomRepo: RoomDatabaseRepository,
+    private val roomRepo: DataSourceRepository,
     locationRepository: LocationRepository,
     private val retrofitRepository: RetrofitRepository
 ) :
@@ -69,7 +69,7 @@ class MapsViewModel @Inject constructor(
     @FlowPreview
     fun getViewState() = mediator
 
-    fun isCurrentEstate(estateId: Int) = roomRepo.setCurrentEstateById(estateId)
+    fun isCurrentEstate(estateId: Long) = roomRepo.setCurrentEstateById(estateId)
 
     fun clearSearch(){
         roomRepo.apply {

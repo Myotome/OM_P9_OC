@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
+import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
-import com.openclassrooms.realestatemanager.repository.RoomDatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class QuerySearchViewModel @Inject constructor(
-    private val roomRepo: RoomDatabaseRepository,
+    private val dataSourceRepo: DataSourceRepository,
     coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
@@ -255,7 +255,7 @@ class QuerySearchViewModel @Inject constructor(
 
     private fun setSearch(query: SimpleSQLiteQuery) {
 //        roomRepo.searchQuery(query)
-        roomRepo.setSearchQuery(query, true)
-//        roomRepo.isSearching(true)
+        dataSourceRepo.setSearchQuery(query, true)
+//        dataSourceRepo.isSearching(true)
     }
 }

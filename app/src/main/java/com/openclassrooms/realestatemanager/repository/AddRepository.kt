@@ -7,6 +7,7 @@ import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Interest
 import com.openclassrooms.realestatemanager.model.Photo
+import com.openclassrooms.realestatemanager.utils.Utils
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,26 +17,23 @@ class AddRepository @Inject constructor(
 ) {
 
     private var onSale = true
-    private var estateId: Int? = null
+    private var estateId: Long? = null
     private var type: String? = null
     private var price: Int? = null
     private var surface: Double? = null
     private var rooms: Int? = null
     private var landSize: Double? = null
     private var soldDate: Long? = null
-    private val bedrooms = MutableLiveData<Int?>()
-    private val bathrooms = MutableLiveData<Int?>()
-    private val description = MutableLiveData<String?>()
-    private val realtor = MutableLiveData<String?>()
+    private var bedrooms: Int? = null
+    private var bathrooms: Int? = null
+    private var description: String? = null
+    private var realtor: String? = null
     private var dateEntry: Long? = null
     private var modifyDate: Long? = null
     private var lat: Double? = null
     private var lng: Double? = null
-
-    //    private val addressLiveData = MutableLiveData<Address>()
     private lateinit var address: Address
-    private val interestLiveData = MutableLiveData<Interest>()
-//    private var listPhoto = ArrayList<Photo>()
+    private lateinit var interest: Interest
 
     fun setPartOne(
         onSale: Boolean,
@@ -56,7 +54,7 @@ class AddRepository @Inject constructor(
     }
 
     fun setPartTwo(
-        id: Int?,
+        id: Long?,
         bedroom: Int?,
         bathroom: Int?,
         description: String?,
@@ -65,10 +63,10 @@ class AddRepository @Inject constructor(
         modificationDate: Long?
     ) {
         estateId = id
-        bedrooms.value = bedroom
-        bathrooms.value = bathroom
-        this.description.value = description
-        this.realtor.value = realtor
+        bedrooms = bedroom
+        bathrooms = bathroom
+        this.description = description
+        this.realtor = realtor
         dateEntry = entryDate
         modifyDate = modificationDate
     }
@@ -80,38 +78,39 @@ class AddRepository @Inject constructor(
     }
 
     fun setInterest(interest: Interest) {
-        interestLiveData.value = interest
+        this.interest = interest
     }
 
-    suspend fun createEstateInDatabase(listPhoto: List<Photo>) {
-        val estate = Estate(
-            estateType = type!!,
-            price = price!!,
-            surface = surface!!,
-            room = rooms,
-            landSize = landSize,
-            bedrooms = bedrooms.value,
-            bathrooms = bathrooms.value,
-            description = description.value,
-            realtor = realtor.value,
-            address = address,
-            interest = interestLiveData.value!!,
-            listPhoto = listPhoto,
-            entryDate = dateEntry!!,
-            soldDate = soldDate,
-            modificationDate = modifyDate,
-            onSale = onSale,
-            lat = lat!!,
-            lng = lng!!
-
-        )
-        if (estateId != null) {
-            val updateEstate = estate.copy(id = estateId!!)
-            estateDAO.updateEstate(updateEstate)
-//            Log.d("DEBUGKEY", "UpdateEstateInDatabase: estate is update")
-        } else {
-            estateDAO.insertEstate(estate)
-//            Log.d("DEBUGKEY", "createEstateInDatabase: estate created")
-        }
-    }
+//    suspend fun createEstateInDatabase(listPhoto: List<Photo>) {
+//        val estate = Estate(
+//            estateType = type!!,
+//            price = price!!,
+//            surface = surface!!,
+//            room = rooms,
+//            landSize = landSize,
+//            bedrooms = bedrooms,
+//            bathrooms = bathrooms,
+//            description = description,
+//            realtor = realtor,
+//            address = address,
+//            interest = interest,
+//            listPhoto = listPhoto,
+//            entryDate = dateEntry!!,
+//            soldDate = soldDate,
+//            modificationDate = modifyDate,
+//            onSale = onSale,
+//            lat = lat!!,
+//            lng = lng!!
+//
+//        )
+//        if (estateId != null) {
+//            val updateEstate = estate.copy(id = estateId!!)
+//            estateDAO.updateEstate(updateEstate)
+////            Log.d("DEBUGKEY", "UpdateEstateInDatabase: estate is update")
+//        } else {
+//            estateId = Utils.getLongFormatDate()*12
+//            estateDAO.insertEstate(estate)
+////            Log.d("DEBUGKEY", "createEstateInDatabase: estate created")
+//        }
+//    }
 }
