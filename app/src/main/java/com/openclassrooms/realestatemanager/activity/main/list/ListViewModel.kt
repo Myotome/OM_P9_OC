@@ -11,15 +11,15 @@ import javax.inject.Inject
 @Suppress("EXPERIMENTAL_API_USAGE")
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val roomRepo: DataSourceRepository
+    private val dataSourceRepository: DataSourceRepository
     ) :
     ViewModel() {
 
-    val isSearching = roomRepo.isSearching
+    val isSearching = dataSourceRepository.isSearching
 
-    fun setCurrentEstateId(estateId: Long) = roomRepo.setCurrentEstateById(estateId)
+    fun setCurrentEstateId(estateId: Long) = dataSourceRepository.setCurrentEstateById(estateId)
 
-    val uiStateLiveData = roomRepo.querySearchFlow.mapNotNull { estates ->
+    val uiStateLiveData = dataSourceRepository.querySearchFlow.mapNotNull { estates ->
         estates?.map{estate -> map(estate) }
     }.asLiveData()
 
@@ -36,7 +36,7 @@ class ListViewModel @Inject constructor(
         )
 
     fun clearSearch() {
-        roomRepo.setSearchQuery(null)
+        dataSourceRepository.setSearchQuery(null)
     }
 
 
