@@ -27,7 +27,7 @@ class AOEPartTwoViewModel @Inject constructor(
     val addEditTwoEvent = addEditTwoChannel.receiveAsFlow()
 
     var estateId: Long? = null
-    private var firestoreId: Long? = null
+    var firestoreId: Long? = null
     var bedrooms: Int? = null
     var bathrooms: Int? = null
     var description: String? = null

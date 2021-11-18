@@ -17,7 +17,6 @@ class QuerySearchViewModel @Inject constructor(
 
     var onSale = true
     var sold = false
-//    var type: String? = null
     var penthouse = false
     var house = false
     var loft = false
@@ -96,12 +95,6 @@ class QuerySearchViewModel @Inject constructor(
         }
         if(typeIsUsed)queryString += ")"
 
-//        if (type != null) {
-//            queryString += if (condition) " AND" else " WHERE"; condition = true
-//            queryString += " estateType =?"
-//            args.add(type!!)
-//        }
-
         if (distric != null){
             queryString += if (condition) " AND" else " WHERE"; condition = true
             queryString += " district LIKE '%' || ? || '%'"
@@ -140,46 +133,46 @@ class QuerySearchViewModel @Inject constructor(
 
         if (roomMin != null && roomMax != null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " room BETWEEN ? AND ?"
+            queryString += " rooms BETWEEN ? AND ?"
             args.add(roomMin!!)
             args.add(roomMax!!)
         } else if (roomMin != null && roomMax == null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " room >=?"
+            queryString += " rooms >=?"
             args.add(roomMin!!)
         } else if (roomMin == null && roomMax != null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " room <=?"
+            queryString += " rooms <=?"
             args.add(roomMax!!)
         }
 
         if (bedroomMin != null && bedroomMax != null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " bedrooms BETWEEN ? AND ?"
+            queryString += " bedroom BETWEEN ? AND ?"
             args.add(bedroomMin!!)
             args.add(bedroomMax!!)
         } else if (bedroomMin != null && bedroomMax == null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " bedrooms >=?"
+            queryString += " bedroom >=?"
             args.add(bedroomMin!!)
         } else if (bedroomMin == null && bedroomMax != null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " bedrooms <=?"
+            queryString += " bedroom <=?"
             args.add(bedroomMax!!)
         }
 
         if (bathroomMin != null && bathroomMax != null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " bathrooms BETWEEN ? AND ?"
+            queryString += " bathroom BETWEEN ? AND ?"
             args.add(bathroomMin!!)
             args.add(bathroomMax!!)
         } else if (bathroomMin != null && bathroomMax == null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " bathrooms >=?"
+            queryString += " bathroom >=?"
             args.add(bathroomMin!!)
         } else if (bathroomMin == null && bathroomMax != null) {
             queryString += if (condition) " AND" else " WHERE"; condition = true
-            queryString += " bathrooms <=?"
+            queryString += " bathroom <=?"
             args.add(bathroomMax!!)
         }
 
@@ -241,7 +234,7 @@ class QuerySearchViewModel @Inject constructor(
 
         if(photoMin!=null){
             queryString += if (condition) " AND" else " WHERE"
-            queryString += " COUNT (listPhoto) >=?"
+            queryString +=" (LENGTH(listPhoto) - LENGTH(REPLACE(listPhoto, 'name', '---'))) >=?"
             args.add(photoMin!!)
         }
 
@@ -254,8 +247,6 @@ class QuerySearchViewModel @Inject constructor(
     }
 
     private fun setSearch(query: SimpleSQLiteQuery) {
-//        roomRepo.searchQuery(query)
         dataSourceRepo.setSearchQuery(query, true)
-//        dataSourceRepo.isSearching(true)
     }
 }

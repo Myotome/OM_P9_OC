@@ -38,6 +38,7 @@ class AOEPartTwoFragment : Fragment() {
                      etAddRealtor.setText(vs.realtor)
                      viewModel.estateId = vs.id
                      viewModel.entryDate = vs.dateEntry
+                     viewModel.firestoreId = vs.firestoreId
                  }
              }
 
