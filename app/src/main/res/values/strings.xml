@@ -65,6 +65,7 @@
     <string name="loft">Loft</string>
     <string name="apartment">Apartment</string>
     <string name="castle">Castle</string>
+    <string name="sync">Sync</string>
 
 
     <string-array name="type">

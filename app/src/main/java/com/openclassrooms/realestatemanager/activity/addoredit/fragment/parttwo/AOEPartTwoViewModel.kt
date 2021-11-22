@@ -60,7 +60,7 @@ class AOEPartTwoViewModel @Inject constructor(
         if (firestoreId == null) firestoreId = Utils.getLongFormatDate() * 3
         dataSourceRepository.setPartTwo(
             SecondaryEstateData(
-                firestoreId,
+                firestoreId!!,
                 bedrooms,
                 bathrooms,
                 description,
