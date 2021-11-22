@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AOEPhotoViewModel @Inject constructor(
-//    private val addRepo: AddRepository,
     private val dataSourceRepository: DataSourceRepository,
     private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {

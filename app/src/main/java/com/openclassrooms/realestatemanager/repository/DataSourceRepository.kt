@@ -4,13 +4,23 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.database.EstateDAO
+import com.openclassrooms.realestatemanager.database.stringToUri
 import com.openclassrooms.realestatemanager.model.*
+import com.openclassrooms.realestatemanager.utils.Utils
+import dagger.hilt.android.qualifiers.ApplicationContext
+import gun0912.tedimagepicker.util.ToastUtil.context
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.collections.ArrayList
 
 @Singleton
 class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO) {
@@ -50,7 +60,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     }
 
     /**
-     * Create or update estate
+     * Create or update estate from AOEActivity
      */
 
     private var id: Long? = null
@@ -105,8 +115,25 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     /**
      * update latlng if necessary
      */
-    suspend fun updateLatLngById(id: Long, lat: Double, lng: Double) {
-        estateDAO.updateLatLngById(id, lat, lng)
+    suspend fun updateLatLngById(id: Long, lat: Double, lng: Double, firestorId: Long, modDate: Long) {
+        estateDAO.updateLatLngById(id, lat, lng, modDate)
+        updateLatLngInFirestore(firestorId, lat, lng)
+    }
+
+    /**
+     * create estate from firebase sync
+     */
+
+    suspend fun createInRoomFromFirebase(estate: Estate){
+        estateDAO.insertEstate(estate)
+    }
+
+    /**
+     * update estate from firebase sync
+     */
+
+    suspend fun updateInRoomFromFirebase(estate : Estate){
+        estateDAO.updateEstate(estate)
     }
 
     /**
@@ -119,23 +146,55 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
 
     fun createEstateInFirestore(estate: Estate) {
         db.collection("RealEstatesManager").document(estate.secondaryEstateData.firebaseId.toString()).set(estate)
+            .addOnSuccessListener { Log.d(TAG, "createEstateInFirestore: succes") }
+            .addOnFailureListener { Log.d(TAG, "createEstateInFirestore: fail") }
+    }
+
+    fun updateLatLngInFirestore(firebaseId : Long, lat: Double, lng: Double){
+        db.collection("RealEstatesManager").document(firebaseId.toString()).update("lat", lat, "lng", lng)
+            .addOnSuccessListener { Log.d(TAG, "updateLatLngInFirestore: succes") }
+            .addOnFailureListener { Log.d(TAG, "updateLatLngInFirestore: fail") }
     }
 
     val getAllEstateFromFirestore: Flow<List<Estate>?> = callbackFlow {
+//        val estates = ArrayList<Estate>()
+        Log.d(TAG, "getEstatefromFirebase beginning: ")
         db.collection("RealEstatesManager")
             .addSnapshotListener { value, error ->
+                val estates = ArrayList<Estate>()
                 when {
-                    error != null -> Log.d(TAG,"getAllEstateFromFirestore: error : ${error.message}")
+                    error != null -> {
+                        Log.d(TAG, "getAllEstateFromFirestore: error : ${error.message}")
+                        close(error)
+                        return@addSnapshotListener
+                    }
                     value != null -> {
-                        val estates = ArrayList<Estate>()
+                        Log.d(TAG, "value not null begin: ")
                         for (doc in value) {
-                            estates.add(doc.toObject(Estate::class.java))
-                            trySend(estates)
+                            estates.add(doc.toObject())
+                            Log.d(TAG, "value not null for loop. Estate size: ${estates.size}")
                         }
-
                     }
                 }
+                trySend(estates).isSuccess
+
             }
+        awaitClose()
+//        Log.d(TAG, "getestatefromfirebase just before emit. Estate size : ${estates.size}: ")
+//        emit(estates)
+    }
+
+    /**
+     * ------------------------------------------------------------
+     * -------------------Storage Part-----------------------------
+     * ------------------------------------------------------------
+     */
+
+    private val storageRef = Firebase.storage.reference
+
+    fun uploadImageToStorage(name: String, uriPath: String){
+        val uuid = UUID.randomUUID().toString()
+        stringToUri(uriPath)?.let { storageRef.child("$uuid+$name").putFile(it)}
     }
 }
 

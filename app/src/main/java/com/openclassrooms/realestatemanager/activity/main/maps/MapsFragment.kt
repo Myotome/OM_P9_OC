@@ -55,7 +55,10 @@ class MapsFragment : Fragment() {
             }
         }
 
-        if(Utils.isInternetAvailable(requireContext())) viewModel.assertAllEstateHadLatLng()
+        if(Utils.isInternetAvailable(requireContext())) {
+            Log.d(TAG, "onCreateView: i'm here")
+            viewModel.assertAllEstateHadLatLng()
+        }
 
         return binding.root
     }

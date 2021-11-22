@@ -8,4 +8,6 @@ data class PrimaryEstateData(
     val rooms: Int?,
     val landSize: Double?,
     val soldDate: Long?
-)
+) {
+    constructor() : this(true, "", 0, 0.0, null, null, null)
+}

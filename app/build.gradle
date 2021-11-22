@@ -18,7 +18,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
-//        buildConfigField 'String', 'MAPS_API_KEY', MAPS_API_KEY
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+
+        //        buildConfigField 'String', 'MAPS_API_KEY', MAPS_API_KEY
 //        resValue 'string', 'MAPS_API_KEY', MAPS_API_KEY
     }
     buildTypes {
@@ -102,9 +108,10 @@ dependencies {
     //google service
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
-    //Firestore
+    //Firestore - firestorage
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"

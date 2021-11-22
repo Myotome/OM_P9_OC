@@ -14,6 +14,7 @@ import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_PREVIOUS
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddAddressBinding
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -51,7 +52,9 @@ class AOEAddressFragment : Fragment() {
             etAddStreet.addTextChangedListener { viewModel.street = (it.toString()) }
             etAddCity.addTextChangedListener { viewModel.city = (it.toString()) }
 
-            btAddressNext.setOnClickListener { viewModel.onSaveClick() }
+            btAddressNext.setOnClickListener {
+                if(Utils.isInternetAvailable(requireContext())) viewModel.internetAvailable = true
+                viewModel.onSaveClick() }
             btAddressBack.setOnClickListener {
                 (activity as AOEActivity).clickToRightOrLeft(ADD_EDIT_PREVIOUS_RESULT)
             }

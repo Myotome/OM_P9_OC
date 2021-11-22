@@ -9,6 +9,7 @@ import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.repository.RetrofitRepository
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -38,6 +39,7 @@ class AOEAddressViewModel @Inject constructor(
     var city: String = ""
     var lat: Double = 0.0
     var lng: Double = 0.0
+    var internetAvailable = false
 
     val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
         map(estate)
@@ -77,7 +79,7 @@ class AOEAddressViewModel @Inject constructor(
             }
 
             else -> {
-                if (lat == 0.0 && lng == 0.0) setGeocoding()
+                if (internetAvailable && lat == 0.0 && lng == 0.0) setGeocoding()
                 createNewAddress()
             }
         }
@@ -96,7 +98,7 @@ class AOEAddressViewModel @Inject constructor(
     }
 
     private fun createNewAddress() = viewModelScope.launch {
-        if (lat == 0.0 && lng == 0.0) getGeocoding()
+        if (internetAvailable && lat == 0.0 && lng == 0.0) getGeocoding()
         val address = withContext(Dispatchers.Default) {
             Address(
                 district,

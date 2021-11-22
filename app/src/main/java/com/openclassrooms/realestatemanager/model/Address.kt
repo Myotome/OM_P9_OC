@@ -6,4 +6,6 @@ data class Address(
     val complement: String? = "",
     val street: String,
     val city: String
-)
+) {
+    constructor() : this("", 0, null, "", "")
+}

@@ -12,11 +12,11 @@ interface EstateDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertEstate(estate: Estate)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.IGNORE)
     suspend fun updateEstate(estate: Estate)
 
-    @Query("UPDATE estate_table SET lat=:lat, lng=:lng WHERE estate_id=:id")
-    suspend fun updateLatLngById(id: Long, lat: Double, lng: Double)
+    @Query("UPDATE estate_table SET lat=:lat, lng=:lng, modificationDate=:modDate WHERE estate_id=:id")
+    suspend fun updateLatLngById(id: Long, lat: Double, lng: Double, modDate: Long)
 
     @Query("SELECT * FROM estate_table")
     fun getAllEstate(): Flow<List<Estate>?>
