@@ -14,6 +14,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,7 +28,7 @@ class AOEPartTwoViewModel @Inject constructor(
     val addEditTwoEvent = addEditTwoChannel.receiveAsFlow()
 
     var estateId: Long? = null
-    var firestoreId: Long? = null
+    var firestoreId: String? = null
     var bedrooms: Int? = null
     var bathrooms: Int? = null
     var description: String? = null
@@ -57,7 +58,7 @@ class AOEPartTwoViewModel @Inject constructor(
     fun onSaveClick() = GlobalScope.launch {
         if (entryDate == null) entryDate = Utils.getLongFormatDate() else modificationDate =
             Utils.getLongFormatDate()
-        if (firestoreId == null) firestoreId = Utils.getLongFormatDate() * 3
+        if (firestoreId == null) firestoreId = UUID.randomUUID().toString()
         dataSourceRepository.setPartTwo(
             SecondaryEstateData(
                 firestoreId!!,

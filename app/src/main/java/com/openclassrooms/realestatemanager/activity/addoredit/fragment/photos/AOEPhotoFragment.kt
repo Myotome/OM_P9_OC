@@ -139,7 +139,10 @@ class AOEPhotoFragment : Fragment() {
         builder.setView(input)
 
         builder.setPositiveButton("Ok") { _, _ ->
-            viewModel.addPhoto(input.text.toString(), uriString)
+            val isInternetAvailable = Utils.isInternetAvailable(requireContext())
+            viewModel.addPhoto(input.text.toString(), uriString, isInternetAvailable)
+//            Utils.isInternetAvailable(requireContext())
+//                ?.let { viewModel.saveOnStorage(input.text.toString(), uriString) }
         }
         builder.setNegativeButton("Cancel") { _, _ -> }
 
