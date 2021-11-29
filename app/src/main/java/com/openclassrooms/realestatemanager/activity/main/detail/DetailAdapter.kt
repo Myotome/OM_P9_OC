@@ -25,7 +25,7 @@ class DetailAdapter(private val listener: (Photo) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(photo: Photo, listener: (Photo) -> Unit) {
 
-            binding.ivContentList.load(Uri.parse(photo.image))
+            binding.ivContentList.load(Uri.parse(photo.storageUriString)?:Uri.parse(photo.image))
             binding.tvContentList.text = photo.name
 
         }

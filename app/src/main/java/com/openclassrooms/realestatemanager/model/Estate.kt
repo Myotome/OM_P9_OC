@@ -15,7 +15,7 @@ data class Estate(
 
 ){constructor() : this(0L,
     PrimaryEstateData(true,"",0,0.0,null, null, null),
-    SecondaryEstateData(0L,null,null,null,null,null,null),
+    SecondaryEstateData("",null,null,null,null,null,null),
     Address("",0,"", "",""),
     0.0,
     0.0,

@@ -37,7 +37,8 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
                     .toString()
             binding.tvContentType.text = estateViewState.type
 
-            binding.ivEstateContent.load(Uri.parse(estateViewState.photo.image))
+//            binding.ivEstateContent.load(Uri.parse(estateViewState.photo.image))
+            binding.ivEstateContent.load(estateViewState.uriStorage)
 
 //            Log.d(TAG, "bind: ${estateViewState.onSale}")
             if (!estateViewState.onSale) binding.tvContentSold.visibility =

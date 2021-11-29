@@ -95,10 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.main_menu_sync -> {
-                viewModel.synchroniseAllDatabase()
-                true
-            }
+
             R.id.main_menu_add -> {
                 viewModel.clearCurrentEstate()
                 startActivity(Intent(this, AOEActivity::class.java))

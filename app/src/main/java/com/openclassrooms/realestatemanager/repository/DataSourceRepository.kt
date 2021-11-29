@@ -1,6 +1,8 @@
 package com.openclassrooms.realestatemanager.repository
 
+import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.google.firebase.firestore.ktx.firestore
@@ -9,12 +11,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.database.EstateDAO
-import com.openclassrooms.realestatemanager.database.stringToUri
 import com.openclassrooms.realestatemanager.model.*
-import com.openclassrooms.realestatemanager.utils.Utils
-import dagger.hilt.android.qualifiers.ApplicationContext
-import gun0912.tedimagepicker.util.ToastUtil.context
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import java.util.*
@@ -101,7 +99,10 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
             listPhoto = listPhoto
         )
         if (id != null) {
-            val updateEstate = estate.copy(id = id!!, secondaryEstateData =( secondaryEstateData.copy(firebaseId = secondaryEstateData.firebaseId)))
+            val updateEstate = estate.copy(
+                id = id!!,
+                secondaryEstateData = (secondaryEstateData.copy(firebaseId = secondaryEstateData.firebaseId))
+            )
             estateDAO.updateEstate(updateEstate)
             createEstateInFirestore(updateEstate)
             Log.d("DEBUGKEY", "UpdateEstateInDatabase: estate is update")
@@ -115,7 +116,13 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     /**
      * update latlng if necessary
      */
-    suspend fun updateLatLngById(id: Long, lat: Double, lng: Double, firestorId: Long, modDate: Long) {
+    suspend fun updateLatLngById(
+        id: Long,
+        lat: Double,
+        lng: Double,
+        firestorId: String,
+        modDate: Long
+    ) {
         estateDAO.updateLatLngById(id, lat, lng, modDate)
         updateLatLngInFirestore(firestorId, lat, lng)
     }
@@ -124,7 +131,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
      * create estate from firebase sync
      */
 
-    suspend fun createInRoomFromFirebase(estate: Estate){
+    suspend fun createInRoomFromFirebase(estate: Estate) {
         estateDAO.insertEstate(estate)
     }
 
@@ -132,7 +139,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
      * update estate from firebase sync
      */
 
-    suspend fun updateInRoomFromFirebase(estate : Estate){
+    suspend fun updateInRoomFromFirebase(estate: Estate) {
         estateDAO.updateEstate(estate)
     }
 
@@ -145,19 +152,21 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     private val db = Firebase.firestore
 
     fun createEstateInFirestore(estate: Estate) {
-        db.collection("RealEstatesManager").document(estate.secondaryEstateData.firebaseId.toString()).set(estate)
+        db.collection("RealEstatesManager")
+            .document(estate.secondaryEstateData.firebaseId).set(estate)
             .addOnSuccessListener { Log.d(TAG, "createEstateInFirestore: succes") }
             .addOnFailureListener { Log.d(TAG, "createEstateInFirestore: fail") }
     }
 
-    fun updateLatLngInFirestore(firebaseId : Long, lat: Double, lng: Double){
-        db.collection("RealEstatesManager").document(firebaseId.toString()).update("lat", lat, "lng", lng)
-            .addOnSuccessListener { Log.d(TAG, "updateLatLngInFirestore: succes") }
+    private fun updateLatLngInFirestore(firebaseId: String, lat: Double, lng: Double) {
+        db.collection("RealEstatesManager").document(firebaseId)
+            .update("lat", lat, "lng", lng)
+            .addOnSuccessListener { Log.d(TAG, "updateLatLngInFirestore: success") }
             .addOnFailureListener { Log.d(TAG, "updateLatLngInFirestore: fail") }
     }
 
+    @ExperimentalCoroutinesApi
     val getAllEstateFromFirestore: Flow<List<Estate>?> = callbackFlow {
-//        val estates = ArrayList<Estate>()
         Log.d(TAG, "getEstatefromFirebase beginning: ")
         db.collection("RealEstatesManager")
             .addSnapshotListener { value, error ->
@@ -180,8 +189,6 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
 
             }
         awaitClose()
-//        Log.d(TAG, "getestatefromfirebase just before emit. Estate size : ${estates.size}: ")
-//        emit(estates)
     }
 
     /**
@@ -192,9 +199,44 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
 
     private val storageRef = Firebase.storage.reference
 
-    fun uploadImageToStorage(name: String, uriPath: String){
-        val uuid = UUID.randomUUID().toString()
-        stringToUri(uriPath)?.let { storageRef.child("$uuid+$name").putFile(it)}
+//    private val storageStateFlow = MutableStateFlow<String?>(null)
+//    val storageFlow = storageStateFlow.asSharedFlow().flatMapLatest { storageId ->
+//        getImageFromStorage(storageId!!)}
+
+
+    fun uploadImageToStorage(storageId: String, uri: Uri) = callbackFlow {
+//        var storageUri = ""
+        storageRef.child(storageId).putFile(uri)
+            .addOnFailureListener { addError ->Log.d(TAG, "uploadImageToStorage: Fail")
+            close(addError)}
+            .addOnSuccessListener { success ->
+//                storageStateFlow.tryEmit(storageId)
+                Log.d(TAG, "uploadImageToStorage:  success with path ${success.metadata?.path}")
+                storageRef.child(storageId).downloadUrl
+                    .addOnFailureListener { e -> close(e) }
+                    .addOnSuccessListener { uri ->
+                        Log.d(TAG, "uploadImageToStorage: uri : $uri")
+//                        storageUri = (uri.toString())
+                        trySend(uri.toString()).isSuccess
+                        close()
+                    }
+            }
+        Log.d(TAG, "uploadImageToStorage: last data : $uri")
+//        if(storageUri.isNotBlank())emit(storageUri)
+        awaitClose()
+    }
+
+    fun getImageFromStorage(storageId: String) : LiveData<String> {
+        val result = MutableLiveData<String>()
+        storageRef.child(storageId).downloadUrl
+            .addOnFailureListener { error ->
+                Log.d(TAG, "getImageFromStorage: fail $error")
+            }
+            .addOnSuccessListener { uri ->
+                Log.d(TAG, "getImageFromStorage: success")
+                result.value = uri.toString()
+            }
+        return result
     }
 }
 
