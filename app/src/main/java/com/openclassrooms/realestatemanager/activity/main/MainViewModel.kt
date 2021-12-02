@@ -80,7 +80,7 @@ class MainViewModel @Inject constructor(
         estate.listPhoto.forEach { photo ->
             if (photo.storageUriString == null || photo.storageUriString == "raté") {
                 var storageUri: String? = null
-                dataSourceRepository.uploadImageToStorage(
+                dataSourceRepository.setImageToStorage(
                     storageId = photo.storageId,
                     uri = Uri.parse(photo.image)
                 ).collect { storageUri = it }

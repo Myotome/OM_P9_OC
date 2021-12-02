@@ -5,13 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:background="@color/ocherDark">
 
     <ImageView
         android:id="@+id/iv_content_list"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:scaleType="centerCrop"
+        android:layout_margin="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,6 +28,8 @@
         android:gravity="center_horizontal"
         android:textColor="@color/ocherDark"
         android:background="#b3001500"
+        android:textSize="25sp"
+        android:layout_margin="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/iv_content_list"

@@ -12,14 +12,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import coil.load
 import com.google.android.material.snackbar.Snackbar
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.database.uriToString
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPhotoBinding
+import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
@@ -69,11 +73,9 @@ class AOEPhotoFragment : Fragment() {
 
     @FlowPreview
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = AOEPhotoAdapter {}
-        //TODO : add listener click to edit picture?
-
-        Log.d(TAG, "onViewCreated: photo fragment is call")
-
+        val adapter = AOEPhotoAdapter {
+            popupName(it, null)
+        }
         binding.rvAddPhoto.adapter = adapter
 
         viewModel.listPhotoLive().observe(viewLifecycleOwner) {
@@ -107,7 +109,7 @@ class AOEPhotoFragment : Fragment() {
                     uri,
                     Intent.FLAG_GRANT_READ_URI_PERMISSION
                 )
-                popupName(uriToString(uri))
+                popupName(uriString = uriToString(uri))
 
             }
 
@@ -123,30 +125,52 @@ class AOEPhotoFragment : Fragment() {
                 null
             )
 
-            popupName(path)
+            popupName(uriString = path)
         }
     }
 
 
-    private fun popupName(uriString: String) {
+    private fun popupName(photo: Photo? = null, uriString: String?) {
 
         val builder = AlertDialog.Builder(context)
-        builder.setMessage("What is that ?")
+        val factory = LayoutInflater.from(context)
+        val view = factory.inflate(R.layout.alert_dialog_photo, null)
+        val image = view.findViewById<ImageView>(R.id.iv_popup_photo)
+        image.load(photo?.storageUriString?:uriString)
+        builder.setView(view)
+        val inputText = view.findViewById<EditText>(R.id.et_popup_name)
+        builder.setCancelable(true)
+        builder.setPositiveButton("Ok"){_,_->
 
-        val input = EditText(context)
-        input.hint = "Enter name"
-        input.inputType = InputType.TYPE_CLASS_TEXT
-        builder.setView(input)
-
-        builder.setPositiveButton("Ok") { _, _ ->
-            val isInternetAvailable = Utils.isInternetAvailable(requireContext())
-            viewModel.addPhoto(input.text.toString(), uriString, isInternetAvailable)
-//            Utils.isInternetAvailable(requireContext())
-//                ?.let { viewModel.saveOnStorage(input.text.toString(), uriString) }
+            viewModel.addPhoto( internet = Utils.isInternetAvailable(requireContext()),
+                name = inputText.text.toString(),
+                path = uriString?:photo!!.image,
+                storagePhotoId = photo?.storageId)
         }
-        builder.setNegativeButton("Cancel") { _, _ -> }
-
+        builder.setNegativeButton("Cancel"){_,_->}
+        if(photo != null) {
+            builder.setNeutralButton("Remove") { _, _ ->
+                viewModel.removePhoto(photo)
+            }
+        }
         builder.show()
+
+
+//        val builder = AlertDialog.Builder(context)
+//        builder.setMessage("What is that ?")
+//
+//        val input = EditText(context)
+//        input.hint = "Enter name"
+//        input.inputType = InputType.TYPE_CLASS_TEXT
+//        builder.setView(input)
+//
+//        builder.setPositiveButton("Ok") { _, _ ->
+//            val isInternetAvailable = Utils.isInternetAvailable(requireContext())
+//            viewModel.addPhoto(input.text.toString(), uriString, isInternetAvailable)
+//        }
+//        builder.setNegativeButton("Cancel") { _, _ -> }
+//
+//        builder.show()
     }
 
     companion object {

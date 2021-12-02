@@ -66,6 +66,7 @@
     <string name="apartment">Apartment</string>
     <string name="castle">Castle</string>
     <string name="sync">Sync</string>
+    <string name="photo_name">Photo name</string>
 
 
     <string-array name="type">

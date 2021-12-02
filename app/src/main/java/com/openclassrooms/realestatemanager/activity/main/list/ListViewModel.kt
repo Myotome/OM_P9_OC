@@ -35,8 +35,6 @@ class ListViewModel @Inject constructor(
             estate.primaryEstateData.price,
             estate.primaryEstateData.onSale,
             estate.listPhoto[0],
-            Uri.parse(estate.listPhoto[0].storageUriString)
-//        null
         )
     }
 
