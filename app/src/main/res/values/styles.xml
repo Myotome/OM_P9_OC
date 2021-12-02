@@ -21,11 +21,19 @@
 
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
-
-
-
-
+        <item name="android:fontFamily">@font/tangerine_bold</item>
+        <item name="materialButtonStyle">@style/estate_button_style</item>
 
     </style>
+
+    <style name="estate_button_style" parent="Theme.MaterialComponents">
+        <item name="materialButtonStyle">@drawable/button_style</item>
+        <item name="android:textAlignment">center</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/ocherDark</item>
+        <item name="elevation">5dp</item>
+    </style>
+
 
 </resources>

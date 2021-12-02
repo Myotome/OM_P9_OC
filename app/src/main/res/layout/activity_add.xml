@@ -7,12 +7,12 @@
     android:background="#00561b"
     android:padding="20dp">
     
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tb_add_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        app:tabMode="fixed"
-        app:tabGravity="fill"/>
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tb_add_tabs"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?android:attr/actionBarSize"-->
+<!--        app:tabMode="fixed"-->
+<!--        app:tabGravity="fill"/>-->
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_add_pager"

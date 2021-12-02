@@ -41,7 +41,8 @@
         android:layout_margin="10dp"
         android:text="Clear search"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible"
+        android:background="@drawable/button_style"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

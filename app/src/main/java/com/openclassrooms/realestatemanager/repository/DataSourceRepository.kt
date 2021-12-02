@@ -199,44 +199,22 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
 
     private val storageRef = Firebase.storage.reference
 
-//    private val storageStateFlow = MutableStateFlow<String?>(null)
-//    val storageFlow = storageStateFlow.asSharedFlow().flatMapLatest { storageId ->
-//        getImageFromStorage(storageId!!)}
-
-
-    fun uploadImageToStorage(storageId: String, uri: Uri) = callbackFlow {
-//        var storageUri = ""
+    fun setImageToStorage(storageId: String, uri: Uri) = callbackFlow {
         storageRef.child(storageId).putFile(uri)
-            .addOnFailureListener { addError ->Log.d(TAG, "uploadImageToStorage: Fail")
-            close(addError)}
-            .addOnSuccessListener { success ->
-//                storageStateFlow.tryEmit(storageId)
-                Log.d(TAG, "uploadImageToStorage:  success with path ${success.metadata?.path}")
+            .addOnFailureListener { addError -> close(addError)}
+            .addOnSuccessListener {
                 storageRef.child(storageId).downloadUrl
                     .addOnFailureListener { e -> close(e) }
                     .addOnSuccessListener { uri ->
-                        Log.d(TAG, "uploadImageToStorage: uri : $uri")
-//                        storageUri = (uri.toString())
                         trySend(uri.toString()).isSuccess
                         close()
                     }
             }
-        Log.d(TAG, "uploadImageToStorage: last data : $uri")
-//        if(storageUri.isNotBlank())emit(storageUri)
         awaitClose()
     }
 
-    fun getImageFromStorage(storageId: String) : LiveData<String> {
-        val result = MutableLiveData<String>()
-        storageRef.child(storageId).downloadUrl
-            .addOnFailureListener { error ->
-                Log.d(TAG, "getImageFromStorage: fail $error")
-            }
-            .addOnSuccessListener { uri ->
-                Log.d(TAG, "getImageFromStorage: success")
-                result.value = uri.toString()
-            }
-        return result
+    fun deleteInStorage(storageId: String){
+        storageRef.child(storageId).delete()
     }
 }
 

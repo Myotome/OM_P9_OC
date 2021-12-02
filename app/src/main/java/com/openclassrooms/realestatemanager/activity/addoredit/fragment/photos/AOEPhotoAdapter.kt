@@ -29,9 +29,11 @@ class AOEPhotoAdapter(private val listener: (Photo) -> Unit) :
 
         fun bind(photo: Photo, listener: (Photo) -> Unit) {
 
-            binding.ivContentList.load(Uri.parse(photo.image))
+            binding.ivContentList.load(Uri.parse(photo.storageUriString?:photo.image))
 
             binding.tvContentList.text = photo.name
+
+            itemView.setOnClickListener { listener(photo) }
         }
 
     }

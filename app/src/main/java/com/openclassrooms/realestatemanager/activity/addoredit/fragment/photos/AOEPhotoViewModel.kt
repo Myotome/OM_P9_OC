@@ -10,10 +10,12 @@ import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -29,6 +31,7 @@ class AOEPhotoViewModel @Inject constructor(
     val addEditTwoEvent = addEditPhotoChannel.receiveAsFlow()
 
     private var listPhotoLiveData = MutableLiveData<MutableList<Photo>>()
+    private var photoListToDelete = ArrayList<Photo>()
 
     init {
         listPhotoLiveData.value = ArrayList()
@@ -50,20 +53,24 @@ class AOEPhotoViewModel @Inject constructor(
     }
 
     @FlowPreview
-    private fun mediatorCombine(listPhoto: MutableList<Photo>?, value: Estate?) {
+    private fun mediatorCombine(listPhoto: MutableList<Photo>?, value: Estate?, photoToDelete: Photo? = null) {
         val localList = ArrayList<Photo>()
+        photoToDelete?.let { photoListToDelete.add(it)}
         var id: Long? = null
         if (value?.listPhoto != null) {
             id = value.id
             for (estatePhoto in value.listPhoto) {
-                localList.add(estatePhoto)
+                if(!photoListToDelete.contains(estatePhoto)){
+                    localList.add(estatePhoto)
+                }
             }
         }
         if (listPhoto != null) {
             for (photo in listPhoto)
-                localList.add(photo)
+                if (!photoListToDelete.contains(photo))localList.add(photo)
         }
-        mediator.value = AOEPhotoViewState(id, localList)
+
+       mediator.value = AOEPhotoViewState(id, localList)
     }
 
     @FlowPreview
@@ -71,14 +78,20 @@ class AOEPhotoViewModel @Inject constructor(
         return mediator
     }
 
-    fun addPhoto(name: String, path: String, internet: Boolean) = viewModelScope.launch {
-        val storageId = UUID.randomUUID().toString()
-        if (internet) {
-            saveOnStorage(name, path, storageId)
-        } else {
-            listPhotoLiveData.value?.add(Photo(name, path, storageId, null))
-            listPhotoLiveData . value = listPhotoLiveData . value
+    fun addPhoto(internet: Boolean, name: String, path: String, storagePhotoId: String?) =
+        viewModelScope.launch {
+            val storageId = storagePhotoId ?: UUID.randomUUID().toString()
+            if (internet) {
+                saveOnStorage(name, path, storageId)
+            } else {
+                listPhotoLiveData.value?.add(Photo(name, path, storageId, null))
+                listPhotoLiveData.value = listPhotoLiveData.value
+            }
         }
+
+    fun removePhoto(photo: Photo) {
+        mediatorCombine(listPhotoLiveData.value, currentEstate?.value, photo)
+        dataSourceRepository.deleteInStorage(photo.storageId)
     }
 
     @FlowPreview
@@ -104,7 +117,7 @@ class AOEPhotoViewModel @Inject constructor(
     private suspend fun saveOnStorage(name: String, path: String, storageId: String) {
         val uri = Uri.parse(path)
         var storageUri: String? = null
-        dataSourceRepository.uploadImageToStorage(storageId, uri).collect {
+        dataSourceRepository.setImageToStorage(storageId, uri).collect {
             storageUri = it
         }
         Log.d(TAG, "saveOnStorage: storageRui ! $storageUri")

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.main.MainActivity"
-    android:id="@+id/cl_main">
+    android:id="@+id/cl_main"
+    android:background="@drawable/fond">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -19,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" />
+            android:background="@color/englishGreen30" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,15 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu"/>
-
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab_main"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="20dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"/>-->
+        app:menu="@menu/bottom_navigation_menu" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -47,8 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-<!--        <include layout="@layout/estate_list" />-->
     </FrameLayout>
 
 
