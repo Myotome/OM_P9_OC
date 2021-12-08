@@ -28,7 +28,7 @@ class LocationRepository @Inject constructor(
 
     fun getCurrentPosition(): LiveData<LatLng> {
         if (currentPosition.value == null) getDeviceLocation()
-//        Log.d("DEBUGKEY", "getCurrentPosition: current Position ${currentPosition.value}")
+        Log.d("DEBUGKEY", "getCurrentPosition: current Position ${currentPosition.value}")
         return currentPosition
     }
 

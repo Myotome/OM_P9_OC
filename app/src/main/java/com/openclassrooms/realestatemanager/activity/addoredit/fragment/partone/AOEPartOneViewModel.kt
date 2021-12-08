@@ -2,13 +2,12 @@ package com.openclassrooms.realestatemanager.activity.addoredit.fragment.partone
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.PrimaryEstateData
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -18,9 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AOEPartOneViewModel @Inject constructor(
-//    private val addRepo: AddRepository,
     private val dataSourceRepository: DataSourceRepository,
-    private val coroutineDispatchers: CoroutineDispatchers
+//    private val coroutineDispatchers: CoroutineDispatchers
 ): ViewModel() {
 
     private val addEditOneChannel = Channel<AddEditOneEvent>()
@@ -37,7 +35,7 @@ class AOEPartOneViewModel @Inject constructor(
 
     val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
         map(estate)
-    }?.asLiveData(coroutineDispatchers.ioDispatchers)
+    }?.asLiveData(Dispatchers.IO)
 
     private fun map(estate: Estate?) : AOEPartOneViewState? = if (estate?.address != null){
         AOEPartOneViewState(

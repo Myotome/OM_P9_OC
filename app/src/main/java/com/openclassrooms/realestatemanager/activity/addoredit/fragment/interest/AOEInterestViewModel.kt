@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.activity.addoredit.fragment.interes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RESULT
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Interest
@@ -18,7 +17,7 @@ import javax.inject.Inject
 class AOEInterestViewModel @Inject constructor(
 //    private val addRepo: AddRepository,
     private val dataSourceRepository: DataSourceRepository,
-    private val coroutineDispatchers: CoroutineDispatchers
+//    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditInterestChannel = Channel<AddEditInterestEvent>()
@@ -36,7 +35,7 @@ class AOEInterestViewModel @Inject constructor(
 
     val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
         map(estate)
-    }?.asLiveData(coroutineDispatchers.ioDispatchers)
+    }?.asLiveData(Dispatchers.IO)
 
     private fun map(estate: Estate?) : AOEInterestViewState? = if (estate?.address != null){
         AOEInterestViewState(school = estate.interest.school,

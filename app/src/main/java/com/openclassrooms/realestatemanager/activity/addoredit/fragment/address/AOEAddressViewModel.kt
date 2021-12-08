@@ -8,8 +8,6 @@ import com.openclassrooms.realestatemanager.model.Address
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.repository.RetrofitRepository
-import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
-import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,7 +24,7 @@ class AOEAddressViewModel @Inject constructor(
 //    private val addRepo: AddRepository,
     private val dataSourceRepository: DataSourceRepository,
     private val retrofitRepository: RetrofitRepository,
-    private val coroutineDispatchers: CoroutineDispatchers
+//    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditAddressChannel = Channel<AddEditAddressEvent>()
@@ -43,7 +41,7 @@ class AOEAddressViewModel @Inject constructor(
 
     val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
         map(estate)
-    }?.asLiveData(coroutineDispatchers.ioDispatchers)
+    }?.asLiveData(Dispatchers.IO)
 
     private fun map(estate: Estate?): AOEAddressViewState? = if (estate?.address != null) {
         AOEAddressViewState(

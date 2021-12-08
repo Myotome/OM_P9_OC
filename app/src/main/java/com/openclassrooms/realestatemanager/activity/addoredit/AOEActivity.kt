@@ -18,8 +18,8 @@ import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.A
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.activity.main.MainActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityAddBinding
-import com.openclassrooms.realestatemanager.utils.appPerms
-import com.openclassrooms.realestatemanager.utils.permissionNameForUser
+import com.openclassrooms.realestatemanager.utilsforinstrutest.appPerms
+import com.openclassrooms.realestatemanager.utilsforinstrutest.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
 
 const val ADD_EDIT_BACK_RESULT = 0

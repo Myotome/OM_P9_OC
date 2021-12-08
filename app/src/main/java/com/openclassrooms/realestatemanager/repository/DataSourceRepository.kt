@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.repository
 
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.google.firebase.firestore.ktx.firestore
@@ -154,7 +153,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     fun createEstateInFirestore(estate: Estate) {
         db.collection("RealEstatesManager")
             .document(estate.secondaryEstateData.firebaseId).set(estate)
-            .addOnSuccessListener { Log.d(TAG, "createEstateInFirestore: succes") }
+            .addOnSuccessListener { Log.d(TAG, "createEstateInFirestore: success") }
             .addOnFailureListener { Log.d(TAG, "createEstateInFirestore: fail") }
     }
 
@@ -201,7 +200,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
 
     fun setImageToStorage(storageId: String, uri: Uri) = callbackFlow {
         storageRef.child(storageId).putFile(uri)
-            .addOnFailureListener { addError -> close(addError)}
+            .addOnFailureListener { addError -> close(addError) }
             .addOnSuccessListener {
                 storageRef.child(storageId).downloadUrl
                     .addOnFailureListener { e -> close(e) }
@@ -213,7 +212,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
         awaitClose()
     }
 
-    fun deleteInStorage(storageId: String){
+    fun deleteInStorage(storageId: String) {
         storageRef.child(storageId).delete()
     }
 }

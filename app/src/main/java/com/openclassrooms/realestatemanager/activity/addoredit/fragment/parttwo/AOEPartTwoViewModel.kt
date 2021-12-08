@@ -6,9 +6,9 @@ import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_NEXT_RES
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.SecondaryEstateData
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
-import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.mapNotNull
@@ -19,9 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AOEPartTwoViewModel @Inject constructor(
-//    private val addRepo: AddRepository,
     private val dataSourceRepository: DataSourceRepository,
-    private val coroutineDispatchers: CoroutineDispatchers
+//    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditTwoChannel = Channel<AddEditTwoEvent>()
@@ -39,7 +38,7 @@ class AOEPartTwoViewModel @Inject constructor(
 
     val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
         map(estate)
-    }?.asLiveData(coroutineDispatchers.ioDispatchers)
+    }?.asLiveData(Dispatchers.IO)
 
     private fun map(estate: Estate?): AOEPartTwoViewState? = if (estate?.address != null) {
         AOEPartTwoViewState(

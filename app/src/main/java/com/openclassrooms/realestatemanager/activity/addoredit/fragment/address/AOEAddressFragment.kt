@@ -14,7 +14,7 @@ import com.openclassrooms.realestatemanager.activity.addoredit.ADD_EDIT_PREVIOUS
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddAddressBinding
-import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 

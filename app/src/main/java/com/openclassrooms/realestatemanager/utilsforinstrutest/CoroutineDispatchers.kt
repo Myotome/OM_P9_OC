@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.utils
+package com.openclassrooms.realestatemanager.utilsforinstrutest
 
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject

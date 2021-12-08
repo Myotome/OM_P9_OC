@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +23,7 @@ import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.database.uriToString
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPhotoBinding
 import com.openclassrooms.realestatemanager.model.Photo
-import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect

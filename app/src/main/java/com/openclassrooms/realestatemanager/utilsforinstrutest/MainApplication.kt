@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.utils
+package com.openclassrooms.realestatemanager.utilsforinstrutest
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

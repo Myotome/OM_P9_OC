@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
+import com.openclassrooms.realestatemanager.utilsforinstrutest.CoroutineDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
