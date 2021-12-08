@@ -1,18 +1,9 @@
-package com.openclassrooms.realestatemanager.utils;
+package com.openclassrooms.realestatemanager.utilsforinstrutest;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
-import android.net.wifi.WifiManager;
-import android.provider.Settings;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,14 +22,14 @@ public class Utils {
      * @param dollars
      * @return
      */
-    public static int convertDollarToEuro(int dollars){return (int) Math.round(dollars * 0.85226);}
+    public static double convertDollarToEuro(int dollars){return (double) Math.round(dollars * 0.85226);}
 
     /**
      * Convert euro to dollar
      * @param euro integer
      * @return dollar integer
      */
-    public static int convertEuroToDollar(int euro){return (int) Math.round(euro * 1.1733);}
+    public static double convertEuroToDollar(int euro){return (double) Math.round(euro * 1.1733);}
 
 
     /**

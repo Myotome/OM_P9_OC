@@ -8,8 +8,8 @@ import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.A
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utils.CoroutineDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
@@ -24,7 +24,7 @@ import kotlin.collections.ArrayList
 @HiltViewModel
 class AOEPhotoViewModel @Inject constructor(
     private val dataSourceRepository: DataSourceRepository,
-    private val coroutineDispatchers: CoroutineDispatchers
+//    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditPhotoChannel = Channel<AddEditPhotoEvent>()
@@ -38,17 +38,14 @@ class AOEPhotoViewModel @Inject constructor(
     }
 
     @FlowPreview
-    private var currentEstate: LiveData<Estate>? =
-        dataSourceRepository.getEstateById()?.asLiveData(coroutineDispatchers.ioDispatchers)
+    var currentEstate: LiveData<Estate>? =
+        dataSourceRepository.getEstateById()?.asLiveData(Dispatchers.IO)
 
     @FlowPreview
     private var mediator = MediatorLiveData<AOEPhotoViewState>().apply {
         addSource(listPhotoLiveData) { photo -> mediatorCombine(photo, currentEstate?.value) }
         if (currentEstate != null) addSource(currentEstate!!) { estate ->
-            mediatorCombine(
-                listPhotoLiveData.value,
-                estate
-            )
+            mediatorCombine(listPhotoLiveData.value, estate)
         }
     }
 

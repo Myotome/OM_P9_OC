@@ -19,7 +19,10 @@
         <item name="colorSecondaryVariant">@color/ocherDark</item>
         <item name="colorOnSecondary">@color/black</item>
 
+        <item name="android:textColor">@color/ocherDark</item>
+
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
 
         <item name="android:fontFamily">@font/tangerine_bold</item>
         <item name="materialButtonStyle">@style/estate_button_style</item>

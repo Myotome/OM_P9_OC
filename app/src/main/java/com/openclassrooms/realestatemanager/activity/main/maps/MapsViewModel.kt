@@ -11,7 +11,7 @@ import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.repository.LocationRepository
 import com.openclassrooms.realestatemanager.repository.RetrofitRepository
-import com.openclassrooms.realestatemanager.utils.Utils
+import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
@@ -19,18 +19,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MapsViewModel @Inject constructor(
-    private val roomRepo: DataSourceRepository,
+    private val dataSourceRepository: DataSourceRepository,
     locationRepository: LocationRepository,
     private val retrofitRepository: RetrofitRepository
 ) :
     ViewModel() {
 
     private val currentPosition = locationRepository.getCurrentPosition()
-    val isSearching = roomRepo.isSearching
+    val isSearching = dataSourceRepository.isSearching
 
     @FlowPreview
-//    private val estateLiveData = roomRepo.allProperty.asLiveData()
-    private val estateLiveData = roomRepo.querySearchFlow.asLiveData()
+    private val estateLiveData = dataSourceRepository.querySearchFlow.asLiveData()
 
     @FlowPreview
     private val mediator = MediatorLiveData<MapsPositionViewState>().apply {
@@ -50,7 +49,7 @@ class MapsViewModel @Inject constructor(
                 val modDate = Utils.getLongFormatDate()
                 delay(1000)
                 val geo = retrofitRepository.geocodingResponse.first().geometry.location
-                roomRepo.updateLatLngById(it.id, geo.lat, geo.lng, it.secondaryEstateData.firebaseId!!, modDate)
+                dataSourceRepository.updateLatLngById(it.id, geo.lat, geo.lng, it.secondaryEstateData.firebaseId!!, modDate)
             }
         }
     }
@@ -65,6 +64,7 @@ class MapsViewModel @Inject constructor(
             }
         }
         if (position != null) {
+            Log.d(TAG, "mediatorCombine: positioon : $position")
             mediator.value =
                 MapsPositionViewState(position.latitude, position.longitude, listViewState)
         }
@@ -73,11 +73,8 @@ class MapsViewModel @Inject constructor(
     @FlowPreview
     fun getViewState() = mediator
 
-    fun isCurrentEstate(estateId: Long) = roomRepo.setCurrentEstateById(estateId)
+    fun isCurrentEstate(estateId: Long) = dataSourceRepository.setCurrentEstateById(estateId)
 
-    fun clearSearch(){
-        roomRepo.apply {
-            setSearchQuery(null)
-        }
-    }
+    fun clearSearch() = dataSourceRepository.setSearchQuery(null)
+
 }

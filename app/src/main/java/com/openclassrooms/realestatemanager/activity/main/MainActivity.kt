@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -18,13 +17,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.addoredit.AOEActivity
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.activity.main.list.ListFragment
 import com.openclassrooms.realestatemanager.activity.main.maps.MapsFragment
 import com.openclassrooms.realestatemanager.activity.main.querysearch.QuerySearchFragment
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
-import com.openclassrooms.realestatemanager.utils.appPerms
-import com.openclassrooms.realestatemanager.utils.permissionNameForUser
+import com.openclassrooms.realestatemanager.utilsforinstrutest.appPerms
+import com.openclassrooms.realestatemanager.utilsforinstrutest.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
 
 

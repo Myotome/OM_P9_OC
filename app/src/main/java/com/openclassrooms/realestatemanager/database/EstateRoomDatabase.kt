@@ -1,16 +1,13 @@
 package com.openclassrooms.realestatemanager.database
 
 
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.openclassrooms.realestatemanager.di.ApplicationScope
 import com.openclassrooms.realestatemanager.model.*
-import com.openclassrooms.realestatemanager.utils.Utils
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 

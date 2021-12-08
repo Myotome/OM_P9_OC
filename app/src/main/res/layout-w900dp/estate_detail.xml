@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:tag="fragment_detail">
+    android:tag="fragment_detail"
+    android:background="@drawable/button_style">
 
     <TextView
         android:id="@+id/tv_detail_sold"
@@ -17,10 +18,12 @@
         android:textStyle="bold"
         android:visibility="gone"
         tools:visibility="visible"
+        android:textColor="@color/ocherDark"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/rv_detail_photo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/button_style"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_detail_photo"
@@ -38,8 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:textSize="50sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_detail_photo"
         tools:text="Penthous 7 rooms 200 m2" />
@@ -49,8 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textSize="20sp"
-        android:textStyle="italic"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_fast_description"
         tools:text="3 000 000 $" />
@@ -74,10 +75,12 @@
                 android:id="@+id/bt_detail_title_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="35sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/description" />
+                tools:text="@string/description"
+                android:background="@drawable/button_style"
+                android:textColor="@color/ocherDark"/>
 
             <TextView
                 android:id="@+id/tv_detail_description"
@@ -87,7 +90,10 @@
                 android:padding="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_detail_title_description"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/lorem/random"
+                android:fontFamily="@font/satisfy_regular"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="25sp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,7 +115,10 @@
             app:drawableStartCompat="@drawable/square"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/surface" />
+            tools:text="@string/surface"
+            android:fontFamily="@font/satisfy_regular"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/tv_detail_rooms"
@@ -121,7 +130,10 @@
             app:drawableStartCompat="@drawable/rooms"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_surface"
-            tools:text="@string/rooms" />
+            tools:text="@string/rooms"
+            android:fontFamily="@font/satisfy_regular"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/tv_detail_land_size"
@@ -133,7 +145,10 @@
 
             app:drawableStartCompat="@drawable/landsize"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_rooms" />
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_rooms"
+            android:fontFamily="@font/satisfy_regular"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/tv_detail_bathrooms"
@@ -145,7 +160,10 @@
 
             app:drawableStartCompat="@drawable/bathrooms"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size" />
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size"
+            android:fontFamily="@font/satisfy_regular"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/tv_detail_bedrooms"
@@ -157,7 +175,10 @@
 
             app:drawableStartCompat="@drawable/bedrooms"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_bathrooms" />
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_bathrooms"
+            android:fontFamily="@font/satisfy_regular"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"/>
 
         <TableLayout
             android:id="@+id/tl_detail_interest"

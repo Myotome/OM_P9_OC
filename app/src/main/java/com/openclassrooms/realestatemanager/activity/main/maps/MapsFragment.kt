@@ -19,8 +19,8 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.activity.main.detail.DetailFragment
 import com.openclassrooms.realestatemanager.databinding.FragmentMapsBinding
-import com.openclassrooms.realestatemanager.utils.Utils
-import com.openclassrooms.realestatemanager.utils.permissionNameForUser
+import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utilsforinstrutest.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 
