@@ -1,8 +1,8 @@
 package com.openclassrooms.realestatemanager
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.interest.AOEInterestViewModel
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.interest.AOEInterestViewState
+import com.openclassrooms.realestatemanager.ui.addoredit.fragment.interest.AOEInterestViewModel
+import com.openclassrooms.realestatemanager.ui.addoredit.fragment.interest.AOEInterestViewState
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utilsfortest.generateOneEstateTest
 import io.mockk.every

@@ -1,14 +1,12 @@
 package com.openclassrooms.realestatemanager.repository
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.database.EstateDAO
 import com.openclassrooms.realestatemanager.model.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,6 +32,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     val isSearching = MutableLiveData(false)
 
     private val querySearchMutableStateFlow = MutableStateFlow<SimpleSQLiteQuery?>(null)
+    @ExperimentalCoroutinesApi
     val querySearchFlow = querySearchMutableStateFlow.asSharedFlow().flatMapLatest { query ->
         if (query != null) estateDAO.getSearchEstate(query) else estateDAO.getAllEstate()
     }
@@ -104,11 +103,11 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
             )
             estateDAO.updateEstate(updateEstate)
             createEstateInFirestore(updateEstate)
-            Log.d("DEBUGKEY", "UpdateEstateInDatabase: estate is update")
+
         } else {
             estateDAO.insertEstate(estate)
             createEstateInFirestore(estate)
-            Log.d("DEBUGKEY", "createEstateInDatabase: estate created")
+
         }
     }
 
@@ -127,7 +126,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     }
 
     /**
-     * create estate from firebase sync
+     * create estate from firebase synchronisation
      */
 
     suspend fun createInRoomFromFirebase(estate: Estate) {
@@ -135,7 +134,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     }
 
     /**
-     * update estate from firebase sync
+     * update estate from firebase synchronisation
      */
 
     suspend fun updateInRoomFromFirebase(estate: Estate) {
@@ -153,39 +152,31 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     fun createEstateInFirestore(estate: Estate) {
         db.collection("RealEstatesManager")
             .document(estate.secondaryEstateData.firebaseId).set(estate)
-            .addOnSuccessListener { Log.d(TAG, "createEstateInFirestore: success") }
-            .addOnFailureListener { Log.d(TAG, "createEstateInFirestore: fail") }
     }
 
     private fun updateLatLngInFirestore(firebaseId: String, lat: Double, lng: Double) {
         db.collection("RealEstatesManager").document(firebaseId)
             .update("lat", lat, "lng", lng)
-            .addOnSuccessListener { Log.d(TAG, "updateLatLngInFirestore: success") }
-            .addOnFailureListener { Log.d(TAG, "updateLatLngInFirestore: fail") }
     }
 
     @ExperimentalCoroutinesApi
     val getAllEstateFromFirestore: Flow<List<Estate>?> = callbackFlow {
-        Log.d(TAG, "getEstatefromFirebase beginning: ")
+
         db.collection("RealEstatesManager")
             .addSnapshotListener { value, error ->
                 val estates = ArrayList<Estate>()
                 when {
                     error != null -> {
-                        Log.d(TAG, "getAllEstateFromFirestore: error : ${error.message}")
                         close(error)
                         return@addSnapshotListener
                     }
                     value != null -> {
-                        Log.d(TAG, "value not null begin: ")
                         for (doc in value) {
                             estates.add(doc.toObject())
-                            Log.d(TAG, "value not null for loop. Estate size: ${estates.size}")
                         }
                     }
                 }
                 trySend(estates).isSuccess
-
             }
         awaitClose()
     }

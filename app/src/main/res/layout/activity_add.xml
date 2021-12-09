@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#00561b"
-    android:padding="20dp">
+    android:background="@drawable/background_style"
+    android:padding="5dp">
     
 <!--    <com.google.android.material.tabs.TabLayout-->
 <!--        android:id="@+id/tb_add_tabs"-->

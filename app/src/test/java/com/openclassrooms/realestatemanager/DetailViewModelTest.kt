@@ -1,8 +1,8 @@
 package com.openclassrooms.realestatemanager
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.openclassrooms.realestatemanager.activity.main.detail.DetailViewModel
-import com.openclassrooms.realestatemanager.activity.main.detail.DetailViewState
+import com.openclassrooms.realestatemanager.ui.main.detail.DetailViewModel
+import com.openclassrooms.realestatemanager.ui.main.detail.DetailViewState
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils

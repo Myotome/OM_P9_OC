@@ -17,8 +17,8 @@ class InternetConnectionTest {
 //    private lateinit var shadowOfActiveNetworkInfo : shadowOf
 
     val connectivityManager = getApplicationContext<Context>().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-    val networkCapabilities = ShadowNetworkCapabilities.newInstance()
+//
+//    val networkCapabilities = ShadowNetworkCapabilities.newInstance()
 
     @Test
     fun internetIsAvailable() {

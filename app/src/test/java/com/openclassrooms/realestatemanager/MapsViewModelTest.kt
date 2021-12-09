@@ -2,9 +2,9 @@ package com.openclassrooms.realestatemanager
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
-import com.openclassrooms.realestatemanager.activity.main.maps.MapsEstateViewState
-import com.openclassrooms.realestatemanager.activity.main.maps.MapsPositionViewState
-import com.openclassrooms.realestatemanager.activity.main.maps.MapsViewModel
+import com.openclassrooms.realestatemanager.ui.main.maps.MapsEstateViewState
+import com.openclassrooms.realestatemanager.ui.main.maps.MapsPositionViewState
+import com.openclassrooms.realestatemanager.ui.main.maps.MapsViewModel
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.repository.LocationRepository
 import com.openclassrooms.realestatemanager.repository.RetrofitRepository

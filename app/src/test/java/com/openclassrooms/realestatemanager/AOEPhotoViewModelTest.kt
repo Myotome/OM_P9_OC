@@ -1,10 +1,8 @@
 package com.openclassrooms.realestatemanager
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoViewModel
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.photos.AOEPhotoViewState
+import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoViewModel
+import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoViewState
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utilsfortest.TestCoroutineRule
@@ -13,12 +11,9 @@ import com.openclassrooms.realestatemanager.utilsfortest.getOrAwaitValue
 import com.openclassrooms.realestatemanager.utilsfortest.observeForTesting
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.spyk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule

@@ -5,9 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
     android:padding="10dp"
-    tools:context=".activity.addoredit.fragment.partone.AOEPartOneFragment">
+    tools:context=".ui.addoredit.fragment.partone.AOEPartOneFragment">
 
     <Switch
         android:id="@+id/sw_one_sale"
@@ -16,11 +15,13 @@
         android:checked="true"
         android:switchPadding="15dp"
         android:text="@string/on_sale"
-        android:textSize="15sp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@id/tv_add_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/button_style"
+        android:padding="10dp"/>
 
     <TextView
         android:id="@+id/tv_add_type"
@@ -40,6 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:spinnerMode="dialog"
         app:layout_constraintBottom_toTopOf="@id/tv_add_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_add_type"

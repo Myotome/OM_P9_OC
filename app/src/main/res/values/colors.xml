@@ -10,10 +10,26 @@
     <color name="englishGreenLight">#416345</color>
     <color name="englishGreenDark">#001500</color>
 
+    <color name="purple">#56003b</color>
+
     <color name="englishGreen50">#8000561b</color>
     <color name="englishGreen30">#4d00561b</color>
 
     <color name="ocher">#fff196</color>
     <color name="ocherLight">#ffffc8</color>
     <color name="ocherDark">#cabf67</color>
+
+    <color name="app_green">#43a047</color>
+    <color name="app_green_light">#76d275</color>
+    <color name="app_green_dark">#00701a</color>
+
+    <color name="app_blue">#e1f5fe</color>
+    <color name="app_blue_light">#ffffff</color>
+    <color name="app_blue_dark">#AFC2CB</color>
+
+    <color name="app_pink">#ffebe2</color>
+    <color name="app_pink_light">#ffffff</color>
+    <color name="app_pink_dark">#ccb9b0</color>
+
+
 </resources>

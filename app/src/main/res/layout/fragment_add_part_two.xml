@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:padding="10dp"
-    tools:context=".activity.addoredit.fragment.partone.AOEPartOneFragment">
+    tools:context=".ui.addoredit.fragment.partone.AOEPartOneFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_bedrooms"
