@@ -1,8 +1,8 @@
 package com.openclassrooms.realestatemanager
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.AOEAddressViewModel
-import com.openclassrooms.realestatemanager.activity.addoredit.fragment.address.AOEAddressViewState
+import com.openclassrooms.realestatemanager.ui.addoredit.fragment.address.AOEAddressViewModel
+import com.openclassrooms.realestatemanager.ui.addoredit.fragment.address.AOEAddressViewState
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.repository.RetrofitRepository
 import com.openclassrooms.realestatemanager.utilsfortest.generateOneEstateTest

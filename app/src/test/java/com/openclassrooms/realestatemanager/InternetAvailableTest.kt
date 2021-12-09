@@ -26,17 +26,17 @@ class InternetAvailableTest {
     private lateinit var connectivityManager : ConnectivityManager
     private lateinit var shadowOfActiveNetworkInfo : ShadowNetworkInfo
     private val context = ApplicationProvider.getApplicationContext<Context>()
-    private lateinit var typeMobile : ConnectivityManager
-    private lateinit var shadowTypeMobile : ShadowConnectivityManager
-    private lateinit var typeWifi : ShadowNetworkInfo
+//    private lateinit var typeMobile : ConnectivityManager
+//    private lateinit var shadowTypeMobile : ShadowConnectivityManager
+//    private lateinit var typeWifi : ShadowNetworkInfo
 
     @Before
     fun setUp(){
         connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         shadowOfActiveNetworkInfo = shadowOf(connectivityManager.activeNetworkInfo)
-        typeMobile =  context.getSystemService(Context.WIFI_SERVICE) as ConnectivityManager
-        shadowTypeMobile = shadowOf(typeMobile)
-        typeWifi = shadowOf(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI))
+//        typeMobile =  context.getSystemService(Context.WIFI_SERVICE) as ConnectivityManager
+//        shadowTypeMobile = shadowOf(typeMobile)
+//        typeWifi = shadowOf(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI))
     }
 
     @Test

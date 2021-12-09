@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/englishGreenDark"
     android:padding="10dp"
     android:tag="fragment_detail">
 
@@ -48,8 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:textColor="@color/ocherDark"
-                android:textSize="40sp"
+                android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_detail_photo"
                 tools:text="Penthouse 7 rooms 200 m2" />
@@ -59,8 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:textColor="@color/ocherDark"
-                android:textSize="35sp"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_fast_description"
                 tools:text="3 000 000 $" />
@@ -79,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
-                    android:text="Show detail"
+                    android:text="@string/show_detail"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -105,32 +102,26 @@
                             android:id="@+id/tv_detail_surface"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="25sp"
+                            android:textSize="15sp"
                             app:drawableStartCompat="@drawable/square"
                             app:layout_constraintEnd_toStartOf="@id/tv_detail_rooms"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="@string/surface" />
-                    </TableRow>
+                            tools:text="@string/surface"
+                            android:layout_marginEnd="5dp"/>
 
-                    <TableRow
-                        android:gravity="center"
-                        android:padding="10dp">
 
                         <TextView
                             android:id="@+id/tv_detail_rooms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="25sp"
+                            android:textSize="15sp"
                             app:drawableStartCompat="@drawable/ic_outline_view_quilt_24"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tv_detail_surface"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="@string/rooms" />
+                            tools:text="@string/rooms"
+                            android:layout_marginStart="5dp"/>
 
                     </TableRow>
 
@@ -142,14 +133,12 @@
                             android:id="@+id/tv_detail_land_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:text="@string/landsize"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="25sp"
+                            android:textSize="15sp"
                             app:drawableStartCompat="@drawable/landsize"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_detail_rooms" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_detail_rooms"/>
                     </TableRow>
 
                     <TableRow
@@ -160,32 +149,26 @@
                             android:id="@+id/tv_detail_bathrooms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:text="@string/bathrooms"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="25sp"
+                            android:textSize="15sp"
                             app:drawableStartCompat="@drawable/ic_baseline_bathtub_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/tv_detail_bedrooms"
-                            app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size" />
-                    </TableRow>
+                            app:layout_constraintEnd_toStartOf="@id/tv_detail_bedrooms"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size"
+                            android:layout_marginEnd="5dp"/>
 
-                    <TableRow
-                        android:gravity="center"
-                        android:padding="10dp">
 
                         <TextView
                             android:id="@+id/tv_detail_bedrooms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:text="@string/bedrooms"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="25sp"
+                            android:textSize="15sp"
                             app:drawableStartCompat="@drawable/ic_baseline_bed_24"
-                            app:layout_constraintEnd_toStartOf="@id/tv_detail_bathrooms"
-                            app:layout_constraintStart_toStartOf="@id/tv_detail_surface"
-                            app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size" />
+                            app:layout_constraintStart_toEndOf="@id/tv_detail_bathrooms"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_detail_land_size"
+                            android:layout_marginStart="5dp"/>
                     </TableRow>
 
                 </TableLayout>
@@ -195,7 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
-                    android:text="@string/description"
+                    android:text="@string/descriptions"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tl_detail_detail" />
 
@@ -204,10 +187,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:fontFamily="@font/satisfy_regular"
                     android:padding="5dp"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bt_detail_title_description"
@@ -239,40 +220,34 @@
                             android:id="@+id/tv_detail_school"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:padding="5dp"
                             android:text="@string/school"
-                            android:textColor="@android:color/darker_gray"
                             android:visibility="gone"
                             app:drawableStartCompat="@drawable/baseline_school_24"
                             tools:visibility="visible"
-                            android:textSize="20sp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:id="@+id/tv_detail_store"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:padding="5dp"
                             android:text="@string/store"
-                            android:textColor="@android:color/darker_gray"
                             android:visibility="gone"
                             app:drawableStartCompat="@drawable/baseline_storefront_24"
                             tools:visibility="visible"
-                            android:textSize="20sp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:id="@+id/tv_detail_park"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:padding="5dp"
                             android:text="@string/park"
-                            android:textColor="@android:color/darker_gray"
                             android:visibility="gone"
                             app:drawableStartCompat="@drawable/baseline_park_24"
                             tools:visibility="visible"
-                            android:textSize="20sp"/>
+                            android:textSize="15sp"/>
                     </TableRow>
 
                     <TableRow>
@@ -281,40 +256,34 @@
                             android:id="@+id/tv_detail_restaurant"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:padding="5dp"
                             android:text="@string/restaurant"
-                            android:textColor="@android:color/darker_gray"
                             android:visibility="gone"
                             app:drawableStartCompat="@drawable/baseline_restaurant_24"
                             tools:visibility="visible"
-                            android:textSize="20sp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:id="@+id/tv_detail_movie"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:padding="5dp"
                             android:text="@string/movie_theatre"
-                            android:textColor="@android:color/darker_gray"
                             android:visibility="gone"
                             app:drawableStartCompat="@drawable/baseline_theaters_24"
                             tools:visibility="visible"
-                            android:textSize="20sp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:id="@+id/tv_detail_theatre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:padding="5dp"
                             android:text="@string/theatre"
-                            android:textColor="@android:color/darker_gray"
                             android:visibility="gone"
                             app:drawableStartCompat="@drawable/baseline_theater_comedy_24"
                             tools:visibility="visible"
-                            android:textSize="20sp"/>
+                            android:textSize="15sp"/>
 
                     </TableRow>
 
@@ -324,27 +293,23 @@
                             android:id="@+id/tv_detail_subway"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:padding="5dp"
                             android:text="@string/subway"
-                            android:textColor="@android:color/darker_gray"
                             android:visibility="gone"
                             app:drawableStartCompat="@drawable/baseline_directions_subway_24"
                             tools:visibility="visible"
-                            android:textSize="20sp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:id="@+id/tv_detail_nightlife"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/satisfy_regular"
                             android:padding="5dp"
                             android:text="@string/nightlife"
-                            android:textColor="@android:color/darker_gray"
                             android:visibility="gone"
                             app:drawableStartCompat="@drawable/baseline_nightlife_24"
                             tools:visibility="visible"
-                            android:textSize="20sp"/>
+                            android:textSize="15sp"/>
                     </TableRow>
 
                 </TableLayout>
@@ -354,7 +319,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
-                    android:text="Map"
+                    android:text="@string/map"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tl_detail_interest" />
@@ -374,9 +339,7 @@
                         android:id="@+id/tv_detail_map_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/satisfy_regular"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/iv_detail_map"
                         app:layout_constraintStart_toStartOf="parent"
@@ -398,7 +361,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
-                    android:text="Information"
+                    android:text="@string/information"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cl_detail_map" />
@@ -416,8 +379,6 @@
                         android:id="@+id/tv_detail_realtor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/satisfy_regular"
-                        android:textColor="@android:color/darker_gray"
                         android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -427,8 +388,6 @@
                         android:id="@+id/tv_detail_entry_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/satisfy_regular"
-                        android:textColor="@android:color/darker_gray"
                         app:layout_constraintStart_toStartOf="parent"
                         android:textSize="15sp"
                         app:layout_constraintTop_toBottomOf="@id/tv_detail_realtor"
@@ -438,8 +397,6 @@
                         android:id="@+id/tv_detail_mod_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/satisfy_regular"
-                        android:textColor="@android:color/darker_gray"
                         android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_detail_entry_date"
@@ -451,8 +408,6 @@
                         android:id="@+id/tv_detail_sold_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/satisfy_regular"
-                        android:textColor="@android:color/darker_gray"
                         android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_detail_mod_date"

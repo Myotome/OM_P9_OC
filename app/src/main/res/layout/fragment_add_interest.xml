@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.addoredit.fragment.interest.AOEInterestFragment">
+    tools:context=".ui.addoredit.fragment.interest.AOEInterestFragment">
 
     <TextView
         android:id="@+id/tv_interest_title"

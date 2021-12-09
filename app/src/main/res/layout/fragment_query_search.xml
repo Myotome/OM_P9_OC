@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:tag="fragment_query"
-    tools:context=".activity.main.querysearch.QuerySearchFragment">
+    tools:context=".ui.main.querysearch.QuerySearchFragment"
+    android:padding="5dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,9 +27,11 @@
                 android:layout_marginStart="30dp"
                 android:checked="true"
                 android:text="@string/sale"
+                android:gravity="center"
                 app:layout_constraintEnd_toStartOf="@id/cb_search_sold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/button_style"/>
 
             <CheckBox
                 android:id="@+id/cb_search_sold"
@@ -37,6 +40,8 @@
                 android:layout_marginEnd="30dp"
                 android:checked="false"
                 android:text="@string/sold"
+                android:gravity="center"
+                android:background="@drawable/button_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cb_search_on_sale"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +53,7 @@
                 android:text="@string/type"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cb_search_on_sale" />
+                app:layout_constraintTop_toBottomOf="@id/cb_search_on_sale"/>
 
             <TableLayout
                 android:id="@+id/tl_query_type"
@@ -91,21 +96,10 @@
                     <CheckBox
                         android:id="@+id/cb_query_mansion"
                         android:layout_margin="5dp"
-                        android:text="Mansion" />
+                        android:text="@string/mansion" />
                 </TableRow>
 
             </TableLayout>
-
-            <!--            <Spinner-->
-            <!--                android:id="@+id/sp_search_type"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:visibility="gone"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@id/bt_search_type"-->
-            <!--                tools:text="Penthouse" />-->
-
 
             <Button
                 android:id="@+id/bt_search_district"
@@ -141,7 +135,7 @@
                 android:text="@string/price"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_query_district" />
+                app:layout_constraintTop_toBottomOf="@id/til_query_district"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_search_price"
@@ -199,7 +193,7 @@
                 android:text="@string/surface"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_search_price" />
+                app:layout_constraintTop_toBottomOf="@id/cl_search_price"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_search_surface"
@@ -256,7 +250,7 @@
                 android:text="@string/rooms"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_search_surface" />
+                app:layout_constraintTop_toBottomOf="@id/cl_search_surface"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_search_room"
@@ -314,7 +308,7 @@
                 android:text="@string/bedrooms"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_search_room" />
+                app:layout_constraintTop_toBottomOf="@id/cl_search_room"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_search_bedroom"

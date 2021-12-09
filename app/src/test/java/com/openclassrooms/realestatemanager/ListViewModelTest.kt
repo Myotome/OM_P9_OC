@@ -2,8 +2,8 @@ package com.openclassrooms.realestatemanager
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
-import com.openclassrooms.realestatemanager.activity.main.list.ListViewModel
-import com.openclassrooms.realestatemanager.activity.main.list.ListViewState
+import com.openclassrooms.realestatemanager.ui.main.list.ListViewModel
+import com.openclassrooms.realestatemanager.ui.main.list.ListViewState
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utilsfortest.generateTwoEstateTest

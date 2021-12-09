@@ -28,7 +28,7 @@ interface EstateDAO {
     fun getSearchEstate(query : SupportSQLiteQuery): Flow<List<Estate>?>
 
     /**
-     * Usefully for content provider
+     * Useful for content provider
      */
     @Query("SELECT * FROM estate_table" )
     fun findAllEstate(): Cursor

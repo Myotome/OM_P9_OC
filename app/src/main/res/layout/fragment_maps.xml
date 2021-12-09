@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:tag="fragment_map"
-        tools:context=".activity.main.maps.MapsFragment" />
+        tools:context=".ui.main.maps.MapsFragment" />
     <Button
         android:id="@+id/bt_map_clear"
         android:layout_width="wrap_content"

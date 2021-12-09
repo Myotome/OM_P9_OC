@@ -7,7 +7,7 @@
     <string name="surface"> Surface : </string>
     <string name="rooms"> Rooms : </string>
     <string name="bedrooms"> Bedrooms : </string>
-    <string name="bathrooms"> Bathrooms :</string>
+    <string name="bathrooms"> Bathrooms : </string>
     <string name="landsize"> Land size : </string>
     <string name="type"> Property type : </string>
     <string name="price"> Price : </string>
@@ -67,6 +67,10 @@
     <string name="castle">Castle</string>
     <string name="sync">Sync</string>
     <string name="photo_name">Photo name</string>
+    <string name="information">Information</string>
+    <string name="show_detail">Show detail</string>
+    <string name="descriptions">Description</string>
+    <string name="mansion">Mansion</string>
 
 
     <string-array name="type">

@@ -39,12 +39,9 @@ class RetrofitRepository @Inject constructor() {
     }
 
     suspend fun setGeocoding(address: String){
-//        Log.d(TAG, "setGeocoding: address $address")
         val geocodingPOJOResponse = googleApi.getGeocoding(address, BuildConfig.MAPS_API_KEY)
         for (i in geocodingPOJOResponse.results.indices){
             geocodingResponseMutableSharedFlow.tryEmit(geocodingPOJOResponse.results[i])
-//            Log.d(TAG, "setGeocoding: tryemit lat value : ${geocodingResponseMutableSharedFlow.first().geometry.location.lat}\n"
-//            +" setGeocoding: geocodingresponse lat : ${geocodingResponse.first().geometry.location.lat}")
         }
 
     }
