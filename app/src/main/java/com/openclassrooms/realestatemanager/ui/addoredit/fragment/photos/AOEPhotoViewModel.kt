@@ -1,30 +1,25 @@
 package com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.*
 import com.openclassrooms.realestatemanager.ui.addoredit.ADD_EDIT_FINISH_RESULT
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-
+@DelicateCoroutinesApi
+@FlowPreview
 @HiltViewModel
 class AOEPhotoViewModel @Inject constructor(
     private val dataSourceRepository: DataSourceRepository,
-//    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditPhotoChannel = Channel<AddEditPhotoEvent>()
@@ -37,11 +32,9 @@ class AOEPhotoViewModel @Inject constructor(
         listPhotoLiveData.value = ArrayList()
     }
 
-    @FlowPreview
     var currentEstate: LiveData<Estate>? =
         dataSourceRepository.getEstateById()?.asLiveData(Dispatchers.IO)
 
-    @FlowPreview
     private var mediator = MediatorLiveData<AOEPhotoViewState>().apply {
         addSource(listPhotoLiveData) { photo -> mediatorCombine(photo, currentEstate?.value) }
         if (currentEstate != null) addSource(currentEstate!!) { estate ->
@@ -49,7 +42,6 @@ class AOEPhotoViewModel @Inject constructor(
         }
     }
 
-    @FlowPreview
     private fun mediatorCombine(listPhoto: MutableList<Photo>?, value: Estate?, photoToDelete: Photo? = null) {
         val localList = ArrayList<Photo>()
         photoToDelete?.let { photoListToDelete.add(it)}
@@ -70,7 +62,6 @@ class AOEPhotoViewModel @Inject constructor(
        mediator.value = AOEPhotoViewState(id, localList)
     }
 
-    @FlowPreview
     fun listPhotoLive(): LiveData<AOEPhotoViewState> {
         return mediator
     }
@@ -79,7 +70,10 @@ class AOEPhotoViewModel @Inject constructor(
         viewModelScope.launch {
             val storageId = storagePhotoId ?: UUID.randomUUID().toString()
             if (internet) {
+                waitForUpload(true)
                 saveOnStorage(name, path, storageId)
+
+
             } else {
                 listPhotoLiveData.value?.add(Photo(name, path, storageId, null))
                 listPhotoLiveData.value = listPhotoLiveData.value
@@ -91,7 +85,6 @@ class AOEPhotoViewModel @Inject constructor(
         dataSourceRepository.deleteInStorage(photo.storageId)
     }
 
-    @FlowPreview
     fun getAllData() {
         if (mediator.value == null || mediator.value?.listPhoto.isNullOrEmpty()) {
             showInvalidInputMessage()
@@ -101,7 +94,7 @@ class AOEPhotoViewModel @Inject constructor(
         }
     }
 
-    @FlowPreview
+
     private fun createEstateInDB() = GlobalScope.launch {
         mediator.value?.listPhoto?.let { dataSourceRepository.createEstateInDatabase(it) }
         addEditPhotoChannel.send(AddEditPhotoEvent.NavigateResult(ADD_EDIT_FINISH_RESULT))
@@ -111,13 +104,18 @@ class AOEPhotoViewModel @Inject constructor(
         addEditPhotoChannel.send(AddEditPhotoEvent.ShowInvalidInputMessage("Minimum 1 photo is required"))
     }
 
+    private fun waitForUpload(status : Boolean) = viewModelScope.launch {
+        addEditPhotoChannel.send(AddEditPhotoEvent.WaitingForUpload(status))
+    }
+
     private suspend fun saveOnStorage(name: String, path: String, storageId: String) {
         val uri = Uri.parse(path)
         var storageUri: String? = null
         dataSourceRepository.setImageToStorage(storageId, uri).collect {
             storageUri = it
+            waitForUpload(false)
         }
-        Log.d(TAG, "saveOnStorage: storageRui ! $storageUri")
+
         listPhotoLiveData.value?.add(Photo(name, path, storageId, storageUri))
         listPhotoLiveData.value = listPhotoLiveData.value
     }
@@ -125,5 +123,6 @@ class AOEPhotoViewModel @Inject constructor(
     sealed class AddEditPhotoEvent {
         data class NavigateResult(val result: Int) : AddEditPhotoEvent()
         data class ShowInvalidInputMessage(val msg: String) : AddEditPhotoEvent()
+        data class WaitingForUpload(val upload: Boolean) : AddEditPhotoEvent()
     }
 }

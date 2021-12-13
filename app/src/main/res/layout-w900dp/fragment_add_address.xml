@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,16 +11,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_number"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/number"
         app:helperText="@string/obligatory"
         app:helperTextEnabled="true"
         app:helperTextTextColor="#ff0000"
-        app:layout_constraintBottom_toTopOf="@id/tv_add_complement"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_street"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/number">
+        app:layout_constraintEnd_toStartOf="@id/tv_add_complement"
+        app:startIconDrawable="@drawable/number"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_number"
@@ -31,13 +35,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_complement"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/complement"
-        app:layout_constraintBottom_toTopOf="@id/tv_add_street"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_number"
-        app:startIconDrawable="@drawable/complement">
+        app:layout_constraintStart_toEndOf="@id/tv_add_number"
+        app:layout_constraintTop_toTopOf="@id/tv_add_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:startIconDrawable="@drawable/complement"
+
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_complement"
@@ -58,7 +65,9 @@
         app:layout_constraintBottom_toTopOf="@id/tv_add_district"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_complement"
-        app:startIconDrawable="@drawable/street">
+        app:startIconDrawable="@drawable/street"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_street"
@@ -70,16 +79,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_district"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/district"
         app:helperText="@string/obligatory"
         app:helperTextEnabled="true"
         app:helperTextTextColor="#ff0000"
-        app:layout_constraintBottom_toTopOf="@id/tv_add_city"
+        app:layout_constraintBottom_toTopOf="@id/bt_address_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_street"
-        app:startIconDrawable="@drawable/district">
+        app:layout_constraintEnd_toStartOf="@id/tv_add_city"
+        app:startIconDrawable="@drawable/district"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_district"
@@ -91,16 +103,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_city"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/city"
         app:helperText="@string/obligatory"
         app:helperTextEnabled="true"
         app:helperTextTextColor="#ff0000"
         app:layout_constraintBottom_toTopOf="@id/bt_address_next"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_district"
-        app:startIconDrawable="@drawable/city">
+        app:layout_constraintStart_toEndOf="@id/tv_add_district"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_street"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:startIconDrawable="@drawable/city"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_city"
@@ -111,26 +126,20 @@
 
     <Button
         android:id="@+id/bt_address_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        style="@style/app_button_aoe_lanscape"
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/bt_address_back"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toEndOf="@id/bt_address_back" />
 
     <Button
         android:id="@+id/bt_address_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        style="@style/app_button_aoe_lanscape"
         android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/bt_address_next"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

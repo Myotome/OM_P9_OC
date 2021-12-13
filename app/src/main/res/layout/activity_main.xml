@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity"
     android:id="@+id/cl_main"
+    android:theme="@style/Theme.RealEstateManager"
     android:background="@drawable/background_style">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,7 +21,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/silver"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -9,5 +9,4 @@ data class AOEInterestViewState(
     val theatre: Boolean = false,
     val subway: Boolean = false,
     val nightlife: Boolean = false
-    ) {
-}
+    )

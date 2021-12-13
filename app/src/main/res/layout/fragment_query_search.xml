@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:tag="fragment_query"
     tools:context=".ui.main.querysearch.QuerySearchFragment"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:background="@drawable/background_style">
 
     <ScrollView
         android:layout_width="match_parent"

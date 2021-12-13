@@ -9,22 +9,18 @@ import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.repository.RetrofitRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@DelicateCoroutinesApi
 @HiltViewModel
 class AOEAddressViewModel @Inject constructor(
-//    private val addRepo: AddRepository,
     private val dataSourceRepository: DataSourceRepository,
     private val retrofitRepository: RetrofitRepository,
-//    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditAddressChannel = Channel<AddEditAddressEvent>()
@@ -82,6 +78,7 @@ class AOEAddressViewModel @Inject constructor(
             }
         }
     }
+
 
     private fun setGeocoding() = GlobalScope.launch {
         val formatStreet = street.trim().replace(" ", "+")

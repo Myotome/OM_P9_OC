@@ -1,6 +1,6 @@
 package com.openclassrooms.realestatemanager
 
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utils.Utils
 import org.junit.Assert
 import org.junit.Test
 import java.text.SimpleDateFormat

@@ -4,33 +4,35 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.ui.addoredit.fragment.address.AOEAddressFragment
 import com.openclassrooms.realestatemanager.ui.addoredit.fragment.interest.AOEInterestFragment
 import com.openclassrooms.realestatemanager.ui.addoredit.fragment.partone.AOEPartOneFragment
 import com.openclassrooms.realestatemanager.ui.addoredit.fragment.parttwo.AOEPartTwoFragment
 import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.ui.main.MainActivity
 import com.openclassrooms.realestatemanager.databinding.ActivityAddBinding
-import com.openclassrooms.realestatemanager.utilsforinstrutest.appPerms
-import com.openclassrooms.realestatemanager.utilsforinstrutest.permissionNameForUser
+import com.openclassrooms.realestatemanager.utils.appPerms
+import com.openclassrooms.realestatemanager.utils.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
 const val ADD_EDIT_BACK_RESULT = 0
 const val ADD_EDIT_PREVIOUS_RESULT = 1
 const val ADD_EDIT_NEXT_RESULT = 2
 const val ADD_EDIT_FINISH_RESULT = 3
 
+@FlowPreview
+@DelicateCoroutinesApi
 @AndroidEntryPoint
 class AOEActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityAddBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,16 +64,11 @@ class AOEActivity : AppCompatActivity() {
     }
 
     internal fun clickToRightOrLeft(int: Int) {
-        Log.d(
-            TAG,
-            "clickToRightOrLeft: int : $int, currentItem : ${binding.vpAddPager.currentItem}"
-        )
         when (int) {
             0 -> onBackPressed()
             1 -> binding.vpAddPager.currentItem -= 1
             2 -> binding.vpAddPager.currentItem += 1
             3 -> {
-                Snackbar.make(binding.root, "Estate created", Snackbar.LENGTH_LONG).show()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }

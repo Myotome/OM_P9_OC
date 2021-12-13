@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.addoredit.fragment.interest
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.openclassrooms.realestatemanager.ui.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.ui.addoredit.AOEActivity
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddInterestBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
+@DelicateCoroutinesApi
 @AndroidEntryPoint
 class AOEInterestFragment : Fragment() {
 
@@ -25,8 +25,6 @@ class AOEInterestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentAddInterestBinding.inflate(inflater, container, false)
-
-        Log.d(TAG, "onCreateView: Interest Fragment is call")
 
         viewModel.currentEstate?.observe(viewLifecycleOwner){vs->
             binding.apply {

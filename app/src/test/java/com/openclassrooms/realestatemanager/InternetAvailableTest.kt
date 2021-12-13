@@ -2,22 +2,16 @@ package com.openclassrooms.realestatemanager
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import androidx.test.core.app.ApplicationProvider
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
-import io.mockk.InternalPlatformDsl.toStr
+import com.openclassrooms.realestatemanager.utils.Utils
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
-import org.robolectric.shadows.ShadowConnectivityManager
-import org.robolectric.shadows.ShadowNetworkCapabilities
 import org.robolectric.shadows.ShadowNetworkInfo
-import java.lang.Exception
 
 @Suppress("DEPRECATION")
 @RunWith(RobolectricTestRunner::class)

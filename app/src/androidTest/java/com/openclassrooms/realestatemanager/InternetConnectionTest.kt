@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utils.Utils
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

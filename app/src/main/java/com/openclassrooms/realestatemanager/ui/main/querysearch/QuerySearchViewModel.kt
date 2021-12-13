@@ -1,18 +1,14 @@
 package com.openclassrooms.realestatemanager.ui.main.querysearch
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utilsforinstrutest.CoroutineDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class QuerySearchViewModel @Inject constructor(
     private val dataSourceRepo: DataSourceRepository,
-    coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     var onSale = true
@@ -23,7 +19,7 @@ class QuerySearchViewModel @Inject constructor(
     var apartment = false
     var castle = false
     var mansion = false
-    var distric: String? = null
+    var district: String? = null
     var priceMin: Int? = null
     var priceMax: Int? = null
     var surfaceMin: Double? = null
@@ -49,8 +45,8 @@ class QuerySearchViewModel @Inject constructor(
     var soldDateCode: Int = 0
     var soldDateText: Long? = null
     var photoMin: Int? = null
-    var typeIsUsed = false
-    var interestIsUsed = false
+    private var typeIsUsed = false
+    private var interestIsUsed = false
 
 
     fun search() {
@@ -61,7 +57,6 @@ class QuerySearchViewModel @Inject constructor(
         var condition = false
 
         if ((onSale && !sold) || (!onSale && sold)) {
-            Log.d(TAG, "search: sale : $onSale, sold : $sold")
             queryString += " WHERE"
             queryString += " onSale =?"
             condition = true
@@ -95,10 +90,10 @@ class QuerySearchViewModel @Inject constructor(
         }
         if(typeIsUsed)queryString += ")"
 
-        if (distric != null){
+        if (district != null){
             queryString += if (condition) " AND" else " WHERE"; condition = true
             queryString += " district LIKE '%' || ? || '%'"
-            args.add(distric!!)
+            args.add(district!!)
         }
 
         if (priceMin != null && priceMax != null) {
@@ -240,7 +235,6 @@ class QuerySearchViewModel @Inject constructor(
 
         //End of query string
         queryString += ";"
-        Log.d("DEBUGKEY", "search: queryString : $queryString")
         val query = SimpleSQLiteQuery(queryString, args.toArray())
         setSearch(query)
 

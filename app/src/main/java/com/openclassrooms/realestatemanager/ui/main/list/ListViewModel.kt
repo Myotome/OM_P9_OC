@@ -5,10 +5,11 @@ import androidx.lifecycle.asLiveData
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.mapNotNull
 import javax.inject.Inject
 
-@Suppress("EXPERIMENTAL_API_USAGE")
+@ExperimentalCoroutinesApi
 @HiltViewModel
 class ListViewModel @Inject constructor(
     private val dataSourceRepository: DataSourceRepository

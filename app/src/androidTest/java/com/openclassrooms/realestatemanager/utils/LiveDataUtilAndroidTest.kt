@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.utilsforinstrutest
+package com.openclassrooms.realestatemanager.utils
 /*
  * Copyright (C) 2019 The Android Open Source Project
  *

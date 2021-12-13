@@ -10,13 +10,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_bedrooms"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/bedrooms"
-        app:layout_constraintBottom_toTopOf="@id/tv_add_bathrooms"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/bedrooms">
+        app:layout_constraintEnd_toStartOf="@id/tv_add_bathrooms"
+        app:startIconDrawable="@drawable/bedrooms"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_bedrooms"
@@ -28,13 +31,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_bathrooms"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/bathrooms"
         app:layout_constraintBottom_toTopOf="@id/tv_add_description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_bedrooms"
-        app:startIconDrawable="@drawable/bathrooms">
+        app:layout_constraintStart_toEndOf="@id/tv_add_bedrooms"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:startIconDrawable="@drawable/bathrooms"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_bathrooms"
@@ -53,7 +59,9 @@
         app:layout_constraintBottom_toTopOf="@id/tv_add_realtor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_bathrooms"
-        app:startIconDrawable="@drawable/text">
+        app:startIconDrawable="@drawable/text"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -61,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:maxLines="3"
+            android:maxLines="5"
             android:ellipsize="middle"/>
 
 
@@ -75,7 +83,9 @@
         app:startIconDrawable="@drawable/realtor"
         app:layout_constraintBottom_toTopOf="@id/bt_two_next"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_description">
+        app:layout_constraintTop_toBottomOf="@id/tv_add_description"
+        android:layout_marginEnd="300dp"
+        android:layout_marginStart="300dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_realtor"
@@ -87,26 +97,20 @@
 
     <Button
         android:id="@+id/bt_two_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        style="@style/app_button_aoe_lanscape"
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/bt_two_back"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toEndOf="@id/bt_two_back"/>
 
     <Button
         android:id="@+id/bt_two_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        style="@style/app_button_aoe_lanscape"
         android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/bt_two_next"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

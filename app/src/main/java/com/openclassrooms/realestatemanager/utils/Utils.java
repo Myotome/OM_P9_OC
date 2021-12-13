@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.utilsforinstrutest;
+package com.openclassrooms.realestatemanager.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -38,7 +38,7 @@ public class Utils {
      * @return
      */
     public static String getTodayDate(){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(new Date());
     }
 

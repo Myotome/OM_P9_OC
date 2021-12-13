@@ -2,7 +2,7 @@
     <string name="app_name">Real Estate Manager</string>
 
 
-    <string name="photo_of_estate">photo of estate</string>
+    <string name="photo_of_estate">Gallery</string>
     <string name="description">Description : </string>
     <string name="surface"> Surface : </string>
     <string name="rooms"> Rooms : </string>
@@ -71,6 +71,9 @@
     <string name="show_detail">Show detail</string>
     <string name="descriptions">Description</string>
     <string name="mansion">Mansion</string>
+    <string name="update">Update</string>
+    <string name="clear_search">Clear search</string>
+    <string name="take_a_picture">Take a picture</string>
 
 
     <string-array name="type">
