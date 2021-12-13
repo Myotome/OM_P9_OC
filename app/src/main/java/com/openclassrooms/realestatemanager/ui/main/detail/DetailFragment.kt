@@ -9,8 +9,10 @@ import coil.load
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.EstateDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.DecimalFormat
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 

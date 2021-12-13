@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.addoredit.fragment.address
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.ui.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.ui.addoredit.AOEActivity
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddAddressBinding
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
+
+@DelicateCoroutinesApi
 @AndroidEntryPoint
 class AOEAddressFragment : Fragment() {
 
@@ -28,8 +29,6 @@ class AOEAddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentAddAddressBinding.inflate(inflater, container, false)
-
-        Log.d(TAG, "onCreateView: address fragment is call")
 
         viewModel.currentEstate?.observe(viewLifecycleOwner) { vs ->
             if (vs != null) {

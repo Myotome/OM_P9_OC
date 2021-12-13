@@ -1,24 +1,22 @@
 package com.openclassrooms.realestatemanager.ui.main
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.*
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utilsforinstrutest.CoroutineDispatchers
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val dataSourceRepository: DataSourceRepository,
-    coroutineDispatchers: CoroutineDispatchers
+    private val dataSourceRepository: DataSourceRepository
 ) : ViewModel() {
 
     fun clearCurrentEstate() = dataSourceRepository.setCurrentEstateById(null)
@@ -26,22 +24,20 @@ class MainViewModel @Inject constructor(
     fun clearSearch() = dataSourceRepository.setSearchQuery(null)
 
 
+
     private val estateFromRoomDatabase =
-        dataSourceRepository.querySearchFlow.asLiveData(coroutineDispatchers.ioDispatchers)
+        dataSourceRepository.querySearchFlow.asLiveData(Dispatchers.IO)
     private val estateFromFirebase =
-        dataSourceRepository.getAllEstateFromFirestore.asLiveData(coroutineDispatchers.ioDispatchers)
+        dataSourceRepository.getAllEstateFromFirestore.asLiveData(Dispatchers.IO)
 
     private var mediator = MediatorLiveData<List<Estate>?>().apply {
-        Log.d(TAG, "mediator add source begin")
         addSource(estateFromFirebase) { firebaseEstate ->
-            Log.d(TAG, "firebase source : ${firebaseEstate?.size}")
             mediatorCombine(
                 firebaseEstate,
                 estateFromRoomDatabase.value
             )
         }
         addSource(estateFromRoomDatabase) { roomEstate ->
-            Log.d(TAG, "room source : ${roomEstate?.size}: ")
             mediatorCombine(
                 estateFromFirebase.value,
                 roomEstate
@@ -54,42 +50,28 @@ class MainViewModel @Inject constructor(
     private fun mediatorCombine(firebaseEstate: List<Estate>?, roomEstate: List<Estate>?) =
         viewModelScope.launch(Dispatchers.IO) {
 
-            Log.d(
-                TAG,
-                "mediatorCombine: begin. Firebase size : ${firebaseEstate?.size}, room size ${roomEstate?.size}"
-            )
             when {
                 firebaseEstate != null && roomEstate == null -> firebaseEstate.forEach { estate ->
-                    dataSourceRepository.createInRoomFromFirebase(estate)
-                }
-//                firebaseEstate == null && roomEstate != null -> roomEstate.forEach { estate ->
-//
-//                    dataSourceRepository.createEstateInFirestore(
-//                        checkStorageUri(estate)
-//                    )
-//                }
-                else -> syncAlgo(firebaseEstate, roomEstate)
-            }
+                    dataSourceRepository.createInRoomFromFirebase(estate) }
+                else -> syncAlgo(firebaseEstate, roomEstate)}
         }
 
     private suspend fun checkStorageUri(estate: Estate): Estate {
         val newListPhoto = mutableSetOf<Photo>()
 
         estate.listPhoto.forEach { photo ->
-            if (photo.storageUriString == null || photo.storageUriString == "raté") {
+            if (photo.storageUriString == null && photo.image != null) {
                 var storageUri: String? = null
                 dataSourceRepository.setImageToStorage(
                     storageId = photo.storageId,
                     uri = Uri.parse(photo.image)
                 ).collect { storageUri = it }
-                Log.d(TAG, "checkStorageUri: storageUri : $storageUri")
                 val newPhoto = storageUri.toString().let { photo.copy(storageUriString = it) }
                 newListPhoto.add(newPhoto)
             } else {
                 newListPhoto.add(photo)
             }
         }
-        Log.d(TAG, "checkStorageUri: final : ${newListPhoto.size}")
         return estate.copy(listPhoto = newListPhoto.toList(), secondaryEstateData = estate.secondaryEstateData.copy(modificationDate = Utils.getLongFormatDate()))
     }
 
@@ -97,7 +79,6 @@ class MainViewModel @Inject constructor(
         firestoreListEstate: List<Estate>?,
         roomListEstate: List<Estate>?
     ) {
-        Log.d(TAG, "syncAlgo: begin")
         if (firestoreListEstate != null && roomListEstate != null) {
             for (roomEstate in roomListEstate) {
                 val roomFId = roomEstate.secondaryEstateData.firebaseId

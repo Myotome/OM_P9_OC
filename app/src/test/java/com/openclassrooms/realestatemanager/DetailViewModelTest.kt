@@ -5,7 +5,7 @@ import com.openclassrooms.realestatemanager.ui.main.detail.DetailViewModel
 import com.openclassrooms.realestatemanager.ui.main.detail.DetailViewState
 import com.openclassrooms.realestatemanager.model.Photo
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utils.Utils
 import com.openclassrooms.realestatemanager.utilsfortest.generateOneEstateTest
 import io.mockk.every
 import io.mockk.mockk

@@ -12,7 +12,9 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.ui.main.detail.DetailFragment
 import com.openclassrooms.realestatemanager.databinding.EstateListBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ListFragment : Fragment() {
 
@@ -40,7 +42,7 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        viewModel.uiStateLiveData.observe(viewLifecycleOwner) {it->
+        viewModel.uiStateLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
         viewModel.isSearching.observe(viewLifecycleOwner) {

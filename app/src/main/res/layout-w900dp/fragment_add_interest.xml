@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/point_of_interest"
-        android:textSize="25sp"
+        android:textSize="40sp"
         android:textStyle="bold|italic"
         android:layout_marginTop="100dp"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -27,138 +27,116 @@
 
         <TableRow
             android:gravity="center"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:layout_marginBottom="50dp">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_interest_school"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/checkBox_landscape_app"
                 android:drawableStart="@drawable/baseline_school_24"
                 android:text="@string/school"
-                android:textColor="@color/silver"
                 app:layout_constraintBottom_toTopOf="@id/cb_interest_park"
                 app:layout_constraintEnd_toStartOf="@id/cb_interest_store"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_interest_store"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/checkBox_landscape_app"
                 android:drawableStart="@drawable/baseline_storefront_24"
                 android:text="@string/store"
-                android:textColor="@color/silver"
                 app:layout_constraintBottom_toTopOf="@id/cb_interest_restaurant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cb_interest_school"
-                app:layout_constraintTop_toTopOf="parent" />
-        </TableRow>
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        <TableRow
-            android:gravity="center"
-            android:padding="20dp">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_interest_park"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/checkBox_landscape_app"
                 android:drawableStart="@drawable/baseline_park_24"
                 android:text="@string/park"
                 app:layout_constraintBottom_toTopOf="@id/cb_interest_movie"
                 app:layout_constraintEnd_toStartOf="@id/cb_interest_restaurant"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cb_interest_school" />
+                app:layout_constraintTop_toBottomOf="@id/cb_interest_school"/>
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_interest_restaurant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/checkBox_landscape_app"
                 android:drawableStart="@drawable/baseline_restaurant_24"
                 android:text="@string/restaurant"
                 app:layout_constraintBottom_toTopOf="@id/cb_interest_theatre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cb_interest_park"
-                app:layout_constraintTop_toBottomOf="@id/cb_interest_store" />
+                app:layout_constraintTop_toBottomOf="@id/cb_interest_store"/>
         </TableRow>
 
         <TableRow
             android:gravity="center"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:layout_marginBottom="50dp">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_interest_movie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/checkBox_landscape_app"
                 android:drawableStart="@drawable/baseline_theaters_24"
                 android:text="@string/movie_theatre"
                 app:layout_constraintBottom_toTopOf="@id/cb_interest_subway"
                 app:layout_constraintEnd_toStartOf="@id/cb_interest_theatre"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cb_interest_park" />
+                app:layout_constraintTop_toBottomOf="@id/cb_interest_park"/>
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_interest_theatre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/checkBox_landscape_app"
                 android:drawableStart="@drawable/baseline_theater_comedy_24"
                 android:text="@string/theatre"
                 app:layout_constraintBottom_toTopOf="@id/cb_interest_nightlife"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cb_interest_movie"
-                app:layout_constraintTop_toBottomOf="@id/cb_interest_restaurant" />
-        </TableRow>
-
-        <TableRow
-            android:gravity="center"
-            android:padding="20dp">
+                app:layout_constraintTop_toBottomOf="@id/cb_interest_restaurant"/>
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_interest_subway"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/checkBox_landscape_app"
                 android:drawableStart="@drawable/baseline_directions_subway_24"
                 android:text="@string/subway"
                 app:layout_constraintBottom_toTopOf="@id/bt_interest_next"
                 app:layout_constraintEnd_toStartOf="@id/cb_interest_nightlife"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cb_interest_movie" />
+                app:layout_constraintTop_toBottomOf="@id/cb_interest_movie"/>
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cb_interest_nightlife"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/checkBox_landscape_app"
                 android:drawableStart="@drawable/baseline_nightlife_24"
                 android:text="@string/nightlife"
                 app:layout_constraintBottom_toTopOf="@id/bt_interest_next"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cb_interest_subway"
-                app:layout_constraintTop_toBottomOf="@id/cb_interest_theatre" />
+                app:layout_constraintTop_toBottomOf="@id/cb_interest_theatre"/>
         </TableRow>
 
     </TableLayout>
 
     <Button
         android:id="@+id/bt_interest_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        style="@style/app_button_aoe_lanscape"
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/bt_interest_back"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toEndOf="@id/bt_interest_back"/>
 
     <Button
         android:id="@+id/bt_interest_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        style="@style/app_button_aoe_lanscape"
         android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/bt_interest_next"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

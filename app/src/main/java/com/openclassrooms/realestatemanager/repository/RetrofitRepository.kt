@@ -2,7 +2,7 @@ package com.openclassrooms.realestatemanager.repository
 
 import com.openclassrooms.realestatemanager.BuildConfig
 import com.openclassrooms.realestatemanager.model.geocodingPOJO.Result
-import com.openclassrooms.realestatemanager.utilsforinstrutest.GoogleApiService
+import com.openclassrooms.realestatemanager.api.GoogleApiService
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import okhttp3.OkHttpClient

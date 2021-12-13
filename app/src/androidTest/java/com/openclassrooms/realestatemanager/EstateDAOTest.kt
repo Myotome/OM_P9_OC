@@ -6,11 +6,10 @@ import androidx.room.Room
 import androidx.sqlite.db.SimpleSQLiteQuery
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
 import com.openclassrooms.realestatemanager.database.EstateDAO
 import com.openclassrooms.realestatemanager.database.EstateRoomDatabase
 import com.openclassrooms.realestatemanager.model.*
-import com.openclassrooms.realestatemanager.utilsforinstrutest.getOrAwaitValue
+import com.openclassrooms.realestatemanager.utils.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.*

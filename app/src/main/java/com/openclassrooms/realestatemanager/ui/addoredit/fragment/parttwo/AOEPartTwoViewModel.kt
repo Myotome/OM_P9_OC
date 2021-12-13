@@ -6,8 +6,9 @@ import com.openclassrooms.realestatemanager.ui.addoredit.ADD_EDIT_NEXT_RESULT
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.SecondaryEstateData
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
@@ -17,10 +18,10 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+@DelicateCoroutinesApi
 @HiltViewModel
 class AOEPartTwoViewModel @Inject constructor(
     private val dataSourceRepository: DataSourceRepository,
-//    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditTwoChannel = Channel<AddEditTwoEvent>()

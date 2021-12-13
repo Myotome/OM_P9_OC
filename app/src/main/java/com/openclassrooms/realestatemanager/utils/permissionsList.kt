@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.utilsforinstrutest
+package com.openclassrooms.realestatemanager.utils
 
 import android.Manifest
 
@@ -6,8 +6,7 @@ val appPerms = arrayOf(
     Manifest.permission.ACCESS_COARSE_LOCATION,
     Manifest.permission.ACCESS_FINE_LOCATION,
     Manifest.permission.CAMERA,
-    Manifest.permission.READ_EXTERNAL_STORAGE,
-//    Manifest.permission.ACCESS_WIFI_STATE
+    Manifest.permission.READ_EXTERNAL_STORAGE
 )
 
 fun permissionNameForUser (permission : String): String =
@@ -16,6 +15,5 @@ fun permissionNameForUser (permission : String): String =
         Manifest.permission.ACCESS_FINE_LOCATION -> "Fine Location"
         Manifest.permission.CAMERA -> "Camera"
         Manifest.permission.READ_EXTERNAL_STORAGE -> "Read external storage"
-//        Manifest.permission.ACCESS_WIFI_STATE -> "Wifi"
         else -> ""
     }

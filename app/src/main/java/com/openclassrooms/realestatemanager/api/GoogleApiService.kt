@@ -1,6 +1,4 @@
-package com.openclassrooms.realestatemanager.utilsforinstrutest
-
-
+package com.openclassrooms.realestatemanager.api
 
 import com.openclassrooms.realestatemanager.model.geocodingPOJO.GeocodingPOJO
 import retrofit2.http.GET

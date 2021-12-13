@@ -11,8 +11,8 @@
 
     <ProgressBar
         android:id="@+id/pb_add_upload"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:elevation="10dp"
         android:indeterminate="true"
         android:visibility="gone"
@@ -23,65 +23,52 @@
 
     <Button
         android:id="@+id/bt_add_gallery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/app_button_aoe_lanscape"
         android:text="@string/photo_of_estate"
         app:layout_constraintStart_toStartOf="@id/bt_photo_back"
         app:layout_constraintEnd_toEndOf="@id/bt_photo_back"
-        app:layout_constraintBottom_toTopOf="@id/bt_photo_finish"
-        android:layout_margin="5dp"
-        android:padding="10dp"/>
+        app:layout_constraintBottom_toTopOf="@id/bt_photo_finish"/>
 
     <Button
         android:id="@+id/bt_add_take_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/app_button_aoe_lanscape"
         android:text="@string/take_a_picture"
         app:layout_constraintBottom_toTopOf="@id/bt_photo_finish"
         app:layout_constraintEnd_toEndOf="@id/bt_photo_finish"
-        app:layout_constraintStart_toStartOf="@id/bt_photo_finish"
-        android:padding="10dp"
-        android:layout_margin="5dp"/>
+        app:layout_constraintStart_toStartOf="@id/bt_photo_finish"/>
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/rv_add_photo"
-       android:layout_width="wrap_content"
-       android:layout_height="0dp"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintBottom_toTopOf="@id/bt_add_take_photo"
-       tools:listitem="@layout/image_list_content"
-       app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-       android:paddingEnd="12dp"
-       android:paddingStart="12dp"
-       android:paddingTop="24dp"
-       android:layout_marginBottom="20dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_add_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bt_add_gallery"
+        tools:listitem="@layout/image_list_content"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:spanCount="4"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        android:paddingTop="24dp"
+        android:layout_marginBottom="15dp"/>
 
     <Button
         android:id="@+id/bt_photo_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/app_button_aoe_lanscape"
         android:text="@string/create"
-        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/bt_photo_back"
-        android:padding="10dp"
-        android:layout_margin="5dp"/>
+        app:layout_constraintStart_toEndOf="@id/bt_photo_back"/>
 
     <Button
         android:id="@+id/bt_photo_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/app_button_aoe_lanscape"
         android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
         android:text="@string/previous"
-        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/bt_photo_finish"
-        android:padding="10dp"
-        android:layout_margin="5dp"/>
+        app:layout_constraintEnd_toStartOf="@id/bt_photo_finish"/>
 
 
 

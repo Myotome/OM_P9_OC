@@ -27,16 +27,18 @@
 
     <TextView
         android:id="@+id/tv_add_type"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/type"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:gravity="center"
         app:drawableStartCompat="@drawable/type"
+        android:layout_marginStart="100dp"
         app:layout_constraintBottom_toBottomOf="@id/sp_add_type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/sp_add_type"
-        android:layout_marginStart="30dp"/>
+        app:layout_constraintEnd_toStartOf="@id/sp_add_type"/>
 
 
     <Spinner
@@ -52,16 +54,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_price"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/price"
         app:helperText="@string/obligatory"
         app:helperTextEnabled="true"
         app:helperTextTextColor="#ff0000"
-        app:layout_constraintBottom_toTopOf="@id/tv_add_surface"
+        app:layout_constraintBottom_toTopOf="@id/tv_add_rooms"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_add_type"
-        app:startIconDrawable="@drawable/dollar">
+        app:layout_constraintEnd_toStartOf="@id/tv_add_surface"
+        app:startIconDrawable="@drawable/dollar"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_price"
@@ -73,16 +78,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_surface"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/surface"
         app:helperText="@string/obligatory"
         app:helperTextEnabled="true"
         app:helperTextTextColor="#ff0000"
         app:layout_constraintBottom_toTopOf="@id/tv_add_rooms"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_price"
-        app:startIconDrawable="@drawable/square">
+        app:layout_constraintStart_toEndOf="@id/tv_add_price"
+        app:layout_constraintTop_toBottomOf="@id/sp_add_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:startIconDrawable="@drawable/square"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_surface"
@@ -94,13 +102,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_rooms"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/rooms"
-        app:layout_constraintBottom_toTopOf="@id/tv_add_landsize"
+        app:layout_constraintBottom_toTopOf="@id/bt_one_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_surface"
-        app:startIconDrawable="@drawable/rooms">
+        app:layout_constraintTop_toBottomOf="@id/tv_add_price"
+        app:layout_constraintEnd_toStartOf="@id/tv_add_landsize"
+        app:startIconDrawable="@drawable/rooms"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_rooms"
@@ -113,13 +124,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_add_landsize"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/landsize"
         app:layout_constraintBottom_toTopOf="@id/bt_one_next"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_rooms"
-        app:startIconDrawable="@drawable/landsize">
+        app:layout_constraintStart_toEndOf="@id/tv_add_rooms"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_surface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:startIconDrawable="@drawable/landsize"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_landsize"
@@ -132,27 +146,21 @@
 
     <Button
         android:id="@+id/bt_one_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        style="@style/app_button_aoe_lanscape"
         android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/bt_one_back"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toEndOf="@id/bt_one_back"/>
 
     <Button
         android:id="@+id/bt_one_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        style="@style/app_button_aoe_lanscape"
         android:drawableLeft="@drawable/ic_baseline_close_24"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/bt_one_next"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,15 +21,22 @@ import com.openclassrooms.realestatemanager.ui.main.list.ListFragment
 import com.openclassrooms.realestatemanager.ui.main.maps.MapsFragment
 import com.openclassrooms.realestatemanager.ui.main.querysearch.QuerySearchFragment
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding
-import com.openclassrooms.realestatemanager.utilsforinstrutest.appPerms
-import com.openclassrooms.realestatemanager.utilsforinstrutest.permissionNameForUser
+import com.openclassrooms.realestatemanager.utils.appPerms
+import com.openclassrooms.realestatemanager.utils.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
 
+@ExperimentalCoroutinesApi
+@FlowPreview
+@DelicateCoroutinesApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         checkForPermissions()
         viewModel.clearSearch()
-        viewModel.synchroniseAllDatabase().observeForever(){}
+        viewModel.synchroniseAllDatabase().observeForever{}
 
         val listFragment = ListFragment()
         val mapFragment = MapsFragment()
@@ -61,13 +68,6 @@ class MainActivity : AppCompatActivity() {
                 else -> super.onOptionsItemSelected(it)
             }
         }
-
-
-//        requestedOrientation = when (resources.getBoolean(R.bool.portrait_only)) {
-//            true -> ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-//            else -> ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-//
-//        }
 
     }
 
@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

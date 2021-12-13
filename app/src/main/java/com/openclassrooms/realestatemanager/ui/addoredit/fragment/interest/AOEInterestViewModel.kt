@@ -13,11 +13,10 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
+@DelicateCoroutinesApi
 @HiltViewModel
 class AOEInterestViewModel @Inject constructor(
-//    private val addRepo: AddRepository,
     private val dataSourceRepository: DataSourceRepository,
-//    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val addEditInterestChannel = Channel<AddEditInterestEvent>()

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.EstateListContentBinding
 import java.text.DecimalFormat
 
@@ -37,10 +38,9 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
                     .toString()
             binding.tvContentType.text = estateViewState.type
 
-//            binding.ivEstateContent.load(Uri.parse(estateViewState.photo.image))
-            binding.ivEstateContent.load(Uri.parse(estateViewState.photo.storageUriString))
+            estateViewState.photo.storageUriString?.let { binding.ivEstateContent.load(Uri.parse(it)) }
+                ?: binding.ivEstateContent.load(R.drawable.ic_baseline_image_not_supported_24)
 
-//            Log.d(TAG, "bind: ${estateViewState.onSale}")
             if (!estateViewState.onSale) {
                 binding.tvContentSold.visibility = View.VISIBLE
                 binding.tvContentPrice.visibility = View.INVISIBLE

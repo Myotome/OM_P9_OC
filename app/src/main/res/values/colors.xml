@@ -31,5 +31,16 @@
     <color name="app_pink_light">#ffffff</color>
     <color name="app_pink_dark">#ccb9b0</color>
 
+    <color name="app_grey">#212f3d</color>
+    <color name="app_grey_light">#4a5868</color>
+    <color name="app_grey_dark">#151414</color>
+
+    <color name="app_red">#ff0000</color>
+    <color name="app_red_light">#ff5a36</color>
+    <color name="app_red_dark">#c20000</color>
+
+    <color name="silver">#c0c0c0</color>
+    <color name="gold">#efd807</color>
+
 
 </resources>

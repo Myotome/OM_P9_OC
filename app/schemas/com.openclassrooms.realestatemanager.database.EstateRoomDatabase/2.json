@@ -1,0 +1,224 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "5ec85e0d5f56b12613f35ba7e2627f2f",
+    "entities": [
+      {
+        "tableName": "estate_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`estate_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `lat` REAL NOT NULL, `lng` REAL NOT NULL, `listPhoto` TEXT NOT NULL, `onSale` INTEGER NOT NULL, `estateType` TEXT NOT NULL, `price` INTEGER NOT NULL, `surface` REAL NOT NULL, `rooms` INTEGER, `landSize` REAL, `soldDate` INTEGER, `firebaseId` INTEGER NOT NULL, `bedroom` INTEGER, `bathroom` INTEGER, `description` TEXT, `realtor` TEXT, `entryDate` INTEGER, `modificationDate` INTEGER, `district` TEXT NOT NULL, `number` INTEGER NOT NULL, `complement` TEXT, `street` TEXT NOT NULL, `city` TEXT NOT NULL, `school` INTEGER NOT NULL, `store` INTEGER NOT NULL, `park` INTEGER NOT NULL, `restaurant` INTEGER NOT NULL, `movie` INTEGER NOT NULL, `theatre` INTEGER NOT NULL, `subway` INTEGER NOT NULL, `nightlife` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "estate_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lng",
+            "columnName": "lng",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "listPhoto",
+            "columnName": "listPhoto",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "primaryEstateData.onSale",
+            "columnName": "onSale",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "primaryEstateData.estateType",
+            "columnName": "estateType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "primaryEstateData.price",
+            "columnName": "price",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "primaryEstateData.surface",
+            "columnName": "surface",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "primaryEstateData.rooms",
+            "columnName": "rooms",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "primaryEstateData.landSize",
+            "columnName": "landSize",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "primaryEstateData.soldDate",
+            "columnName": "soldDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "secondaryEstateData.firebaseId",
+            "columnName": "firebaseId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "secondaryEstateData.bedroom",
+            "columnName": "bedroom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "secondaryEstateData.bathroom",
+            "columnName": "bathroom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "secondaryEstateData.description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "secondaryEstateData.realtor",
+            "columnName": "realtor",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "secondaryEstateData.entryDate",
+            "columnName": "entryDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "secondaryEstateData.modificationDate",
+            "columnName": "modificationDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address.district",
+            "columnName": "district",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address.number",
+            "columnName": "number",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address.complement",
+            "columnName": "complement",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address.street",
+            "columnName": "street",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address.city",
+            "columnName": "city",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interest.school",
+            "columnName": "school",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interest.store",
+            "columnName": "store",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interest.park",
+            "columnName": "park",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interest.restaurant",
+            "columnName": "restaurant",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interest.movie",
+            "columnName": "movie",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interest.theatre",
+            "columnName": "theatre",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interest.subway",
+            "columnName": "subway",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interest.nightlife",
+            "columnName": "nightlife",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "estate_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_estate_table_estate_id",
+            "unique": false,
+            "columnNames": [
+              "estate_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_estate_table_estate_id` ON `${TABLE_NAME}` (`estate_id`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5ec85e0d5f56b12613f35ba7e2627f2f')"
+    ]
+  }
+}

@@ -1,13 +1,11 @@
 package com.openclassrooms.realestatemanager.ui.addoredit.fragment.partone
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.openclassrooms.realestatemanager.ui.addoredit.ADD_EDIT_NEXT_RESULT
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.PrimaryEstateData
 import com.openclassrooms.realestatemanager.repository.DataSourceRepository
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -15,10 +13,10 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
+@DelicateCoroutinesApi
 @HiltViewModel
 class AOEPartOneViewModel @Inject constructor(
     private val dataSourceRepository: DataSourceRepository,
-//    private val coroutineDispatchers: CoroutineDispatchers
 ): ViewModel() {
 
     private val addEditOneChannel = Channel<AddEditOneEvent>()
@@ -30,7 +28,7 @@ class AOEPartOneViewModel @Inject constructor(
     var surface: Double? = null
     var rooms: Int? = null
     var landsize: Double? = null
-    var soldTime: Long? = null
+    private var soldTime: Long? = null
 
 
     val currentEstate = dataSourceRepository.getEstateById()?.mapNotNull { estate ->
@@ -51,7 +49,6 @@ class AOEPartOneViewModel @Inject constructor(
     }
 
     fun onSaveClick(){
-        Log.d(TAG, "onSaveClick: is clicked")
         when{
             type.isNullOrBlank()-> {
                 showInvalidInputMessage("Property type cannot be empty")
@@ -66,7 +63,6 @@ class AOEPartOneViewModel @Inject constructor(
                 return
             }
             else ->{
-                Log.d(TAG, "onSaveClick:  create part in when")
                 createPartOne()
 
             }
@@ -74,7 +70,6 @@ class AOEPartOneViewModel @Inject constructor(
     }
 
     private fun createPartOne() = GlobalScope.launch{
-        Log.d(TAG, "createPartOne: is called")
         if(!onSale) soldTime = Utils.getLongFormatDate()
         dataSourceRepository.setPartOne(PrimaryEstateData( onSale, type!!, price!!, surface!!, rooms, landsize, soldTime))
         addEditOneChannel.send(AddEditOneEvent.NavigateWithResult(ADD_EDIT_NEXT_RESULT))

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FragmentQuerySearchBinding
-import com.openclassrooms.realestatemanager.utilsforinstrutest.Utils
+import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,32 +42,13 @@ class QuerySearchFragment : Fragment() {
             cbQueryApartment.setOnCheckedChangeListener { _, isChecked -> viewModel.apartment = isChecked }
             cbQueryCastle.setOnCheckedChangeListener { _, isChecked -> viewModel.castle = isChecked }
             cbQueryMansion.setOnCheckedChangeListener { _, isChecked -> viewModel.mansion = isChecked }
-//            spSearchType.apply {
-//                adapter = ArrayAdapter(
-//                    requireContext(),
-//                    android.R.layout.simple_spinner_item,
-//                    resources.getStringArray(R.array.type)
-//                )
-//                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                    override fun onItemSelected(
-//                        parent: AdapterView<*>?,
-//                        view: View?,
-//                        position: Int,
-//                        id: Long
-//                    ) {
-//                        viewModel.type = parent?.getItemAtPosition(position).toString()
-//                    }
-//
-//                    override fun onNothingSelected(p0: AdapterView<*>?) {}
-//                }
-//            }
 
             btSearchDistrict.setOnClickListener {
                 tilQueryDistrict.visibility =
                     if(tilQueryDistrict.visibility == View.VISIBLE)View.GONE else View.VISIBLE
             }
             etSearchDistrict.addTextChangedListener {
-                viewModel.distric = it.toString()
+                viewModel.district = it.toString()
             }
 
             btSearchPrice.setOnClickListener {
@@ -167,7 +148,6 @@ class QuerySearchFragment : Fragment() {
             rgSearchEntry.setOnCheckedChangeListener { _, id ->
                 when (id) {
                     R.id.rb_search_entry_before -> viewModel.entryDateCode = 0
-//                    R.id.rb_search_entry_at -> viewModel.entryDateCode = 1
                     R.id.rb_search_entry_after -> viewModel.entryDateCode = 1
                 }
             }
@@ -182,7 +162,6 @@ class QuerySearchFragment : Fragment() {
             rgSearchSold.setOnCheckedChangeListener { _, id ->
                 when (id) {
                     R.id.rb_search_sold_before -> viewModel.soldDateCode = 0
-//                    R.id.rb_search_sold_at -> viewModel.soldDateCode = 1
                     R.id.rb_search_sold_after -> viewModel.soldDateCode = 1
                 }
             }

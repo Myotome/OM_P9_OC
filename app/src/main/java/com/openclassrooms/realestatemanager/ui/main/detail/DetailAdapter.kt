@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.ImageListContentBinding
 import com.openclassrooms.realestatemanager.model.Photo
 
@@ -17,7 +18,7 @@ class DetailAdapter(private val listener: (Photo) -> Unit) :
         ImageListContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
-    override fun onBindViewHolder(holder: DetailAdapter.DetailViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: DetailViewHolder, position: Int) =
         holder.bind(getItem(position), listener)
 
 
@@ -25,7 +26,8 @@ class DetailAdapter(private val listener: (Photo) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(photo: Photo, listener: (Photo) -> Unit) {
 
-            binding.ivContentList.load(Uri.parse(photo.storageUriString)?:Uri.parse(photo.image))
+            photo.storageUriString?.let {binding.ivContentList.load( Uri.parse(it))}
+                ?:binding.ivContentList.load(R.drawable.ic_baseline_image_not_supported_24)
             binding.tvContentList.text = photo.name
 
         }

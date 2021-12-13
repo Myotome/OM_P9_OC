@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.addoredit.fragment.parttwo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.openclassrooms.realestatemanager.ui.addoredit.ADD_EDIT_PREVIOUS_RESULT
 import com.openclassrooms.realestatemanager.ui.addoredit.AOEActivity
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPartTwoBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
+@DelicateCoroutinesApi
 @AndroidEntryPoint
 class AOEPartTwoFragment : Fragment() {
 
@@ -26,8 +26,6 @@ class AOEPartTwoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentAddPartTwoBinding.inflate(inflater, container, false)
-
-         Log.d(TAG, "onCreateView: part two fragment is call")
 
          viewModel.currentEstate?.observe(viewLifecycleOwner){vs->
              if(vs!=null){

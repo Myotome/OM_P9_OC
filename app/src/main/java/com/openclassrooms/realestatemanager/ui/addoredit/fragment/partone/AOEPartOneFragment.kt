@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.addoredit.fragment.partone
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +14,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.ui.addoredit.ADD_EDIT_BACK_RESULT
 import com.openclassrooms.realestatemanager.ui.addoredit.AOEActivity
-import com.openclassrooms.realestatemanager.ui.addoredit.fragment.photos.AOEPhotoFragment.Companion.TAG
 import com.openclassrooms.realestatemanager.databinding.FragmentAddPartOneBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
+@DelicateCoroutinesApi
 @AndroidEntryPoint
 class AOEPartOneFragment : Fragment() {
 
@@ -30,8 +30,6 @@ class AOEPartOneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentAddPartOneBinding.inflate(inflater, container, false)
-
-        Log.d(TAG, "onCreateView: part one is call")
 
         viewModel.currentEstate?.observe(viewLifecycleOwner) { vs ->
             if (vs != null) {
