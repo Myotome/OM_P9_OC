@@ -61,12 +61,12 @@ class AOEPhotoViewModelTest {
         id = -5L,
         listPhoto = listOf(
             Photo(
-                image = "content://media/external/images/media/162",
+//                image = "content://media/external/images/media/162",
                 name = "view",
                 storageId = "987654",
                 storageUriString = ""
             ), Photo(
-                image = "content://media/external/images/media/158",
+//                image = "content://media/external/images/media/158",
                 name = "view",
                 storageId = "854732",
                 storageUriString = ""

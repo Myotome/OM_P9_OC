@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toTopOf="@id/tv_add_bathrooms"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/bedrooms">
+        app:startIconDrawable="@drawable/ic_baseline_bed_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_bedrooms"
@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toTopOf="@id/tv_add_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_bedrooms"
-        app:startIconDrawable="@drawable/bathrooms">
+        app:startIconDrawable="@drawable/ic_baseline_bathtub_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_add_bathrooms"
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toTopOf="@id/tv_add_realtor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_bathrooms"
-        app:startIconDrawable="@drawable/text">
+        app:startIconDrawable="@drawable/ic_baseline_text_snippet_24">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -72,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/realtor"
-        app:startIconDrawable="@drawable/realtor"
+        app:startIconDrawable="@drawable/ic_baseline_face_24"
         app:layout_constraintBottom_toTopOf="@id/bt_two_next"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_description">

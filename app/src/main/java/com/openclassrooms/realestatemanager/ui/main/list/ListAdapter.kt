@@ -4,10 +4,13 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.Px
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.EstateListContentBinding
 import java.text.DecimalFormat
@@ -38,7 +41,9 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
                     .toString()
             binding.tvContentType.text = estateViewState.type
 
-            estateViewState.photo.storageUriString?.let { binding.ivEstateContent.load(Uri.parse(it)) }
+            estateViewState.photo.storageUriString?.let { binding.ivEstateContent.load(Uri.parse(it)){
+                transformations(RoundedCornersTransformation(radius = 20.5F))
+            } }
                 ?: binding.ivEstateContent.load(R.drawable.ic_baseline_image_not_supported_24)
 
             if (!estateViewState.onSale) {

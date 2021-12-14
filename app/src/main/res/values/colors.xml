@@ -23,9 +23,15 @@
     <color name="app_green_light">#76d275</color>
     <color name="app_green_dark">#00701a</color>
 
-    <color name="app_blue">#e1f5fe</color>
+    <color name="app_blue">#f3f9fc</color>
     <color name="app_blue_light">#ffffff</color>
     <color name="app_blue_dark">#AFC2CB</color>
+
+    <color name="app_brown">#a9857b</color>
+    <color name="app_brown_light">#dbb5aa</color>
+    <color name="app_brown_dark">#79584f</color>
+
+    <color name="all_item">@color/app_brown</color>
 
     <color name="app_pink">#ffebe2</color>
     <color name="app_pink_light">#ffffff</color>

@@ -20,17 +20,11 @@ class InternetAvailableTest {
     private lateinit var connectivityManager : ConnectivityManager
     private lateinit var shadowOfActiveNetworkInfo : ShadowNetworkInfo
     private val context = ApplicationProvider.getApplicationContext<Context>()
-//    private lateinit var typeMobile : ConnectivityManager
-//    private lateinit var shadowTypeMobile : ShadowConnectivityManager
-//    private lateinit var typeWifi : ShadowNetworkInfo
 
     @Before
     fun setUp(){
         connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         shadowOfActiveNetworkInfo = shadowOf(connectivityManager.activeNetworkInfo)
-//        typeMobile =  context.getSystemService(Context.WIFI_SERVICE) as ConnectivityManager
-//        shadowTypeMobile = shadowOf(typeMobile)
-//        typeWifi = shadowOf(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI))
     }
 
     @Test
@@ -65,19 +59,13 @@ class InternetAvailableTest {
     }
 
     @Test
-    fun getNetworkInfo_shouldReturnDefaultNetworks() {
-        val wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-        Assert.assertTrue(wifi!!.detailedState == NetworkInfo.DetailedState.DISCONNECTED)
-        val mobile = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-        Assert.assertTrue(mobile!!.detailedState == NetworkInfo.DetailedState.CONNECTED)
-
-        Assert.assertTrue(Utils.isInternetAvailable(context))
+    fun getInternetWhenIsConnecting(){
+        shadowOfActiveNetworkInfo.setConnectionStatus(NetworkInfo.State.CONNECTING)
+        connectivityManager.activeNetworkInfo?.let {
+            Assert.assertTrue(it.isConnectedOrConnecting)
+            Assert.assertFalse(it.isConnected)
+        }
+        Assert.assertFalse(Utils.isInternetAvailable(context))
     }
-
-//    @Test
-//    fun mobileOff_WIFIOn(){
-//        shadowTypeMobile.
-//
-//    }
 
 }

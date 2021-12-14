@@ -17,7 +17,6 @@
         android:switchPadding="15dp"
         android:text="@string/on_sale"
         android:textSize="25sp"
-        android:textColor="@color/silver"
         app:layout_constraintBottom_toTopOf="@id/tv_add_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +32,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:gravity="center"
-        app:drawableStartCompat="@drawable/type"
+        app:drawableStartCompat="@drawable/ic_baseline_home_work_24"
         android:layout_marginStart="100dp"
         app:layout_constraintBottom_toBottomOf="@id/sp_add_type"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_add_type"
         app:layout_constraintEnd_toStartOf="@id/tv_add_surface"
-        app:startIconDrawable="@drawable/dollar"
+        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 
@@ -88,7 +87,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_add_price"
         app:layout_constraintTop_toBottomOf="@id/sp_add_type"
         app:layout_constraintEnd_toEndOf="parent"
-        app:startIconDrawable="@drawable/square"
+        app:startIconDrawable="@drawable/ic_baseline_settings_overscan_24"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 
@@ -109,7 +108,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_price"
         app:layout_constraintEnd_toStartOf="@id/tv_add_landsize"
-        app:startIconDrawable="@drawable/rooms"
+        app:startIconDrawable="@drawable/ic_outline_space_dashboard_24"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 
@@ -131,7 +130,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_add_rooms"
         app:layout_constraintTop_toBottomOf="@id/tv_add_surface"
         app:layout_constraintEnd_toEndOf="parent"
-        app:startIconDrawable="@drawable/landsize"
+        app:startIconDrawable="@drawable/ic_baseline_panorama_24"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 

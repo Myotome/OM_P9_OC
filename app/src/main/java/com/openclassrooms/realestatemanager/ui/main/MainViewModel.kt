@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.ui.main
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.*
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Photo
@@ -19,11 +20,11 @@ class MainViewModel @Inject constructor(
     private val dataSourceRepository: DataSourceRepository
 ) : ViewModel() {
 
+    val TAG = "DEBUGKEY"
+
     fun clearCurrentEstate() = dataSourceRepository.setCurrentEstateById(null)
 
     fun clearSearch() = dataSourceRepository.setSearchQuery(null)
-
-
 
     private val estateFromRoomDatabase =
         dataSourceRepository.querySearchFlow.asLiveData(Dispatchers.IO)
@@ -49,31 +50,15 @@ class MainViewModel @Inject constructor(
 
     private fun mediatorCombine(firebaseEstate: List<Estate>?, roomEstate: List<Estate>?) =
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d(TAG, "mediatorCombine: is call")
 
             when {
                 firebaseEstate != null && roomEstate == null -> firebaseEstate.forEach { estate ->
-                    dataSourceRepository.createInRoomFromFirebase(estate) }
-                else -> syncAlgo(firebaseEstate, roomEstate)}
-        }
-
-    private suspend fun checkStorageUri(estate: Estate): Estate {
-        val newListPhoto = mutableSetOf<Photo>()
-
-        estate.listPhoto.forEach { photo ->
-            if (photo.storageUriString == null && photo.image != null) {
-                var storageUri: String? = null
-                dataSourceRepository.setImageToStorage(
-                    storageId = photo.storageId,
-                    uri = Uri.parse(photo.image)
-                ).collect { storageUri = it }
-                val newPhoto = storageUri.toString().let { photo.copy(storageUriString = it) }
-                newListPhoto.add(newPhoto)
-            } else {
-                newListPhoto.add(photo)
+                    dataSourceRepository.createInRoomFromFirebase(estate)
+                }
+                else -> syncAlgo(firebaseEstate, roomEstate)
             }
         }
-        return estate.copy(listPhoto = newListPhoto.toList(), secondaryEstateData = estate.secondaryEstateData.copy(modificationDate = Utils.getLongFormatDate()))
-    }
 
     private suspend fun syncAlgo(
         firestoreListEstate: List<Estate>?,
@@ -86,8 +71,8 @@ class MainViewModel @Inject constructor(
                 val firestoreId = firestoreListEstate.map { it.secondaryEstateData.firebaseId }
 
                 if (!firestoreId.contains(roomFId)) {
-                    dataSourceRepository.createEstateInFirestore(roomEstate)
-                    checkStorageUri(roomEstate)
+                    dataSourceRepository.createEstateInFirestore(checkStorageUri(roomEstate))
+
                 }
 
                 for (firestoreEstate in firestoreListEstate) {
@@ -103,13 +88,17 @@ class MainViewModel @Inject constructor(
                                 }
 
                                 roomModDate > firestorModDate -> {
-                                    dataSourceRepository.createEstateInFirestore(roomEstate)
-                                    checkStorageUri(roomEstate)
+                                    dataSourceRepository.createEstateInFirestore(
+                                        checkStorageUri(
+                                            roomEstate
+                                        )
+                                    )
+
                                 }
                             }
                         } else if (roomModDate != null && firestorModDate == null) {
-                            dataSourceRepository.createEstateInFirestore(roomEstate)
-                            checkStorageUri(roomEstate)
+                            dataSourceRepository.createEstateInFirestore(checkStorageUri(roomEstate))
+
 
                         } else if (roomModDate == null && firestorModDate != null) {
                             firestoreEstate.id = roomEstate.id
@@ -127,5 +116,39 @@ class MainViewModel @Inject constructor(
             }
         }
     }
+
+
+    private suspend fun checkStorageUri(estate: Estate): Estate {
+        Log.d(TAG, "checkStorageUri: is call")
+
+        val newListPhoto = mutableSetOf<Photo>()
+
+        estate.listPhoto.forEach { photo ->
+            Log.d(TAG, "checkStorageUri: photo.image = ${photo.image ?: "null"}")
+            if (photo.storageUriString == null && photo.image != null) {
+                var storageUri: String? = null
+                dataSourceRepository.setImageToStorage(
+                    storageId = photo.storageId,
+                    uri = Uri.parse(photo.image)
+                ).collect { storageUri = it }
+                val newPhoto = storageUri.toString().let { photo.copy(storageUriString = it) }
+                newListPhoto.add(newPhoto)
+
+                Log.d(TAG, "checkStorageUri: newPhoto is $newPhoto")
+
+            } else {
+                newListPhoto.add(photo)
+            }
+        }
+        Log.d(
+            TAG,
+            "checkStorageUri: estate.listPhoto.storageUri = ${newListPhoto.forEach { photo -> photo.storageUriString }}"
+        )
+        return estate.copy(
+            listPhoto = newListPhoto.toList(),
+            secondaryEstateData = estate.secondaryEstateData.copy(modificationDate = Utils.getLongFormatDate())
+        )
+    }
+
 
 }

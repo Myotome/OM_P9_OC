@@ -87,3 +87,6 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+app/google-services.json
+app/src/main/java/com/openclassrooms/realestatemanager/Todo.kt
+gradle.properties

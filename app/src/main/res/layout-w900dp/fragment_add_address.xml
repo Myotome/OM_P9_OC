@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_add_complement"
-        app:startIconDrawable="@drawable/number"
+        app:startIconDrawable="@drawable/ic_baseline_123_24"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_add_number"
         app:layout_constraintTop_toTopOf="@id/tv_add_number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:startIconDrawable="@drawable/complement"
+        app:startIconDrawable="@drawable/ic_baseline_library_books_24"
 
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
@@ -65,7 +65,7 @@
         app:layout_constraintBottom_toTopOf="@id/tv_add_district"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_complement"
-        app:startIconDrawable="@drawable/street"
+        app:startIconDrawable="@drawable/ic_baseline_add_road_24"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 
@@ -89,7 +89,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_street"
         app:layout_constraintEnd_toStartOf="@id/tv_add_city"
-        app:startIconDrawable="@drawable/district"
+        app:startIconDrawable="@drawable/ic_baseline_holiday_village_24"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_add_district"
         app:layout_constraintTop_toBottomOf="@id/tv_add_street"
         app:layout_constraintEnd_toEndOf="parent"
-        app:startIconDrawable="@drawable/city"
+        app:startIconDrawable="@drawable/ic_baseline_location_city_24"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp">
 
