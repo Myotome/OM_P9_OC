@@ -38,7 +38,7 @@ class ListViewModelTest {
             price = 8500501,
             onSale = true,
             photo = Photo(
-                image = "content://media/external/images/media/162",
+//                image = "content://media/external/images/media/162",
                 name = "view",
                 storageId = "987654",
                 storageUriString = ""

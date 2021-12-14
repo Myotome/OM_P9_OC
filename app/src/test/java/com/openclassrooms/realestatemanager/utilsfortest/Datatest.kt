@@ -11,7 +11,7 @@ fun generateOneEstateTest(): Estate {
     val listPhoto = ArrayList<Photo>()
     listPhoto.add(
         Photo(
-            image = "content://media/external/images/media/162",
+//            image = "content://media/external/images/media/162",
             name = "view",
             storageId = "987654",
             storageUriString = ""
@@ -19,7 +19,7 @@ fun generateOneEstateTest(): Estate {
     )
     listPhoto.add(
         Photo(
-            image = "content://media/external/images/media/158",
+//            image = "content://media/external/images/media/158",
             name = "view",
             storageId = "854732",
             storageUriString = ""
@@ -73,7 +73,7 @@ fun generateTwoEstateTest(): List<Estate> {
     val listPhoto = ArrayList<Photo>()
     listPhoto.add(
         Photo(
-            image = "content://media/external/images/media/162",
+//            image = "content://media/external/images/media/162",
             name = "view",
             storageId = "987654",
             storageUriString = ""
@@ -81,7 +81,7 @@ fun generateTwoEstateTest(): List<Estate> {
     )
     listPhoto.add(
         Photo(
-            image = "content://media/external/images/media/158",
+//            image = "content://media/external/images/media/158",
             name = "view",
             storageId = "854732",
             storageUriString = ""
@@ -204,7 +204,7 @@ fun generateOneEstateWithoutLatLng(): List<Estate>{
         lat = 0.0,
         lng = 0.0,
         listPhoto = listOf(Photo(
-            image = "content://media/external/images/media/162",
+//            image = "content://media/external/images/media/162",
             name = "view",
             storageId = "987654",
             storageUriString = ""
