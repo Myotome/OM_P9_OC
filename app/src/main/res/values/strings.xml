@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Real Estate Manager</string>
-
-
     <string name="photo_of_estate">Gallery</string>
     <string name="description">Description : </string>
     <string name="surface"> Surface : </string>
@@ -53,6 +51,7 @@
     <string name="min_landsize">Min. land size</string>
     <string name="max_landsize">Maw. land size</string>
     <string name="point_of_interest">Point of interest : </string>
+    <string name="point_of_interest_2">Point of interest</string>
     <string name="date_of_entry">Entry date : </string>
     <string name="before">Before :</string>
     <string name="at">At :</string>
@@ -65,7 +64,7 @@
     <string name="loft">Loft</string>
     <string name="apartment">Apartment</string>
     <string name="castle">Castle</string>
-    <string name="sync">Sync</string>
+<!--    <string name="sync">Sync</string>-->
     <string name="photo_name">Photo name</string>
     <string name="information">Information</string>
     <string name="show_detail">Show detail</string>
