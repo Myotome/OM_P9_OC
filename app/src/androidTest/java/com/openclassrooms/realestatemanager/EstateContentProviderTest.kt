@@ -38,7 +38,7 @@ class EstateContentProviderTest {
      *    because depend on current database number
      */
     @Test
-    fun getEstateWhenNoEstateInserted(){
+    fun getAllEstateWithContentProvider(){
         val cursor = contentResolver.query(
             ContentUris.withAppendedId(EstateContentProvider.Companion.URI_MENU, 1),
             null,

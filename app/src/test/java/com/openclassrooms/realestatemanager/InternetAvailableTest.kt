@@ -33,7 +33,7 @@ class InternetAvailableTest {
     }
 
     @Test
-    fun getInternetIsAvailable(){
+    fun getInternetIsAvailableTest(){
 
         shadowOfActiveNetworkInfo.setConnectionStatus(NetworkInfo.State.CONNECTED)
         connectivityManager.activeNetworkInfo
@@ -46,7 +46,7 @@ class InternetAvailableTest {
 
 
     @Test
-    fun getInternetIsNotAvailable(){
+    fun getInternetIsNotAvailableTest(){
 
         shadowOfActiveNetworkInfo.setConnectionStatus(NetworkInfo.State.DISCONNECTED)
         connectivityManager.activeNetworkInfo
@@ -59,7 +59,7 @@ class InternetAvailableTest {
     }
 
     @Test
-    fun getInternetWhenIsConnecting(){
+    fun getInternetWhenIsConnectingTest(){
         shadowOfActiveNetworkInfo.setConnectionStatus(NetworkInfo.State.CONNECTING)
         connectivityManager.activeNetworkInfo?.let {
             Assert.assertTrue(it.isConnectedOrConnecting)

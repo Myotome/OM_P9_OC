@@ -38,7 +38,7 @@ class DataSourceRepositoryTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
     //Necessary to keep this for test even if it's not use
     private val firebaseApp = FirebaseApp.initializeApp(context);
-    private val dataSourceRepositoryTest = DataSourceRepository(estateDao)
+    private val dataSourceRepositoryTest = DataSourceRepository(estateDao, context)
 
     @Before
     fun setUp() {

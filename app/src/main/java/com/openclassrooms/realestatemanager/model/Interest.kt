@@ -1,5 +1,12 @@
 package com.openclassrooms.realestatemanager.model
 
+/**
+ * Data class for point of interest only
+ *
+ * No need empty constructor for firebase
+ * because all fields are filled by default
+ */
+
 data class Interest(
     val school: Boolean = false,
     val store: Boolean = false,

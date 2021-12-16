@@ -31,7 +31,7 @@
     <color name="app_brown_light">#dbb5aa</color>
     <color name="app_brown_dark">#79584f</color>
 
-    <color name="all_item">@color/app_brown</color>
+    <color name="all_item">@color/black</color>
 
     <color name="app_pink">#ffebe2</color>
     <color name="app_pink_light">#ffffff</color>
@@ -47,6 +47,14 @@
 
     <color name="silver">#c0c0c0</color>
     <color name="gold">#efd807</color>
+
+    <color name="green_500">#4caf50</color>
+    <color name="green_700">#388e3b</color>
+    <color name="green_300">#81c784</color>
+
+    <color name="purple_400">#af4cac</color>
+    <color name="purple_600">#932c98</color>
+
 
 
 </resources>

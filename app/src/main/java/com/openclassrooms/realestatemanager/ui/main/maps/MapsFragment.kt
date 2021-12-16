@@ -23,6 +23,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
+/**
+ * Fragment view for get data
+ * Use view state to show correct data with live data
+ */
+
 @FlowPreview
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint

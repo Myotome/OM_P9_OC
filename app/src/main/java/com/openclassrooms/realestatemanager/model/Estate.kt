@@ -2,6 +2,15 @@ package com.openclassrooms.realestatemanager.model
 
 import androidx.room.*
 
+/**
+ * Main and only real data class for room
+ * All relation are one to one
+ * with '@Embedded' tag
+ *
+ * Empty constructor needed for firebase
+ * Do not delete
+ */
+
 @Entity(tableName = "estate_table")
 data class Estate(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "estate_id", index = true) var id: Long = 0L,

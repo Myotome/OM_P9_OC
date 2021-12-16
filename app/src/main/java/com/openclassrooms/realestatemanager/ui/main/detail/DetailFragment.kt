@@ -6,11 +6,17 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.EstateDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.DecimalFormat
+
+/**
+ * Fragment view for get data
+ * Use view state to show correct data with live data
+ */
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -27,7 +33,7 @@ class DetailFragment : Fragment() {
 
         binding = EstateDetailBinding.inflate(inflater, container, false)
 
-        val adapter = DetailAdapter {}
+        val adapter = DetailAdapter()
         binding.rvDetailPhoto.adapter = adapter
 
         viewModel.detailLiveData.observe(viewLifecycleOwner) {
@@ -44,7 +50,9 @@ class DetailFragment : Fragment() {
                 tvDetailRooms.text = "Rooms : ${it.rooms ?: "-"}"
                 tvDetailLandSize.text = "Land size : ${it.landSize ?: "-"}"
 
-                ivDetailMap.load(it.formattedAddress)
+                ivDetailMap.load(it.formattedAddress){
+                    transformations(RoundedCornersTransformation(radius = 20.5F))
+                }
 
                 tvDetailSchool.visibility = if (it.school) View.VISIBLE else View.GONE
                 tvDetailStore.visibility = if (it.store) View.VISIBLE else View.GONE
@@ -109,7 +117,7 @@ class DetailFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.findItem(R.id.main_menu_edit).isVisible = true
-        menu.findItem(R.id.main_menu_search).isVisible = false
+        menu.findItem(R.id.main_menu_search).isVisible = !resources.getBoolean(R.bool.portrait_only)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

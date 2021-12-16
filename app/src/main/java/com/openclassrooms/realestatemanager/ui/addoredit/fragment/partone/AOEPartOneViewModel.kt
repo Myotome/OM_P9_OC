@@ -13,6 +13,14 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
+/**
+ * Main logic for fragment
+ * When edition, get data from repository and create view state to show correct data on view
+ * Assert all obligatory fields are complete before save part
+ * Flow channel to communicate with the view
+ * Get sold date if needed
+ */
+
 @DelicateCoroutinesApi
 @HiltViewModel
 class AOEPartOneViewModel @Inject constructor(

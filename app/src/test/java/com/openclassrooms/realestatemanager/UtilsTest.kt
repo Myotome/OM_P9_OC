@@ -9,7 +9,7 @@ import java.util.*
 class UtilsTest {
 
     @Test
-    fun testConvertDollarToEuro(){
+    fun convertDollarToEuroTest(){
         val submit = 40
         val expect = 34.0904
         val result = Utils.convertDollarToEuro(submit)
@@ -18,7 +18,7 @@ class UtilsTest {
     }
 
     @Test
-    fun testConvertEuroToDollar(){
+    fun convertEuroToDollarTest(){
         val submit = 40
         val expect = 46.932
         val result = Utils.convertEuroToDollar(submit)
@@ -27,13 +27,14 @@ class UtilsTest {
     }
 
     @Test
-    fun testGetTodayDate(){
+    fun getTodayDateTest(){
         val dateFormat = SimpleDateFormat("dd/MM/yyyy")
         val expect = dateFormat.format(Date())
 
         /**
          * variant to test
          * enter today date before test
+         * in format "dd/MM/yyyy"
          */
 //        val expect = "02/12/2021"
 
@@ -43,7 +44,7 @@ class UtilsTest {
     }
 
     @Test
-    fun testGetLongFormatDate(){
+    fun getLongFormatDateTest(){
         val expect = Calendar.getInstance().time.time.toFloat()
         val result = Utils.getLongFormatDate().toFloat()
 
@@ -51,7 +52,7 @@ class UtilsTest {
     }
 
     @Test
-    fun testGetLongFormatDateWithParameters(){
+    fun getLongFormatDateWithParametersTest(){
         val years = 2021
         val month = 12
         val day = 25
@@ -65,7 +66,7 @@ class UtilsTest {
     }
 
     @Test
-    fun testGetLongToString(){
+    fun getLongToStringTest(){
         val submit = 123456789L
         val expect = "02/01/1970"
         val result  = Utils.getLongToString(submit)

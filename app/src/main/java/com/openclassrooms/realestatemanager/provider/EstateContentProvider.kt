@@ -10,6 +10,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 
+/**
+ * Content provider for read only
+ */
+
+
 class EstateContentProvider : ContentProvider() {
 
     @InstallIn(SingletonComponent::class)

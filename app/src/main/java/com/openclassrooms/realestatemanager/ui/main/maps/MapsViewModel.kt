@@ -15,6 +15,13 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
+
+/**
+ * Main logic for fragment
+ * Get data from repositories and create view state to show correct data on view
+ * Assert lat/lng is correctly added or get it
+ */
+
 @ExperimentalCoroutinesApi
 @FlowPreview
 @HiltViewModel
@@ -50,6 +57,11 @@ class MapsViewModel @Inject constructor(
         }
     }
 
+    /**
+     * combine multi sources and create two viewState type
+     * One with data of estate
+     * One with list of data of estate and current position
+     */
     private fun mediatorCombine(position: LatLng?, listEstate: List<Estate>?) {
 
         val listViewState = ArrayList<MapsEstateViewState>()

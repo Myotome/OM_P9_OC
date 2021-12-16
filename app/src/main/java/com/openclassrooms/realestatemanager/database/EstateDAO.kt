@@ -18,7 +18,7 @@ interface EstateDAO {
     @Query("UPDATE estate_table SET lat=:lat, lng=:lng, modificationDate=:modDate WHERE estate_id=:id")
     suspend fun updateLatLngById(id: Long, lat: Double, lng: Double, modDate: Long)
 
-    @Query("SELECT * FROM estate_table")
+    @Query("SELECT * FROM estate_table ORDER BY entryDate DESC")
     fun getAllEstate(): Flow<List<Estate>?>
 
     @Query("SELECT * FROM estate_table WHERE estate_id =:id")

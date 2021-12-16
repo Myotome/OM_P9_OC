@@ -14,6 +14,11 @@ import com.openclassrooms.realestatemanager.databinding.EstateListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+/**
+ * Fragment view for get data
+ * Use view state to show correct data with live data
+ */
+
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ListFragment : Fragment() {

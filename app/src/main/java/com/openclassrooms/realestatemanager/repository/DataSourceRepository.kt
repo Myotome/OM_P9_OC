@@ -1,14 +1,27 @@
 package com.openclassrooms.realestatemanager.repository
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.TaskStackBuilder
 import androidx.lifecycle.MutableLiveData
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.database.EstateDAO
 import com.openclassrooms.realestatemanager.model.*
+import com.openclassrooms.realestatemanager.ui.main.MainActivity
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
@@ -17,8 +30,16 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.collections.ArrayList
 
+const val COLLECTION_PATH = "RealEstatesManager"
+const val CHANNEL_ID = "channelId"
+const val CHANNEL_NAME = "channelName"
+const val NOTIF_ID = 976431
+
 @Singleton
-class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO) {
+class DataSourceRepository @Inject constructor(
+    private val estateDAO: EstateDAO,
+    @ApplicationContext private val context: Context
+) {
 
     /**
      * ------------------------------------------------------------
@@ -32,6 +53,7 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     val isSearching = MutableLiveData(false)
 
     private val querySearchMutableStateFlow = MutableStateFlow<SimpleSQLiteQuery?>(null)
+
     @ExperimentalCoroutinesApi
     val querySearchFlow = querySearchMutableStateFlow.asSharedFlow().flatMapLatest { query ->
         if (query != null) estateDAO.getSearchEstate(query) else estateDAO.getAllEstate()
@@ -103,10 +125,12 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
             )
             estateDAO.updateEstate(updateEstate)
             createEstateInFirestore(updateEstate)
+            sendNotification(true)
 
         } else {
             estateDAO.insertEstate(estate)
             createEstateInFirestore(estate)
+            sendNotification(false)
 
         }
     }
@@ -150,19 +174,19 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     private val db = Firebase.firestore
 
     fun createEstateInFirestore(estate: Estate) {
-        db.collection("RealEstatesManager")
+        db.collection(COLLECTION_PATH)
             .document(estate.secondaryEstateData.firebaseId).set(estate)
     }
 
     private fun updateLatLngInFirestore(firebaseId: String, lat: Double, lng: Double) {
-        db.collection("RealEstatesManager").document(firebaseId)
+        db.collection(COLLECTION_PATH).document(firebaseId)
             .update("lat", lat, "lng", lng)
     }
 
     @ExperimentalCoroutinesApi
     val getAllEstateFromFirestore: Flow<List<Estate>?> = callbackFlow {
 
-        db.collection("RealEstatesManager")
+        db.collection(COLLECTION_PATH)
             .addSnapshotListener { value, error ->
                 val estates = ArrayList<Estate>()
                 when {
@@ -206,6 +230,55 @@ class DataSourceRepository @Inject constructor(private val estateDAO: EstateDAO)
     fun deleteInStorage(storageId: String) {
         storageRef.child(storageId).delete()
     }
+
+    /**
+     * ------------------------------------------------------------
+     * -------------------Notification Part------------------------
+     * ------------------------------------------------------------
+     */
+
+    private fun sendNotification(isUpdate: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID, CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                lightColor = Color.GREEN
+                enableLights(true)
+            }
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+
+        }
+
+        var text = "New Estate Created"
+        if (isUpdate) text = "Estate update"
+
+        val notificationManager = NotificationManagerCompat.from(context)
+
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setContentTitle("Real Estate Manager")
+            .setContentText(text)
+            .setContentIntent(createPendingIntent())
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setSmallIcon(R.drawable.ic_baseline_holiday_village_24)
+            .setAutoCancel(true)
+            .build()
+
+        notificationManager.notify(NOTIF_ID, notification)
+
+    }
+
+    private fun createPendingIntent(): PendingIntent?{
+        val intent = Intent(context, MainActivity::class.java)
+        return TaskStackBuilder.create(context).run {
+            addNextIntentWithParentStack(intent)
+            getPendingIntent(753951, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+    }
+
+
 }
 
 

@@ -43,7 +43,7 @@ class MapsViewModelTest {
 
     @FlowPreview
     @Test
-    fun getViewStateTest(){
+    fun generateViewStateForMaps(){
         //Before
         every { dataSourceRepository.querySearchFlow } returns flowOf(generateTwoEstateTest())
 

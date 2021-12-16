@@ -11,7 +11,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.ImageListContentBinding
 import com.openclassrooms.realestatemanager.model.Photo
 
-class DetailAdapter(private val listener: (Photo) -> Unit) :
+class DetailAdapter :
     ListAdapter<Photo, DetailAdapter.DetailViewHolder>(DetailDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DetailViewHolder(
@@ -19,14 +19,15 @@ class DetailAdapter(private val listener: (Photo) -> Unit) :
     )
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) =
-        holder.bind(getItem(position), listener)
+        holder.bind(getItem(position))
 
 
     class DetailViewHolder(private val binding: ImageListContentBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(photo: Photo, listener: (Photo) -> Unit) {
+        fun bind(photo: Photo) {
 
             photo.storageUriString?.let {binding.ivContentList.load( Uri.parse(it))}
+                ?:photo.image?.let{ binding.ivContentList.load(Uri.parse(it))}
                 ?:binding.ivContentList.load(R.drawable.ic_baseline_image_not_supported_24)
             binding.tvContentList.text = photo.name
 

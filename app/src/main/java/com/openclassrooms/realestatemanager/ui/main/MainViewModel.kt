@@ -14,13 +14,18 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * A very important view model.
+ * In fact this view model is use for synchronise local DB and firestore
+ * Algorithm check which of the two db must be update
+ * Also chek if image was stored online or not, and update if it's need
+ */
+
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val dataSourceRepository: DataSourceRepository
 ) : ViewModel() {
-
-    val TAG = "DEBUGKEY"
 
     fun clearCurrentEstate() = dataSourceRepository.setCurrentEstateById(null)
 
@@ -50,7 +55,6 @@ class MainViewModel @Inject constructor(
 
     private fun mediatorCombine(firebaseEstate: List<Estate>?, roomEstate: List<Estate>?) =
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d(TAG, "mediatorCombine: is call")
 
             when {
                 firebaseEstate != null && roomEstate == null -> firebaseEstate.forEach { estate ->
@@ -119,12 +123,10 @@ class MainViewModel @Inject constructor(
 
 
     private suspend fun checkStorageUri(estate: Estate): Estate {
-        Log.d(TAG, "checkStorageUri: is call")
 
         val newListPhoto = mutableSetOf<Photo>()
 
         estate.listPhoto.forEach { photo ->
-            Log.d(TAG, "checkStorageUri: photo.image = ${photo.image ?: "null"}")
             if (photo.storageUriString == null && photo.image != null) {
                 var storageUri: String? = null
                 dataSourceRepository.setImageToStorage(
@@ -134,16 +136,11 @@ class MainViewModel @Inject constructor(
                 val newPhoto = storageUri.toString().let { photo.copy(storageUriString = it) }
                 newListPhoto.add(newPhoto)
 
-                Log.d(TAG, "checkStorageUri: newPhoto is $newPhoto")
 
             } else {
                 newListPhoto.add(photo)
             }
         }
-        Log.d(
-            TAG,
-            "checkStorageUri: estate.listPhoto.storageUri = ${newListPhoto.forEach { photo -> photo.storageUriString }}"
-        )
         return estate.copy(
             listPhoto = newListPhoto.toList(),
             secondaryEstateData = estate.secondaryEstateData.copy(modificationDate = Utils.getLongFormatDate())

@@ -169,7 +169,6 @@ class EstateDAOTest {
         lng = -73.99271,
         listPhoto = listOf(
             Photo(
-//                image = "content://media/external/images/media/162",
                 name = "view",
                 storageId = "987654",
                 storageUriString = ""
@@ -191,7 +190,6 @@ class EstateDAOTest {
         val listPhoto = ArrayList<Photo>()
         listPhoto.add(
             Photo(
-//                image = "content://media/external/images/media/162",
                 name = "view",
                 storageId = "987654",
                 storageUriString = ""
@@ -199,7 +197,6 @@ class EstateDAOTest {
         )
         listPhoto.add(
             Photo(
-//                image = "content://media/external/images/media/158",
                 name = "view",
                 storageId = "854732",
                 storageUriString = ""

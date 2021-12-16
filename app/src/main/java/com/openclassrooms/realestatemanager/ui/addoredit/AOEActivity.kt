@@ -19,12 +19,18 @@ import com.openclassrooms.realestatemanager.utils.appPerms
 import com.openclassrooms.realestatemanager.utils.permissionNameForUser
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 const val ADD_EDIT_BACK_RESULT = 0
 const val ADD_EDIT_PREVIOUS_RESULT = 1
 const val ADD_EDIT_NEXT_RESULT = 2
 const val ADD_EDIT_FINISH_RESULT = 3
+
+/**
+ * Main support for create or edition activity
+ * support view pager
+ */
 
 @FlowPreview
 @DelicateCoroutinesApi
@@ -63,6 +69,7 @@ class AOEActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalCoroutinesApi
     internal fun clickToRightOrLeft(int: Int) {
         when (int) {
             0 -> onBackPressed()

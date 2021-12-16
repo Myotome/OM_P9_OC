@@ -1,5 +1,13 @@
 package com.openclassrooms.realestatemanager.model
 
+/**
+ * Data class for second part of estate only
+ * This part is useful in create or update estate
+ *
+ * Empty constructor needed for firebase
+ * Do not delete
+ */
+
 data class SecondaryEstateData(
     val firebaseId: String,
     val bedroom: Int?,

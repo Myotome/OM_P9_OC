@@ -9,6 +9,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.mapNotNull
 import javax.inject.Inject
 
+
+/**
+ * Main logic for fragment
+ * Get data from repository and create view state to show correct data on view
+ */
+
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class ListViewModel @Inject constructor(

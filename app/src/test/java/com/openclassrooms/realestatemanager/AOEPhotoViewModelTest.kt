@@ -11,6 +11,7 @@ import com.openclassrooms.realestatemanager.utilsfortest.getOrAwaitValue
 import com.openclassrooms.realestatemanager.utilsfortest.observeForTesting
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.flow
@@ -36,10 +37,11 @@ class AOEPhotoViewModelTest {
 
     }
 
+    @DelicateCoroutinesApi
     @ExperimentalCoroutinesApi
     @FlowPreview
     @Test
-    fun getViewStateTest() = testCoroutineRule.runBlockingTest  {
+    fun generateViewStateForPhoto() = testCoroutineRule.runBlockingTest  {
         //Expect
         val viewStateExpect = getExpectedViewState()
 

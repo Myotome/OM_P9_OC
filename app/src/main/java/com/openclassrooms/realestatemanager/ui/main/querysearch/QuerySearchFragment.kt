@@ -10,6 +10,11 @@ import com.openclassrooms.realestatemanager.databinding.FragmentQuerySearchBindi
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Fragment view for get data
+ * Use view state to show correct data with live data
+ */
+
 @AndroidEntryPoint
 class QuerySearchFragment : Fragment() {
 

@@ -13,6 +13,12 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
+/**
+ * Main logic for fragment
+ * When edition, get data from repository and create view state to show correct data on view
+ * Flow channel to communicate with the view
+ */
+
 @DelicateCoroutinesApi
 @HiltViewModel
 class AOEInterestViewModel @Inject constructor(

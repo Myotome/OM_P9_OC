@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.openclassrooms.realestatemanager">
 
 
@@ -38,12 +39,13 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_api_key" />
+            android:value="@string/MAPS_API_KEY" />
 
         <provider
             android:authorities="com.openclassrooms.realestatemanager.provider"
             android:name="com.openclassrooms.realestatemanager.provider.EstateContentProvider"
-            android:exported="true"/>
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
 
     </application>
 
