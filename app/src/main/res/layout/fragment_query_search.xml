@@ -12,8 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@id/bt_search_cancel"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -25,7 +24,7 @@
                 android:id="@+id/cb_search_on_sale"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_margin="30dp"
                 android:checked="true"
                 android:text="@string/sale"
                 android:gravity="center"
@@ -38,7 +37,7 @@
                 android:id="@+id/cb_search_sold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
+                android:layout_margin="30dp"
                 android:checked="false"
                 android:text="@string/sold"
                 android:gravity="center"
@@ -52,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/type"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cb_search_on_sale"/>
@@ -61,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_type">
 
                 <TableRow android:gravity="center">
@@ -107,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/district"
+                android:layout_margin="7dp"
                 app:layout_constraintTop_toBottomOf="@id/tl_query_type"
                 app:layout_constraintBottom_toTopOf="@id/til_query_district"/>
 
@@ -117,6 +119,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:hint="@string/district"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_district"
                 app:startIconDrawable="@drawable/ic_baseline_holiday_village_24"
@@ -134,6 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/price"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_query_district"/>
@@ -143,6 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_price">
@@ -192,6 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/surface"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_search_price"/>
@@ -201,6 +207,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_surface">
@@ -249,6 +256,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/rooms"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_search_surface"/>
@@ -258,6 +266,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_room">
@@ -307,6 +316,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bedrooms"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_search_room"/>
@@ -316,6 +326,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_bedroom">
@@ -364,6 +375,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bathrooms"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_search_bedroom" />
@@ -373,6 +385,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_bathroom">
@@ -422,6 +435,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/landsize"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_search_bathroom" />
@@ -431,6 +445,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_landsize">
@@ -481,6 +496,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/point_of_interest"
+                android:layout_margin="7dp"
                 app:layout_constraintTop_toBottomOf="@id/cl_search_landsize" />
 
             <TableLayout
@@ -488,6 +504,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_interest">
 
                 <TableRow>
@@ -562,6 +579,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/date_of_entry"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tl_search_interest" />
@@ -571,6 +589,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_entry_date">
 
                 <RadioGroup
@@ -586,12 +605,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/before" />
-
-                    <!--                    <RadioButton-->
-                    <!--                        android:id="@+id/rb_search_entry_at"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="@string/at" />-->
 
                     <RadioButton
                         android:id="@+id/rb_search_entry_after"
@@ -621,6 +634,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sold_date"
                 android:visibility="gone"
+                android:layout_margin="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_search_entry_date"
@@ -631,6 +645,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_sold_date">
 
                 <RadioGroup
@@ -646,12 +661,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/before" />
-
-                    <!--                    <RadioButton-->
-                    <!--                        android:id="@+id/rb_search_sold_at"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="@string/at" />-->
 
                     <RadioButton
                         android:id="@+id/rb_search_sold_after"
@@ -679,6 +688,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/photo_of_estate"
+                android:layout_margin="7dp"
                 app:layout_constraintTop_toBottomOf="@id/cl_search_sold_date" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -689,6 +699,7 @@
                 android:layout_marginEnd="5dp"
                 android:hint="@string/min_photo"
                 android:visibility="gone"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bt_search_photo"
                 app:startIconDrawable="@drawable/ic_baseline_camera_alt_24">
@@ -701,6 +712,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
     <Button
@@ -708,6 +720,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
+        android:layout_margin="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/bt_search_search"
         app:layout_constraintStart_toStartOf="parent" />
@@ -717,6 +730,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/search"
+        android:layout_margin="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/bt_search_cancel" />

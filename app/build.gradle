@@ -70,10 +70,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:$hilt_version")
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.gms:play-services-maps:18.0.0'
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // Provides lifecycle and coroutines scopes
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -82,7 +81,6 @@ dependencies {
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC'
-
 
     // Provides 'by viewModels' delegate
     implementation "androidx.fragment:fragment-ktx:1.4.0"
@@ -111,7 +109,8 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     //google service
-    implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.google.android.gms:play-services-location:19.0.0'
+    implementation 'com.google.android.gms:play-services-maps:18.0.1'
 
     //Firestore - firestorage
     implementation platform('com.google.firebase:firebase-bom:29.0.0')

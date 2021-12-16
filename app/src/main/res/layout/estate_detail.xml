@@ -25,6 +25,7 @@
                 android:text="@string/sold"
                 android:textSize="50sp"
                 android:visibility="gone"
+                android:textColor="@color/ocherDark"
                 app:layout_constraintBottom_toTopOf="@id/rv_detail_photo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textSize="25sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_detail_photo"
                 tools:text="Penthouse 7 rooms 200 m2" />
@@ -58,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textSize="30sp"
+                android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_fast_description"
                 tools:text="3 000 000 $" />
@@ -78,6 +81,8 @@
                     android:background="@drawable/button_style"
                     android:text="@string/show_detail"
                     android:textAlignment="center"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginTop="7dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/cl3" />
@@ -179,6 +184,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
                     android:text="@string/descriptions"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginTop="7dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tl_detail_detail" />
 
@@ -188,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:padding="5dp"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bt_detail_title_description"
@@ -199,7 +206,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
-                    android:text="Point of interest"
+                    android:text="@string/point_of_interest_2"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginTop="7dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_detail_description" />
@@ -320,6 +329,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
                     android:text="@string/map"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginTop="7dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tl_detail_interest" />
@@ -363,6 +374,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_style"
                     android:text="@string/information"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginTop="7dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cl_detail_map" />
