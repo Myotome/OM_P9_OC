@@ -15,14 +15,22 @@ import com.openclassrooms.realestatemanager.databinding.FragmentAddAddressBindin
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 
+/**
+ * Fragment view for get data in create or edition of estate
+ * Use view state to show correct data with live data
+ * Use flow channel for show event or change page on viewPager
+ */
 
 @DelicateCoroutinesApi
 @AndroidEntryPoint
+@FlowPreview
 class AOEAddressFragment : Fragment() {
 
     private val viewModel by viewModels<AOEAddressViewModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

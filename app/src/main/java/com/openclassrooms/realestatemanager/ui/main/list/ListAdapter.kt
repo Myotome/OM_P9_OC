@@ -44,6 +44,7 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
             estateViewState.photo.storageUriString?.let { binding.ivEstateContent.load(Uri.parse(it)){
                 transformations(RoundedCornersTransformation(radius = 20.5F))
             } }
+                ?:estateViewState.photo.image?.let{ binding.ivEstateContent.load(Uri.parse(it))}
                 ?: binding.ivEstateContent.load(R.drawable.ic_baseline_image_not_supported_24)
 
             if (!estateViewState.onSale) {

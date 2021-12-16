@@ -12,6 +12,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Retrofit call for obtain Latitude and Longitude
+ * for estate.
+ * Use with GoogleApiService
+ */
+
 @Singleton
 class RetrofitRepository @Inject constructor() {
 

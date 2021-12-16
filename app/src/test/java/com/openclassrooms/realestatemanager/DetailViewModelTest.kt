@@ -30,7 +30,7 @@ class DetailViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun generateDetailViewState() {
+    fun generateViewStateForDetail() {
         //Expect
         val viewState = getExpectedViewState()
 
@@ -63,7 +63,7 @@ class DetailViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun getFormattedAddress() {
+    fun getFormattedAddressTest() {
         //Expect
         val addressFormatExpect = "https://maps.googleapis.com/maps/api/" +
                 "staticmap?size=200x200&scale=2" +
@@ -102,12 +102,10 @@ class DetailViewModelTest {
             nightlife = false,
             photoList = listOf(
                 Photo(
-//                    image = "content://media/external/images/media/162",
                     name = "view",
                     storageId = "987654",
                     storageUriString = ""
                 ), Photo(
-//                    image = "content://media/external/images/media/158",
                     name = "view",
                     storageId = "854732",
                     storageUriString = ""

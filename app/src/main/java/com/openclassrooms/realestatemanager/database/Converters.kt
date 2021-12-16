@@ -6,6 +6,10 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.openclassrooms.realestatemanager.model.Photo
 
+/**
+ * class to convert specific field for save on room
+ */
+
 class Converters {
 
 

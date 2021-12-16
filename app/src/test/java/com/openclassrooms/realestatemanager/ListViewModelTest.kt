@@ -9,6 +9,7 @@ import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import com.openclassrooms.realestatemanager.utilsfortest.generateTwoEstateTest
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Assert
 import org.junit.Before
@@ -22,14 +23,16 @@ class ListViewModelTest {
 
     private val dataSourceRepository = mockk<DataSourceRepository>()
 
+    @ExperimentalCoroutinesApi
     @Before
     fun setUp() {
         every { dataSourceRepository.querySearchFlow } returns flowOf(generateTwoEstateTest())
         every { dataSourceRepository.isSearching } returns MutableLiveData(false)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun generateListViewState()  {
+    fun generateViewStateForList()  {
         //Expect
         val expect = ListViewState(
             id = -5L,
@@ -38,7 +41,6 @@ class ListViewModelTest {
             price = 8500501,
             onSale = true,
             photo = Photo(
-//                image = "content://media/external/images/media/162",
                 name = "view",
                 storageId = "987654",
                 storageUriString = ""

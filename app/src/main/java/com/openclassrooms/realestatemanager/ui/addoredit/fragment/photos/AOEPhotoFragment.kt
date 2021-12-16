@@ -28,6 +28,12 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import java.io.ByteArrayOutputStream
 
+/**
+ * Fragment view for get data in create or edition of estate
+ * Use view state to show correct data with live data
+ * Use flow channel for show event or change page on viewPager
+ */
+
 
 @DelicateCoroutinesApi
 @FlowPreview
@@ -63,8 +69,17 @@ class AOEPhotoFragment : Fragment() {
                         Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
                     }
                     is AOEPhotoViewModel.AddEditPhotoEvent.WaitingForUpload -> {
-                        if (event.upload) binding.pbAddUpload.visibility =
-                            View.VISIBLE else binding.pbAddUpload.visibility = View.GONE
+                        if (event.upload) {
+                            binding.apply {
+                                pbAddUpload.visibility = View.VISIBLE
+                                tvAddUpload.visibility = View.VISIBLE
+                            }
+                        } else{
+                            binding.apply {
+                                pbAddUpload.visibility = View.GONE
+                                tvAddUpload.visibility = View.GONE
+                            }
+                        }
                     }
                 }
             }

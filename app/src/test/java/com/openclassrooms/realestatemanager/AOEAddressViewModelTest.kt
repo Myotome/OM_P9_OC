@@ -8,6 +8,7 @@ import com.openclassrooms.realestatemanager.repository.RetrofitRepository
 import com.openclassrooms.realestatemanager.utilsfortest.generateOneEstateTest
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import org.junit.Assert
 import org.junit.Before
@@ -27,8 +28,9 @@ class AOEAddressViewModelTest {
         every { dataSourceRepository.getEstateById() } returns flow { generateOneEstateTest() }
     }
 
+    @DelicateCoroutinesApi
     @Test
-    fun generateDetailViewState() {
+    fun generateDetailViewStateForAddress() {
         //Expect
         val viewState = getExpectedViewState()
 

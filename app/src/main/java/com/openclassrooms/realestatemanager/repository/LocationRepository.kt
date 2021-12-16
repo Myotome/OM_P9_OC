@@ -14,6 +14,12 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Get device's location when permission are okay
+ * Position are update every 2 sec and
+ * for displacement of 100 m
+ */
+
 @Singleton
 class LocationRepository @Inject constructor(
     @ApplicationContext private val context: Context
@@ -32,8 +38,8 @@ class LocationRepository @Inject constructor(
     private fun getDeviceLocation() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
         locationRequest = LocationRequest.create().apply {
-            interval = TimeUnit.SECONDS.toMillis(60)
-            fastestInterval = TimeUnit.SECONDS.toMillis(30)
+            interval = TimeUnit.SECONDS.toMillis(120)
+            fastestInterval = TimeUnit.SECONDS.toMillis(60)
             smallestDisplacement = 100F
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }

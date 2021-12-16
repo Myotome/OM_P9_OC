@@ -13,7 +13,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@tools:sample/avatars"/>
+        tools:src="@tools:sample/avatars"
+        android:layout_margin="7dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tl_popup"
@@ -26,7 +27,8 @@
             android:id="@+id/et_popup_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:layout_margin="7dp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

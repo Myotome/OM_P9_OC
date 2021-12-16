@@ -4,10 +4,10 @@
 
     <corners android:radius="20dp" />
 
-    <solid android:color="@color/app_blue_dark"/>
+    <solid android:color="#e8f5e9"/>
 
     <stroke
-        android:color="@color/app_brown"
+        android:color="@color/green_500"
         android:width="2dp"/>
 
     <padding

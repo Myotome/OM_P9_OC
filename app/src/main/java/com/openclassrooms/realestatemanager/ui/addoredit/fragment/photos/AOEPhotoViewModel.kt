@@ -15,6 +15,15 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
+/**
+ * Main logic for fragment
+ * When edition, get data from repository and create view state to show correct data on view
+ * Assert all obligatory fields are complete before save part
+ * Flow channel to communicate with the view
+ * Combine two different sources : repository and view
+ * So main logic is on combine method
+ */
+
 @DelicateCoroutinesApi
 @FlowPreview
 @HiltViewModel
@@ -66,6 +75,13 @@ class AOEPhotoViewModel @Inject constructor(
         return mediator
     }
 
+
+    /**
+     * When internet is available, get directly storage uri
+     * When internet isn't available, save local uri on local database
+     * This way permit to not block threat, and get storage uri later
+     * with unique ID
+     */
     fun addPhoto(internet: Boolean, name: String, path: String, storagePhotoId: String?) =
         viewModelScope.launch {
             val storageId = storagePhotoId ?: UUID.randomUUID().toString()

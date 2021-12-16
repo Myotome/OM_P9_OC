@@ -28,6 +28,13 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
+/**
+ * Main activity to support toolbar, bottom view, master/detail screen
+ * Assert or ask for permission first time
+ * Main view model is using for synchronise and update databases
+ * so in this activity, the method is observe forever
+ */
+
 
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -36,7 +43,6 @@ import kotlinx.coroutines.FlowPreview
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

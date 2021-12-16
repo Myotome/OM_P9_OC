@@ -12,10 +12,18 @@ import com.openclassrooms.realestatemanager.ui.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.databinding.FragmentAddInterestBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
+
+/**
+ * Fragment view for get data in create or edition of estate
+ * Use view state to show correct data with live data
+ * Use flow channel for show event or change page on viewPager
+ */
 
 @DelicateCoroutinesApi
 @AndroidEntryPoint
+@FlowPreview
 class AOEInterestFragment : Fragment() {
 
     private val viewModel by viewModels<AOEInterestViewModel>()

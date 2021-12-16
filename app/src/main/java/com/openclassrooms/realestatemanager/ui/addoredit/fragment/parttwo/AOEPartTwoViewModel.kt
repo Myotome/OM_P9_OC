@@ -18,6 +18,15 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Main logic for fragment
+ * When edition, get data from repository and create view state to show correct data on view
+ * Flow channel to communicate with the view
+ * Get entry date or modification date if needed
+ * Get unique ID for firestore. It's very useful to get one and save it on local database
+ * instead of let firestore generate one
+ */
+
 @DelicateCoroutinesApi
 @HiltViewModel
 class AOEPartTwoViewModel @Inject constructor(

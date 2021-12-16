@@ -6,6 +6,12 @@ import com.openclassrooms.realestatemanager.repository.DataSourceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+/**
+ * Main logic for fragment
+ * Big view model with a lot of field to cover a lot of situation
+ * At the end create a query for search on DB
+ */
+
 @HiltViewModel
 class QuerySearchViewModel @Inject constructor(
     private val dataSourceRepo: DataSourceRepository,

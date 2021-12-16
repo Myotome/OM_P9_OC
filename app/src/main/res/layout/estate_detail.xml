@@ -347,11 +347,12 @@
 
                     <ImageView
                         android:id="@+id/iv_detail_map"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="175dp"
+                        android:layout_height="175dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/cl_detail_map"
-                        tools:src="@drawable/ic_baseline_image_not_supported_24" />
+                        tools:src="@drawable/ic_baseline_image_not_supported_24"
+                        android:contentDescription="@string/map" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
