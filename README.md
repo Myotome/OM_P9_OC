@@ -101,7 +101,7 @@ Retrouvez :
 
 ## Votre base de données est automatiquement synchronisée en ligne
 * Aucune action n'est requise de votre part
-* La synchronisation est en temps réelle lorsque vous êtes connecté à internet
+* La synchronisation est en temps réel lorsque vous êtes connecté à internet
 * Vous êtes hors ligne ? 
   - Pas de soucis, continuez de travailler grâce à votre base de données locale
   - La mise à jour sera automatique lorsque vous rejoindrez le réseau Internet
