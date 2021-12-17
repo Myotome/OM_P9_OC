@@ -41,14 +41,14 @@ class DetailFragment : Fragment() {
 
             binding.apply {
                 tvDetailFastDescription.text =
-                    "${it.type}, ${it.rooms ?: "-"} rooms, ${it.surface} m2 "
+                    "${it.type}, ${it.rooms ?: "-"} rooms, ${it.surface} m² "
                 tvDetailPrice.text = "${DecimalFormat("#,###").format(it.price)} $"
                 tvDetailDescription.text = it.description
                 tvDetailBedrooms.text = "Bedrooms : ${it.bedrooms ?: "-"}"
                 tvDetailBathrooms.text = "Bathrooms : ${it.bathrooms ?: "-"}"
-                tvDetailSurface.text = "Surface : ${it.surface}"
+                tvDetailSurface.text = "Surface : ${it.surface} m²"
                 tvDetailRooms.text = "Rooms : ${it.rooms ?: "-"}"
-                tvDetailLandSize.text = "Land size : ${it.landSize ?: "-"}"
+                tvDetailLandSize.text = "Land size : ${it.landSize ?: "-"} m²"
 
                 ivDetailMap.load(it.formattedAddress){
                     transformations(RoundedCornersTransformation(radius = 20.5F))

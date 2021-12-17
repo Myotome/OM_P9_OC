@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.main.list
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -32,13 +33,13 @@ class ListAdapter(private val listener: (ListViewState) -> Unit) :
     class EstateViewHolder(private val binding: EstateListContentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(estateViewState: ListViewState, listener: (ListViewState) -> Unit) {
 
             binding.tvContentDistrict.text = estateViewState.district
             binding.tvContentPrice.text =
-                DecimalFormat("#,###")
-                    .format(estateViewState.price)
-                    .toString()
+                "${DecimalFormat("#,###")
+                    .format(estateViewState.price)} $"
             binding.tvContentType.text = estateViewState.type
 
             estateViewState.photo.storageUriString?.let { binding.ivEstateContent.load(Uri.parse(it)){

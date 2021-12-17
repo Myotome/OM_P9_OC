@@ -80,6 +80,7 @@ class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.findItem(R.id.main_menu_edit).isVisible = false
+        menu.findItem(R.id.main_menu_search).isVisible = true
         super.onCreateOptionsMenu(menu, inflater)
     }
 }
