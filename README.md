@@ -4,10 +4,10 @@ Projet 9 OpenClassrooms
 
 > Développé par Olivier Marais
 
-### Application de gestion de bien immobilier de Luxe
+### Application de gestion d'immobilier de Luxe
 -----------------------------------------------------
 
-## Technologie
+## Technologies
 ---------------
 * Kotlin 94 %
 * Java 6 %
@@ -28,7 +28,7 @@ Projet 9 OpenClassrooms
  
  * Tests par JUnit 4 et Robolectric 4.7.3
 
-# Adapté aux smartphones ou tablettes
+# Adapté aux smartphones et tablettes
 -------------------------------------
 ## Liste des biens 
 ![2021-12-17_10h24_20](https://user-images.githubusercontent.com/78822313/146521276-dade182d-a622-46fc-9309-8ec1fe43d152.png)
@@ -66,7 +66,7 @@ Retrouvez :
 
 ## Retrouvez les biens sur la carte
 * Autour de vous
-* Cliquez sur la punaise pour voir le détail du bien
+* Cliquez sur le marqueur pour voir le détail du bien
 
 ![2021-12-17_10h35_08](https://user-images.githubusercontent.com/78822313/146522941-d5f024bb-21a2-4ced-9366-1cebd85f434c.png)
 ![2021-12-17_10h41_05](https://user-images.githubusercontent.com/78822313/146523887-956e7cd8-b44a-44b4-a246-3a34caab8dcb.png)
@@ -86,23 +86,23 @@ Retrouvez :
 ![2021-12-17_10h59_34](https://user-images.githubusercontent.com/78822313/146526606-3ef491e6-0b2d-4464-8b79-9b89b43c4560.png)
 ![2021-12-17_10h59_47](https://user-images.githubusercontent.com/78822313/146526629-47c18b28-26d6-4417-b8dd-e7e08695dc5d.png)
 
-## Soyez notifié lorsque vous créez ou modifier un bien
+## Soyez notifié lorsque vous créez ou modifiez un bien
 
 ![2021-12-17_11h04_37](https://user-images.githubusercontent.com/78822313/146527286-0e2dbddd-bda6-4202-bf33-e594d25725bc.png)
 
-## Cherchez un ou plusieurs bien
-* Un sytème de recherche complet pour tous vos désir de filtre
-* Une interface adaptive, n'affichez que les champs qui vous intéresses
+## Cherchez un ou plusieurs biens
+* Un sytème de recherche complet pour tous vos désirs de filtres
+* Une interface adaptive, n'affichez que les champs qui vous intéressent
 * Le tri se fait aussi bien sur la liste que sur la carte
 
 ![2021-12-17_11h01_52](https://user-images.githubusercontent.com/78822313/146526927-24083299-4654-4b3f-b4ca-456fef335a78.png)
 ![2021-12-17_11h02_22](https://user-images.githubusercontent.com/78822313/146526987-07ed820d-48a9-4f40-b5f7-31f857385d1b.png)
 ![2021-12-17_11h02_30](https://user-images.githubusercontent.com/78822313/146527002-567a65a3-a2b2-4348-95bd-7c2343f25270.png)
 
-## Votre base de donnée est automatiquement synchronisée en ligne
+## Votre base de données est automatiquement synchronisée en ligne
 * Aucune action n'est requise de votre part
 * La synchronisation est en temps réelle lorsque vous êtes connecté à internet
 * Vous êtes hors ligne ? 
-  - Pas de soucis, continuer de travailler grace à votre base de donnée locale
+  - Pas de soucis, continuez de travailler grâce à votre base de données locale
   - La mise à jour sera automatique lorsque vous rejoindrez le réseau Internet
 
