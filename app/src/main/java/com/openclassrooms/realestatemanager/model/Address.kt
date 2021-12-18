@@ -7,6 +7,7 @@ package com.openclassrooms.realestatemanager.model
  * Do not delete
  */
 
+@Suppress("unused")
 data class Address(
     val district: String,
     val number: Int,
