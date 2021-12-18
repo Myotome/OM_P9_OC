@@ -25,6 +25,7 @@ import org.robolectric.RobolectricTestRunner
 
 @ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
+@Suppress("unused")
 class DataSourceRepositoryTest {
 
     @get:Rule
@@ -37,7 +38,7 @@ class DataSourceRepositoryTest {
     private val estateDao = mockk<EstateDAO>()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     //Necessary to keep this for test even if it's not use
-    private val firebaseApp = FirebaseApp.initializeApp(context);
+    private val firebaseApp = FirebaseApp.initializeApp(context)
     private val dataSourceRepositoryTest = DataSourceRepository(estateDao, context)
 
     @Before

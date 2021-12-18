@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.main
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.*
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.Photo

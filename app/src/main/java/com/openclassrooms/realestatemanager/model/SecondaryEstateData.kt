@@ -8,6 +8,7 @@ package com.openclassrooms.realestatemanager.model
  * Do not delete
  */
 
+@Suppress("unused")
 data class SecondaryEstateData(
     val firebaseId: String,
     val bedroom: Int?,

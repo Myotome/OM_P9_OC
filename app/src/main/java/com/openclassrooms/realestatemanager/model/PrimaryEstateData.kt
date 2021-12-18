@@ -8,6 +8,7 @@ package com.openclassrooms.realestatemanager.model
  * Do not delete
  */
 
+@Suppress("unused")
 data class PrimaryEstateData(
     val onSale: Boolean = true,
     val estateType: String,

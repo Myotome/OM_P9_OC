@@ -11,7 +11,6 @@ fun generateOneEstateTest(): Estate {
     val listPhoto = ArrayList<Photo>()
     listPhoto.add(
         Photo(
-//            image = "content://media/external/images/media/162",
             name = "view",
             storageId = "987654",
             storageUriString = ""
@@ -19,7 +18,6 @@ fun generateOneEstateTest(): Estate {
     )
     listPhoto.add(
         Photo(
-//            image = "content://media/external/images/media/158",
             name = "view",
             storageId = "854732",
             storageUriString = ""
@@ -73,7 +71,6 @@ fun generateTwoEstateTest(): List<Estate> {
     val listPhoto = ArrayList<Photo>()
     listPhoto.add(
         Photo(
-//            image = "content://media/external/images/media/162",
             name = "view",
             storageId = "987654",
             storageUriString = ""
@@ -81,7 +78,6 @@ fun generateTwoEstateTest(): List<Estate> {
     )
     listPhoto.add(
         Photo(
-//            image = "content://media/external/images/media/158",
             name = "view",
             storageId = "854732",
             storageUriString = ""
@@ -171,55 +167,6 @@ fun generateTwoEstateTest(): List<Estate> {
         ))
 
     return listOf(estateOne, estateTwo)
-}
-
-fun generateOneEstateWithoutLatLng(): List<Estate>{
-    return listOf(Estate(
-        -5L,
-        primaryEstateData = PrimaryEstateData(
-            onSale = true,
-            estateType = "Penthouse",
-            price = 8500501,
-            surface = 99.0,
-            rooms = 10,
-            landSize = 555.0,
-            null
-        ),
-        secondaryEstateData = SecondaryEstateData(
-            firebaseId = "123456",
-            bedroom = 5,
-            bathroom = 3,
-            description = "estate to sell",
-            realtor = "seller",
-            entryDate = 123456789,
-            modificationDate = null
-        ),
-        address = Address(
-            district = "Manhattan",
-            number = 753,
-            complement = null,
-            street = "Broadway",
-            city = "New York"
-        ),
-        lat = 0.0,
-        lng = 0.0,
-        listPhoto = listOf(Photo(
-//            image = "content://media/external/images/media/162",
-            name = "view",
-            storageId = "987654",
-            storageUriString = ""
-        )),
-        interest = Interest(
-            school = true,
-            store = false,
-            park = true,
-            restaurant = false,
-            movie = true,
-            theatre = false,
-            subway = true,
-            nightlife = false
-        ))
-    )
 }
 
 fun generateCurrentPositionTest() : LiveData<LatLng>{
