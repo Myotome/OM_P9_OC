@@ -15,6 +15,7 @@ import com.openclassrooms.realestatemanager.databinding.FragmentAddAddressBindin
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 
@@ -27,9 +28,11 @@ import kotlinx.coroutines.flow.collect
 @DelicateCoroutinesApi
 @AndroidEntryPoint
 @FlowPreview
+@ExperimentalCoroutinesApi
 class AOEAddressFragment : Fragment() {
 
     private val viewModel by viewModels<AOEAddressViewModel>()
+
 
 
     override fun onCreateView(

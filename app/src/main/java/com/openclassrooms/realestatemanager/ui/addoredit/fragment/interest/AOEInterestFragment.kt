@@ -12,6 +12,7 @@ import com.openclassrooms.realestatemanager.ui.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.databinding.FragmentAddInterestBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 
@@ -24,9 +25,11 @@ import kotlinx.coroutines.flow.collect
 @DelicateCoroutinesApi
 @AndroidEntryPoint
 @FlowPreview
+@ExperimentalCoroutinesApi
 class AOEInterestFragment : Fragment() {
 
     private val viewModel by viewModels<AOEInterestViewModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
