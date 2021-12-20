@@ -24,6 +24,7 @@ import com.openclassrooms.realestatemanager.ui.addoredit.AOEActivity
 import com.openclassrooms.realestatemanager.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import java.io.ByteArrayOutputStream
@@ -38,10 +39,12 @@ import java.io.ByteArrayOutputStream
 @DelicateCoroutinesApi
 @FlowPreview
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class AOEPhotoFragment : Fragment() {
 
     private val viewModel by viewModels<AOEPhotoViewModel>()
     lateinit var binding: FragmentAddPhotoBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

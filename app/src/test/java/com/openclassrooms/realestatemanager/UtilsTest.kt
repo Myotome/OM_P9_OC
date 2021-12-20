@@ -36,7 +36,7 @@ class UtilsTest {
          * enter today date before test
          * in format "dd/MM/yyyy"
          */
-//        val expect = "02/12/2021"
+//        val expect = "20/12/2021"
 
         val result = Utils.getTodayDate()
 
